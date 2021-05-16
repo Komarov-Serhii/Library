@@ -15,12 +15,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class Book_PhotoDatabaseDao extends ConnectionSupport implements Book_PhotoDao {
+
     public Book_PhotoDatabaseDao(Connector connector) {
         super(connector);
     }
 
     @Override
-    public boolean add(Book_Photo entity) throws DataBaseException, SQLException {
+    public boolean add(Book_Photo entity) throws DataBaseException {
         try (Connection connection = connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.INSERT_BOOK_PHOTO)) {
             statement.setString(1, entity.getUrl());

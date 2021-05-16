@@ -1,11 +1,14 @@
 package com.komarov_s_s.final_project.library;
 
+import com.komarov_s_s.final_project.library.dao.Book_PhotoDao;
 import com.komarov_s_s.final_project.library.dao.Connection.Connector;
 import com.komarov_s_s.final_project.library.dao.impl.BookDatabaseDao;
+import com.komarov_s_s.final_project.library.dao.impl.Book_PhotoDatabaseDao;
 import com.komarov_s_s.final_project.library.dao.impl.PersonDatabaseDao;
 import com.komarov_s_s.final_project.library.exception.DataBaseException;
 import com.komarov_s_s.final_project.library.exception.ServiceException;
 import com.komarov_s_s.final_project.library.model.Book;
+import com.komarov_s_s.final_project.library.model.Book_Photo;
 import com.komarov_s_s.final_project.library.model.Person;
 
 import java.util.List;
@@ -18,11 +21,16 @@ public class Solution {
 
     public static void main(String[] args) throws ServiceException, DataBaseException {
         PersonDatabaseDao personDao = new PersonDatabaseDao(Connector.getInstance());
-        personDao.add(new Person("ivanov","Nikita"));
-        personDao.add(new Person("petrov","pitrov"));
-        personDao.add(new Person("obama","Abama"));
+      //  personDao.add(new Person("ivanov","Nikita"));
+//        personDao.add(new Person("petrov","pitrov"));
+//        personDao.add(new Person("obama","Abama"));
 //
-      //  printList(personDao.findAllEntity());
+       // Person s = personDao.getEntity(1);
+      //  s.setName("lox");
+      //  personDao.updateEntity(s);
+        personDao.deleteEntity(1);
+
+    //    printList(personDao.findAllEntity());
     //   personDao.deleteEntity(1);
 
 
@@ -43,5 +51,9 @@ public class Solution {
 //        Person teamA = dbPerson.getEntity(6);
 //        teamA.setName("Matros");
 //        dbPerson.updateEntity(teamA);
+
+//        Book_PhotoDao book_photoDao = new Book_PhotoDatabaseDao(Connector.getInstance());
+//        book_photoDao.add(new Book_Photo("asf",1));
+
     }
 }

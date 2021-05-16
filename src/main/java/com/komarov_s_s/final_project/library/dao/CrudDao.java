@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public interface CrudDao<K, T extends Model> {
 
-    boolean add(T entity) throws DataBaseException, SQLException;
+    boolean add(T entity) throws DataBaseException;
 
     T getEntity(K id) throws DataBaseException, ServiceException;
 

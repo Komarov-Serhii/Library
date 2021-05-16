@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 
 public class BookDatabaseDao extends ConnectionSupport implements BookDao {
 
-
     public BookDatabaseDao(Connector connector) {
         super(connector);
     }
