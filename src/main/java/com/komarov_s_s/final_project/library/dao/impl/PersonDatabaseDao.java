@@ -1,6 +1,5 @@
 package com.komarov_s_s.final_project.library.dao.impl;
 
-import com.komarov_s_s.final_project.library.dao.Connection.ConnectionSupport;
 import com.komarov_s_s.final_project.library.dao.Connection.Connector;
 import com.komarov_s_s.final_project.library.dao.Constant.Constants;
 import com.komarov_s_s.final_project.library.dao.PersonDao;
@@ -14,13 +13,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PersonDatabaseDao extends ConnectionSupport implements PersonDao {
+public class PersonDatabaseDao implements PersonDao {
 
-    public PersonDatabaseDao(Connector connector) {
-        super(connector);
+    public PersonDatabaseDao() {
     }
-
-
 
     @Override
     public boolean add(Person person) throws DataBaseException {
@@ -38,7 +34,7 @@ public class PersonDatabaseDao extends ConnectionSupport implements PersonDao {
     @Override
     public Person getEntity(Integer id) throws DataBaseException, ServiceException {
         try (Connection connection = Connector.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(Constants.ALL_PERSON)) {
+             PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_ID_PERSON)) {
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
@@ -95,7 +91,7 @@ public class PersonDatabaseDao extends ConnectionSupport implements PersonDao {
                 outerPeople.add(new Person(rs.getString(2)));
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Cannot findAllEntity person", e);
+            throw new RuntimeException("Cannot getAllPerson", e);
         }
         return outerPeople;
     }

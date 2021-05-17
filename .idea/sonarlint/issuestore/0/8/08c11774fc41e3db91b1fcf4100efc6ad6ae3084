@@ -1,0 +1,27 @@
+
+^	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(æÃÄ’ÿÿÿÿÿ
+^	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ïª°•şÿÿÿÿ
+Y	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(ñ•Œ
+`	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(µïï
+d	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¤÷öù
+i	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‡éÎ«üÿÿÿÿ
+g
+java:S1128"SRemove this unused import 'com.komarov_s_s.final_project.library.model.Book_Photo'.(÷Ò¤²
+H
+java:S6212"/Declare this local variable with "var" instead.(¸éß•ùÿÿÿÿ
+H
+java:S6212"/Declare this local variable with "var" instead.(¸éß•ùÿÿÿÿ
+C
+java:S6212"/Declare this local variable with "var" instead.(„‡–
+C
+java:S6212"/Declare this local variable with "var" instead.(¤÷öù
+H
+java:S6212"/Declare this local variable with "var" instead.(‡éÎ«üÿÿÿÿ
+H
+java:S6212"/Declare this local variable with "var" instead.(¸éß•ùÿÿÿÿ
+l
+java:S2139"XEither log this exception and handle it, or rethrow it with some contextual information.(É®£
+H
+java:S6212"/Declare this local variable with "var" instead.(¸éß•ùÿÿÿÿ
+l
+java:S2139"XEither log this exception and handle it, or rethrow it with some contextual information.(É®£

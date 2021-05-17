@@ -7,6 +7,11 @@ public class Book_Photo extends Model{
 
     public Book_Photo() {
     }
+
+    public Book_Photo(String url) {
+        this.url = url;
+    }
+
     public Book_Photo(int id, String url) {
         super(id);
         this.url = url;
@@ -42,5 +47,13 @@ public class Book_Photo extends Model{
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "Book_Photo{" +
+                "url='" + url + '\'' +
+                ", id_book=" + id_book +
+                '}';
     }
 }

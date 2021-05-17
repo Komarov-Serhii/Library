@@ -48,7 +48,10 @@ public class Person extends Model{
 
     @Override
     public String toString() {
-        return name;
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 
     @Override

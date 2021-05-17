@@ -1,5 +1,11 @@
 package com.komarov_s_s.final_project.library.dao.Connection;
 
+import com.komarov_s_s.final_project.library.dao.impl.PersonDatabaseDao;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,10 +22,15 @@ public class Connector {
     private String pass;
     private String url;
     private Connection conn;
+    private static Connector pool;
 
-    public static Connector getInstance() {
-        return new Connector();
+    public static synchronized Connector getInstance() {
+            if (pool == null) {
+                pool = new Connector();
+            }
+        return pool;
     }
+
     public Connection getConnection() throws SQLException {
         try (InputStream input = new FileInputStream("app.properties")) {
             Properties prop = new Properties();

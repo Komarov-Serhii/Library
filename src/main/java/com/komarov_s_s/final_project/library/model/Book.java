@@ -104,7 +104,15 @@ public class Book extends Model {
 
     @Override
     public String toString() {
-        return name;
+        return "Book{" +
+                "name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", publisher_date='" + publisher_date + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", genre='" + genre + '\'' +
+                '}';
     }
 
     @Override

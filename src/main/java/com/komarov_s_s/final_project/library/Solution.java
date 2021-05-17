@@ -1,15 +1,13 @@
 package com.komarov_s_s.final_project.library;
 
-import com.komarov_s_s.final_project.library.dao.Book_PhotoDao;
-import com.komarov_s_s.final_project.library.dao.Connection.Connector;
 import com.komarov_s_s.final_project.library.dao.impl.BookDatabaseDao;
 import com.komarov_s_s.final_project.library.dao.impl.Book_PhotoDatabaseDao;
+import com.komarov_s_s.final_project.library.dao.impl.Cart_DatabaseDao;
 import com.komarov_s_s.final_project.library.dao.impl.PersonDatabaseDao;
 import com.komarov_s_s.final_project.library.exception.DataBaseException;
 import com.komarov_s_s.final_project.library.exception.ServiceException;
-import com.komarov_s_s.final_project.library.model.Book;
 import com.komarov_s_s.final_project.library.model.Book_Photo;
-import com.komarov_s_s.final_project.library.model.Person;
+import com.komarov_s_s.final_project.library.model.Cart;
 
 import java.util.List;
 
@@ -19,41 +17,63 @@ public class Solution {
         System.out.println(list);
     }
 
-    public static void main(String[] args) throws ServiceException, DataBaseException {
-        PersonDatabaseDao personDao = new PersonDatabaseDao(Connector.getInstance());
-      //  personDao.add(new Person("ivanov","Nikita"));
-//        personDao.add(new Person("petrov","pitrov"));
-//        personDao.add(new Person("obama","Abama"));
+    public static void main(String[] args) throws DataBaseException, ServiceException {
+        PersonDatabaseDao personDao = new PersonDatabaseDao();
+        BookDatabaseDao bookDao  = new BookDatabaseDao();
+        Book_PhotoDatabaseDao book_photoDao = new Book_PhotoDatabaseDao();
+        Cart_DatabaseDao cartDao = new Cart_DatabaseDao();
+
+    //    personDao.add(new Person("ivanov", "Nikita"));
+   //     personDao.add(new Person("petrov", "pitrov"));
+    //    personDao.add(new Person("obama", "Abama"));
+
+       // personDao.deleteEntity(12);
+    //    printList(personDao.getAllPerson());
+      //  System.out.println(personDao.getEntity(13));
+
+//        Person person = personDao.getEntity(13);
+//        person.setName("Matros");
+//        personDao.updateEntity(person);
+
+//-----------------------------------------------------------
+
+//        bookDatabaseDao.add(new Book("15 нигерс", "Nikita", "dshh", "2008", "Super class", 500, "sb"));
+//        bookDatabaseDao.add(new Book("10 нигерс", "BORY", "nhgng", "2010", "Super class", 700, "sb"));
+//        bookDatabaseDao.add(new Book("5 нигерс", "NOR", "qwdf", "2012", "Super class", 1000, "sb"));
+
+   //bookDao.deleteEntity(9);
+      //  printList(bookDao.getAllBook());
+      //    System.out.println(bookDao.getEntity(14));
+
+//        Book book = bookDao.getEntity(13);
+//        book.setName("Matros");
+//        bookDao.updateEntity(book);
+        //-----------------------------------------------------------
+
+//        book_photoDao.add(new Book_Photo("picture_1", 12));
+//        book_photoDao.add(new Book_Photo("picture_2", 13));
+//        book_photoDao.add(new Book_Photo("picture_3", 14));
 //
-       // Person s = personDao.getEntity(1);
-      //  s.setName("lox");
-      //  personDao.updateEntity(s);
-        personDao.deleteEntity(1);
+      // book_photoDao.deleteEntity(5);
+     //     printList(book_photoDao.getAllBook_Photo());
+      //     System.out.println(book_photoDao.getEntity(6));
 
-    //    printList(personDao.findAllEntity());
-    //   personDao.deleteEntity(1);
+//        Book_Photo book_photo = book_photoDao.getEntity(6);
+//        book_photo.setUrl("AAAAAAAA");
+//        book_photoDao.updateEntity(book_photo);
 
+        //-----------------------------------------------------------
 
-//        BookDatabaseDao bookDatabaseDao = new BookDatabaseDao(Connector.getInstance());
-//        dbBook.insertEntity(new Book("15 нигерс", "Nikita", "dshh", "2008", "Super class", 500, "sb"));
-//        dbBook.insertEntity(new Book("10 нигерс", "BORY", "nhgng", "2010", "Super class", 700, "sb"));
-//        dbBook.insertEntity(new Book("5 нигерс", "NOR", "qwdf", "2012", "Super class", 1000, "sb"));
+//        cartDao.add(new Cart(13, 12));
+//        cartDao.add(new Cart(14, 13));
+//        cartDao.add(new Cart(15, 14 ));
 
-//        dbBook.getEntity(9).setName("House");
-//        dbBook.updateEntity(dbBook.getEntity(9));
-//        printList(dbBook.findAllEntity());
-  //      Book teamC = bookDatabaseDao.getEntity(30);
-        //teamC.setName("House");
- //       System.out.println(teamC);
-//        dbBook.updateEntity(teamC);
-        //printList(dbBook.findAllEntity());
+//
+      //   cartDao.deleteEntity(14);
+         //    System.out.println(cartDao.getEntity(15));
 
-//        Person teamA = dbPerson.getEntity(6);
-//        teamA.setName("Matros");
-//        dbPerson.updateEntity(teamA);
-
-//        Book_PhotoDao book_photoDao = new Book_PhotoDatabaseDao(Connector.getInstance());
-//        book_photoDao.add(new Book_Photo("asf",1));
-
+//        Cart cart = cartDao.getEntity(15);
+//        cart.setPerson_id(16);
+//        cartDao.updateEntity(cart);
     }
 }

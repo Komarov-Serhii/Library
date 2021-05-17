@@ -1,7 +1,6 @@
 package com.komarov_s_s.final_project.library.dao.impl;
 
 import com.komarov_s_s.final_project.library.dao.BookDao;
-import com.komarov_s_s.final_project.library.dao.Connection.ConnectionSupport;
 import com.komarov_s_s.final_project.library.dao.Connection.Connector;
 import com.komarov_s_s.final_project.library.dao.Constant.Constants;
 import com.komarov_s_s.final_project.library.exception.DataBaseException;
@@ -15,23 +14,23 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BookDatabaseDao extends ConnectionSupport implements BookDao {
+public class BookDatabaseDao  implements BookDao {
 
-    public BookDatabaseDao(Connector connector) {
-        super(connector);
+    public BookDatabaseDao() {
     }
+
 
     @Override
     public boolean add(Book book) throws DataBaseException {
         try (Connection connection = Connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.INSERT_BOOK)) {
-            statement.setString(2, book.getName());
-            statement.setString(3, book.getAuthor());
-            statement.setString(4, book.getPublisher());
-            statement.setString(5, book.getPublisher_date());
-            statement.setString(6, book.getDescription());
-            statement.setInt(7, book.getPrice());
-            statement.setString(8, book.getGenre());
+            statement.setString(1, book.getName());
+            statement.setString(2, book.getAuthor());
+            statement.setString(3, book.getPublisher());
+            statement.setString(4, book.getPublisher_date());
+            statement.setString(5, book.getDescription());
+            statement.setInt(6, book.getPrice());
+            statement.setString(7, book.getGenre());
             statement.execute();
             return true;
         } catch (SQLException e) {
@@ -42,12 +41,12 @@ public class BookDatabaseDao extends ConnectionSupport implements BookDao {
     @Override
     public Book getEntity(Integer id) throws DataBaseException, ServiceException {
         try (Connection connection = Connector.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(Constants.ALL_BOOK)) {
+             PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_ID_BOOK)) {
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-            int id_book = resultSet.getInt("id_book");
+
             String name = resultSet.getString("name");
             String author = resultSet.getString("author");
             String publisher = resultSet.getString("publisher");
@@ -56,9 +55,9 @@ public class BookDatabaseDao extends ConnectionSupport implements BookDao {
             int price = resultSet.getInt("price");
             String genre = resultSet.getString("genre");
 
-            return new Book(id_book, name, author, publisher, publisher_date, description, price, genre);
+            return new Book(id, name, author, publisher, publisher_date, description, price, genre);
         } catch (SQLException e) {
-            throw new DataBaseException(String.format("Cannot get user by id=%d", id), e);
+            throw new DataBaseException(String.format("Cannot get book by id=%d", id), e);
         }
     }
 
@@ -72,7 +71,7 @@ public class BookDatabaseDao extends ConnectionSupport implements BookDao {
             return true;
         } catch (SQLException e) {
             Logger.getLogger(BookDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
-            throw new RuntimeException("Cannot delete user", e);
+            throw new RuntimeException("Cannot delete book", e);
         }
     }
 
@@ -98,7 +97,7 @@ public class BookDatabaseDao extends ConnectionSupport implements BookDao {
     }
 
     @Override
-    public List<Book> findAllEntity() {
+    public List<Book> getAllBook() {
         List<Book> outerBooks = new ArrayList<>();
         try (Connection connection = Connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.ALL_BOOK)) {
@@ -117,7 +116,7 @@ public class BookDatabaseDao extends ConnectionSupport implements BookDao {
                 }
             return outerBooks;
             } catch (SQLException e) {
-            throw new RuntimeException("Cannot findAllEntity book", e);
+            throw new RuntimeException("Cannot getAllEntity book", e);
         }
     }
 }

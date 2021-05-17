@@ -26,8 +26,10 @@ public class DatabaseDaoFactory extends DaoFactory{
     }
 
     @Override
-    public Book_PhotoDao getBook_PhotoDAO() {
+    public Book_PhotoDao getBookPhotoDAO() {
         logger.info("Get Book_PhotoDatabaseDao");
         return book_photoDao;
     }
+
+    // method cart
 }
