@@ -1,6 +1,6 @@
 package com.komarov_s_s.final_project.library.dao.impl;
 
-import com.komarov_s_s.final_project.library.dao.Book_PhotoDao;
+import com.komarov_s_s.final_project.library.dao.BookPhotoDao;
 import com.komarov_s_s.final_project.library.dao.Connection.Connector;
 import com.komarov_s_s.final_project.library.dao.Constant.Constants;
 import com.komarov_s_s.final_project.library.exception.DataBaseException;
@@ -16,9 +16,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Book_PhotoDatabaseDao implements Book_PhotoDao {
+public class BookPhotoDatabaseDao implements BookPhotoDao {
 
-    public Book_PhotoDatabaseDao() {
+    public BookPhotoDatabaseDao() {
     }
 
     @Override
@@ -61,7 +61,7 @@ public class Book_PhotoDatabaseDao implements Book_PhotoDao {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(Book_PhotoDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
+            Logger.getLogger(BookPhotoDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
             throw new RuntimeException("Cannot delete book_photo", e);
         }
     }

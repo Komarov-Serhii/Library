@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Person extends Model{
     private String name;
     private String email;
+    private String password;
 
     public Person() {
     }
@@ -18,10 +19,17 @@ public class Person extends Model{
         this.email = email;
     }
 
-    public Person(int id, String name, String email) {
+    public Person(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Person(int id, String name, String email, String password) {
         super(id);
         this.name = name;
         this.email = email;
+        this.password = password;
     }
 
     public void setName(String name) {
@@ -40,6 +48,13 @@ public class Person extends Model{
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public int hashCode() {
@@ -51,6 +66,7 @@ public class Person extends Model{
         return "Person{" +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 '}';
     }
 

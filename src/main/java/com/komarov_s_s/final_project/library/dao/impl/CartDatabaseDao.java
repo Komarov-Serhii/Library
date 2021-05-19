@@ -5,7 +5,6 @@ import com.komarov_s_s.final_project.library.dao.Connection.Connector;
 import com.komarov_s_s.final_project.library.dao.Constant.Constants;
 import com.komarov_s_s.final_project.library.exception.DataBaseException;
 import com.komarov_s_s.final_project.library.exception.ServiceException;
-import com.komarov_s_s.final_project.library.model.Book_Photo;
 import com.komarov_s_s.final_project.library.model.Cart;
 
 import java.sql.Connection;
@@ -15,7 +14,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Cart_DatabaseDao implements CartDao {
+public class CartDatabaseDao implements CartDao {
+
+    public CartDatabaseDao() {
+    }
+
     @Override
     public boolean add(Cart entity) throws DataBaseException {
         try (Connection connection = Connector.getInstance().getConnection();
@@ -56,7 +59,7 @@ public class Cart_DatabaseDao implements CartDao {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            Logger.getLogger(Book_PhotoDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
+            Logger.getLogger(BookPhotoDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
             throw new RuntimeException("Cannot delete cart", e);
         }
     }

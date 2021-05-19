@@ -112,7 +112,7 @@ public class BookDatabaseDao  implements BookDao {
                     book.setDescription(rs.getString(6));
                     book.setPrice(rs.getInt(7));
                     book.setGenre(rs.getString(8));
-                    outerBooks.add(new Book(rs.getString(2)));
+                    outerBooks.add(book);
                 }
             return outerBooks;
             } catch (SQLException e) {

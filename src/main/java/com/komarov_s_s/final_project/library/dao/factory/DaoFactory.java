@@ -1,8 +1,10 @@
 package com.komarov_s_s.final_project.library.dao.factory;
 
 import com.komarov_s_s.final_project.library.dao.BookDao;
-import com.komarov_s_s.final_project.library.dao.Book_PhotoDao;
+import com.komarov_s_s.final_project.library.dao.BookPhotoDao;
+import com.komarov_s_s.final_project.library.dao.CartDao;
 import com.komarov_s_s.final_project.library.dao.PersonDao;
+import com.komarov_s_s.final_project.library.model.Cart;
 
 
 public abstract class DaoFactory {
@@ -21,7 +23,7 @@ public abstract class DaoFactory {
 
     public abstract BookDao getBookDAO();
 
-    public abstract Book_PhotoDao getBookPhotoDAO();
+    public abstract BookPhotoDao getBookPhotoDAO();
 
-    // should be method Cart
+    public abstract CartDao getCartDAO();
 }

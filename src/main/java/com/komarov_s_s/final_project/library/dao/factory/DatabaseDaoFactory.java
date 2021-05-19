@@ -10,7 +10,8 @@ public class DatabaseDaoFactory extends DaoFactory{
 
     private PersonDao personDao = new PersonDatabaseDao();
     private BookDao bookDao = new BookDatabaseDao();
-    private Book_PhotoDao book_photoDao = new Book_PhotoDatabaseDao();
+    private BookPhotoDao book_photoDao = new BookPhotoDatabaseDao();
+    private CartDao cartDao = new CartDatabaseDao();
 
 
     @Override
@@ -26,10 +27,14 @@ public class DatabaseDaoFactory extends DaoFactory{
     }
 
     @Override
-    public Book_PhotoDao getBookPhotoDAO() {
+    public BookPhotoDao getBookPhotoDAO() {
         logger.info("Get Book_PhotoDatabaseDao");
         return book_photoDao;
     }
 
-    // method cart
+    @Override
+    public CartDao getCartDAO() {
+        logger.info("Get CartDatabaseDao");
+        return cartDao;
+    }
 }
