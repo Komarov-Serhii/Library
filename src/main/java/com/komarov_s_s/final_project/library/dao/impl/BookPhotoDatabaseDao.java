@@ -35,7 +35,7 @@ public class BookPhotoDatabaseDao implements BookPhotoDao {
     }
 
     @Override
-    public Book_Photo getEntity(Integer id) throws DataBaseException, ServiceException {
+    public Book_Photo getById(Integer id) throws DataBaseException, ServiceException {
         try (Connection connection = Connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_ID_BOOK_PHOTO)) {
             statement.setInt(1, id);

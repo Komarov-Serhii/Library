@@ -33,7 +33,7 @@ public class CartDatabaseDao implements CartDao {
     }
 
     @Override
-    public Cart getEntity(Integer id) throws DataBaseException, ServiceException {
+    public Cart getById(Integer id) throws DataBaseException, ServiceException {
         try (Connection connection = Connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_ID_CART)) {
             statement.setInt(1, id);

@@ -5,6 +5,7 @@ import com.komarov_s_s.final_project.library.dao.Constant.Constants;
 import com.komarov_s_s.final_project.library.dao.PersonDao;
 import com.komarov_s_s.final_project.library.exception.DataBaseException;
 import com.komarov_s_s.final_project.library.exception.ServiceException;
+import com.komarov_s_s.final_project.library.model.Book;
 import com.komarov_s_s.final_project.library.model.Person;
 
 import java.sql.*;
@@ -25,6 +26,7 @@ public class PersonDatabaseDao implements PersonDao {
             statement.setString(1, person.getName());
             statement.setString(2, person.getEmail());
             statement.setString(3, person.getPassword());
+            statement.setInt(4, person.getAccessLevel());
             statement.execute();
             return true;
         } catch (SQLException e) {
@@ -33,7 +35,7 @@ public class PersonDatabaseDao implements PersonDao {
     }
 
     @Override
-    public Person getEntity(Integer id) throws DataBaseException, ServiceException {
+    public Person getById(Integer id) throws DataBaseException, ServiceException {
         try (Connection connection = Connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_ID_PERSON)) {
             statement.setInt(1, id);
@@ -44,8 +46,9 @@ public class PersonDatabaseDao implements PersonDao {
             String name = resultSet.getString("name");
             String email = resultSet.getString("email");
             String password = resultSet.getString("password");
+            int level = resultSet.getInt("level");
 
-            return new Person(id, name, email, password);
+            return new Person(id, name, email, password , level);
         } catch (SQLException e) {
             throw new DataBaseException(String.format("Cannot get person by id=%d", id), e);
         }
@@ -92,11 +95,40 @@ public class PersonDatabaseDao implements PersonDao {
                 person.setName(rs.getString(2));
                 person.setEmail(rs.getString(3));
                 person.setPassword(rs.getString(4));
+                person.setAccessLevel(rs.getInt(5));
                 outerPeople.add(person);
             }
             return outerPeople;
         } catch (SQLException e) {
             throw new RuntimeException("Cannot getAllPerson", e);
+        }
+    }
+
+    @Override
+    public Person getByLoginAndPass(String login, String password) {
+        try (Connection connection = Connector.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_LOGIN)) {
+            statement.setString(1, login);
+            statement.setString(2, password);
+            ResultSet resultSet = statement.executeQuery();
+
+            Person person = null;
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String pass = resultSet.getString("password");
+                int level = resultSet.getInt("level");
+
+
+                person = new Person(id, name, email, pass, level);
+            }
+
+            return person;
+        } catch (SQLException e) {
+            Logger.getLogger(PersonDatabaseDao.class.getName()).log(Level.WARNING, "Cannot get user by login = %s");
+            throw new RuntimeException("Cannot getByLoginAndPass person", e);
         }
     }
 }

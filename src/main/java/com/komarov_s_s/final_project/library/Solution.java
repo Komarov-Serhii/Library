@@ -17,20 +17,20 @@ public class Solution {
     }
 
     public static void main(String[] args) throws DataBaseException, ServiceException {
-  //      PersonDatabaseDao personDao = new PersonDatabaseDao();
-        BookDatabaseDao bookDao = new BookDatabaseDao();
-        BookPhotoDatabaseDao book_photoDao = new BookPhotoDatabaseDao();
-        CartDatabaseDao cartDao = new CartDatabaseDao();
+        PersonDatabaseDao personDao = new PersonDatabaseDao();
+//        BookDatabaseDao bookDao = new BookDatabaseDao();
+//        BookPhotoDatabaseDao book_photoDao = new BookPhotoDatabaseDao();
+//        CartDatabaseDao cartDao = new CartDatabaseDao();
 
-   //     personDao.add(new Person("ivanov", "Nikita@gmail.com", "123123"));
-//        personDao.add(new Person("petrov", "pitrov@gmail.com", "12345678"));
-//        personDao.add(new Person("obama", "Abama@gmail.com", "qazwsxedc"));
+//        personDao.add(new Person("ivanov", "Nikita@gmail.com", "123123",1));
+//        personDao.add(new Person("petrov", "pitrov@gmail.com", "12345678",2));
+//        personDao.add(new Person("obama", "Abama@gmail.com", "qazwsxedc",3));
 
- //       personDao.deleteEntity(17);
+     //   personDao.deleteEntity(18);
 //        printList(personDao.getAllPerson());
- //       System.out.println(personDao.getEntity(18));
+  //      System.out.println(personDao.getById(20));
 //
-//        Person person = personDao.getEntity(18);
+//        Person person = personDao.getById(20);
 //        person.setName("Matros");
 //        personDao.updateEntity(person);
 

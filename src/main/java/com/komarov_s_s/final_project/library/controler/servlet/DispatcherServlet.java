@@ -1,6 +1,9 @@
 package com.komarov_s_s.final_project.library.controler.servlet;
 
 import com.komarov_s_s.final_project.library.controler.command.Command;
+//import com.komarov_s_s.final_project.library.controler.command.factory.CommandFactory;
+import com.komarov_s_s.final_project.library.controler.command.utils.CommandUtil;
+//import com.komarov_s_s.final_project.library.exception.NotFoundOperationException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,14 +13,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class DispatcherServlet extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//
+//    @Override
+//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        doPost(req, resp);
+//    }
+//
+//    @Override
+//    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        resp.setContentType ("text/html; charset=UTF-8");
 //        req.setCharacterEncoding("UTF-8");
 //
@@ -31,11 +34,5 @@ public class DispatcherServlet extends HttpServlet {
 //        } catch (NotFoundOperationException e) {
 //            CommandUtil.goToPage(req, resp, "/WEB-INF/view/not_found.jsp");
 //        }
-        PrintWriter pr = resp.getWriter();
-
-        pr.println("<html>");
-        pr.println("<h1>Hello world!</h1>");
-        pr.println("</html>");
-
-    }
+//    }
 }

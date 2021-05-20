@@ -39,7 +39,7 @@ public class BookDatabaseDao  implements BookDao {
     }
 
     @Override
-    public Book getEntity(Integer id) throws DataBaseException, ServiceException {
+    public Book getById(Integer id) throws DataBaseException, ServiceException {
         try (Connection connection = Connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_ID_BOOK)) {
             statement.setInt(1, id);

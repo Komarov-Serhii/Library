@@ -10,7 +10,7 @@ public interface CrudDao<K, T extends Model> {
 
     boolean add(T entity) throws DataBaseException;
 
-    T getEntity(K id) throws DataBaseException, ServiceException;
+    T getById(K id) throws DataBaseException, ServiceException;
 
     boolean deleteEntity(K id);
 

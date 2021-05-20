@@ -4,7 +4,6 @@ import com.komarov_s_s.final_project.library.dao.BookDao;
 import com.komarov_s_s.final_project.library.dao.BookPhotoDao;
 import com.komarov_s_s.final_project.library.dao.CartDao;
 import com.komarov_s_s.final_project.library.dao.PersonDao;
-import com.komarov_s_s.final_project.library.model.Cart;
 
 
 public abstract class DaoFactory {

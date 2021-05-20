@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface PersonDao extends CrudDao<Integer, Person> {
      List<Person> getAllPerson();
+     //boolean registrationUserForExam(Person person, Cart crt);
+     Person getByLoginAndPass(String login, String password);
+
 }

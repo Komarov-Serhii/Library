@@ -6,6 +6,7 @@ public class Person extends Model{
     private String name;
     private String email;
     private String password;
+    private int accessLevel;
 
     public Person() {
     }
@@ -25,11 +26,25 @@ public class Person extends Model{
         this.password = password;
     }
 
+    public Person(String name, String email, String password, int accessLevel) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.accessLevel = accessLevel;
+    }
+
     public Person(int id, String name, String email, String password) {
         super(id);
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+    public Person(int id, String name, String email, String password, int accessLevel) {
+        super(id);
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.accessLevel = accessLevel;
     }
 
     public void setName(String name) {
@@ -56,6 +71,14 @@ public class Person extends Model{
         this.password = password;
     }
 
+    public int getAccessLevel() {
+        return accessLevel;
+    }
+
+    public void setAccessLevel(int accessLevel) {
+        this.accessLevel = accessLevel;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name);
@@ -67,6 +90,7 @@ public class Person extends Model{
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", accessLevel='" + accessLevel + '\'' +
                 '}';
     }
 
