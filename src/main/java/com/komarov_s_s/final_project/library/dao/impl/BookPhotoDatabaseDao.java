@@ -7,6 +7,7 @@ import com.komarov_s_s.final_project.library.exception.DataBaseException;
 import com.komarov_s_s.final_project.library.exception.ServiceException;
 import com.komarov_s_s.final_project.library.model.Book_Photo;
 
+import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,7 +30,7 @@ public class BookPhotoDatabaseDao implements BookPhotoDao {
             statement.setInt(2, entity.getId_book());
             statement.execute();
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot add add book_photo", e);
         }
     }
@@ -48,7 +49,7 @@ public class BookPhotoDatabaseDao implements BookPhotoDao {
 
 
             return new Book_Photo(id, url, id_book);
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             throw new DataBaseException(String.format("Cannot get book_photo by id=%d", id), e);
         }
     }
@@ -60,7 +61,7 @@ public class BookPhotoDatabaseDao implements BookPhotoDao {
             statement.setInt(1, id);
             statement.executeUpdate();
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             Logger.getLogger(BookPhotoDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
             throw new RuntimeException("Cannot delete book_photo", e);
         }
@@ -76,7 +77,7 @@ public class BookPhotoDatabaseDao implements BookPhotoDao {
 
             statement.executeUpdate();
             return book_photo;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             Logger.getLogger(BookDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
             throw new RuntimeException("Cannot update book_photo", e);
         }
@@ -97,7 +98,7 @@ public class BookPhotoDatabaseDao implements BookPhotoDao {
                 outerBooks_photo.add(outerBooks_photos);
             }
             return outerBooks_photo;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot getAllEntity book_photo", e);
         }
     }

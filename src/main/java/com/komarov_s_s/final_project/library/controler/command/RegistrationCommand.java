@@ -8,14 +8,17 @@ import com.komarov_s_s.final_project.library.exception.WrongDataException;
 import com.komarov_s_s.final_project.library.model.Person;
 import com.komarov_s_s.final_project.library.service.PersonService;
 import com.komarov_s_s.final_project.library.service.factory.ServiceFactory;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RegistrationCommand implements Command {
+
+     private static Logger logger = Logger.getLogger(String.valueOf(RegistrationCommand.class));
+
+
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
         ServiceFactory factory = ServiceFactory.getInstance();
@@ -32,10 +35,10 @@ public class RegistrationCommand implements Command {
                 throw new WrongDataException();
             }
 
-            PersonService personService = factory.getUserService();
+            PersonService personService = factory.getPersonService();
 
 
-            String name = req.getParameter("name");
+            String name = req.getParameter("firstName");
 
             Person person = new Person(name, email, password);
             person.setAccessLevel(2);
@@ -44,9 +47,11 @@ public class RegistrationCommand implements Command {
 
             req.getSession().setAttribute("person", person);
 
-            String page = CommandUtil.getUserPageByRole(person.getAccessLevel());
+            String page = "/login.jsp";//CommandUtil.getPersonPageByRole(person.getAccessLevel());
 
             CommandUtil.goToPage(req, resp,page);
+
+            logger.info(page);
 
         } catch (ServiceException e) {
             req.setAttribute("notFound", true);

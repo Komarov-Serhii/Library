@@ -6,9 +6,10 @@ import com.komarov_s_s.final_project.library.exception.WrongDataException;
 import com.komarov_s_s.final_project.library.model.Person;
 import com.komarov_s_s.final_project.library.service.PersonService;
 import com.komarov_s_s.final_project.library.service.factory.ServiceFactory;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import java.util.Objects;
 
 public class LoginCommand implements Command {
@@ -20,13 +21,13 @@ public class LoginCommand implements Command {
         String password = req.getParameter("password");
 
         if (Objects.nonNull(login) && Objects.nonNull(password)) {
-            PersonService userService = factory.getUserService();
+            PersonService userService = factory.getPersonService();
 
             try {
                 Person person = userService.getByLoginAndPass(login, password);
                 req.getSession().setAttribute("person", person);
 
-                String page = CommandUtil.getUserPageByRole(person.getAccessLevel());
+                String page = CommandUtil.getPersonPageByRole(person.getAccessLevel());
 
                 CommandUtil.goToPage(req, resp, page);
             } catch (NotFoundPersonException e) {

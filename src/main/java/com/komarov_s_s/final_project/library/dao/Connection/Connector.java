@@ -18,30 +18,22 @@ import java.util.logging.Logger;
 
 public class Connector {
 
-    private String user;
-    private String pass;
-    private String url;
-    private Connection conn;
     private static Connector pool;
+    private final DataSource dataSource;
 
-    public static synchronized Connector getInstance() {
-            if (pool == null) {
-                pool = new Connector();
-            }
+    public Connector() throws NamingException {
+        Context initialContext = new InitialContext();
+        dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/library");
+    }
+
+    public static synchronized Connector getInstance() throws NamingException {
+        if (pool == null) {
+            pool = new Connector();
+        }
         return pool;
     }
 
     public Connection getConnection() throws SQLException {
-        try (InputStream input = new FileInputStream("app.properties")) {
-            Properties prop = new Properties();
-            prop.load(input);
-            url = prop.getProperty("connection.url");
-            user = prop.getProperty("user");
-            pass = prop.getProperty("password");
-        } catch (IOException ex) {
-            Logger.getLogger(Connector.class.getName()).log(Level.WARNING, "Exception: ", ex);
-        }
-        conn = DriverManager.getConnection(url, user, pass);
-        return conn;
+        return dataSource.getConnection();
     }
 }

@@ -1,16 +1,14 @@
 package com.komarov_s_s.final_project.library.controler.command.utils;
 
-import com.komarov_s_s.final_project.library.service.impl.PersonServiceImpl;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CommandUtil {
+public abstract class CommandUtil {
 
     public static void goToPage(HttpServletRequest req, HttpServletResponse resp, String url) {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher(url);
@@ -21,14 +19,14 @@ public class CommandUtil {
         }
     }
 
-    public static String getUserPageByRole(int accessLevel) {
+    public static String getPersonPageByRole(int accessLevel) {
         String page = "";
         switch (accessLevel) {
             case 2:
-                page = "/WEB-INF/view/entrant_menu.jsp";
+                page = "/WEB-INF/view/personPage.jsp";
                 break;
             case 3:
-                page = "/WEB-INF/view/admin_menu.jsp";
+                page = "/WEB-INF/view/adminPage.jsp";
                 break;
             default:
         }

@@ -7,14 +7,9 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}"
-       scope="session"/>
-<fmt:setLocale value="${language}"/>
-<fmt:setBundle basename="text"/>
 <html>
 <head>
-  <title><fmt:message key="title"/></title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <title>LOGIN</title>
 </head>
 <body>
 
@@ -23,9 +18,9 @@
 
     <div class=" w3-green">
       <div align="center">
-        <h3><fmt:message key="title"/></h3>
+        <h3>LOGIN</h3>
       </div>
-      <a href="${pageContext.request.contextPath}/view/registration"><fmt:message key="registration"/></a>
+      <a href="${pageContext.request.contextPath}/view/registration">registration</a>
       <a href="${pageContext.request.contextPath}/view/language//?language=RU">
         <%--<img src="image/ru.png"/>--%>
         RU
@@ -40,37 +35,24 @@
           action="${pageContext.request.contextPath}/view/login">
       <p>
         <label>
-          <input class="w3-input" type="text" required placeholder="<fmt:message key="login"/>"
+          <input class="w3-input" type="text" required placeholder="login"
                  name="login">
         </label>
       </p>
 
       <p>
         <label>
-          <input class="w3-input" type="password" required placeholder="<fmt:message key="password"/>"
+          <input class="w3-input" type="password" required placeholder="password"
                  name="password">
         </label>
       </p>
 
       <div>
         <input class="w3-button w3-margin-bottom w3-green" type="submit"
-               value="<fmt:message key="enter"/>">
+               value=enter>
       </div>
-
-      <c:if test="${requestScope.notFound}">
-        <div class="w3-container">
-          <fmt:message key="invalidData"/>
-        </div>
-      </c:if>
-
-      <c:if test="${requestScope.wrongData}">
-        <div class="w3-container">
-          <fmt:message key="incorrectData"/>
-        </div>
-      </c:if>
     </form>
   </div>
 </div>
 </body>
-
 </html>

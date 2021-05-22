@@ -8,6 +8,7 @@ import com.komarov_s_s.final_project.library.exception.ServiceException;
 import com.komarov_s_s.final_project.library.model.Book;
 
 
+import javax.naming.NamingException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class BookDatabaseDao  implements BookDao {
             statement.setString(7, book.getGenre());
             statement.execute();
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             throw new DataBaseException("Cannot add book", e);
         }
     }
@@ -56,7 +57,7 @@ public class BookDatabaseDao  implements BookDao {
             String genre = resultSet.getString("genre");
 
             return new Book(id, name, author, publisher, publisher_date, description, price, genre);
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             throw new DataBaseException(String.format("Cannot get book by id=%d", id), e);
         }
     }
@@ -69,7 +70,7 @@ public class BookDatabaseDao  implements BookDao {
             statement.setInt(1, id);
             statement.executeUpdate();
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             Logger.getLogger(BookDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
             throw new RuntimeException("Cannot delete book", e);
         }
@@ -90,7 +91,7 @@ public class BookDatabaseDao  implements BookDao {
             statement.setInt(8, book.getId());
             statement.executeUpdate();
             return book;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             Logger.getLogger(BookDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
             throw new RuntimeException("Cannot update user", e);
         }
@@ -115,7 +116,7 @@ public class BookDatabaseDao  implements BookDao {
                     outerBooks.add(book);
                 }
             return outerBooks;
-            } catch (SQLException e) {
+            } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot getAllEntity book", e);
         }
     }

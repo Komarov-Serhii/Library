@@ -3,8 +3,7 @@ package com.komarov_s_s.final_project.library.model;
 public enum Role {
     UNREGISTERED(1),
     USER(2),
-    LIBRARIAN(3),
-    ADMIN(4);
+    ADMIN(3);
 
     private int accessLevel;
 

@@ -8,6 +8,7 @@ import com.komarov_s_s.final_project.library.exception.ServiceException;
 import com.komarov_s_s.final_project.library.model.Book;
 import com.komarov_s_s.final_project.library.model.Person;
 
+import javax.naming.NamingException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class PersonDatabaseDao implements PersonDao {
             statement.setInt(4, person.getAccessLevel());
             statement.execute();
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             throw new DataBaseException("Cannot add person", e);
         }
     }
@@ -49,7 +50,7 @@ public class PersonDatabaseDao implements PersonDao {
             int level = resultSet.getInt("level");
 
             return new Person(id, name, email, password , level);
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             throw new DataBaseException(String.format("Cannot get person by id=%d", id), e);
         }
     }
@@ -62,7 +63,7 @@ public class PersonDatabaseDao implements PersonDao {
             statement.setInt(1, id);
             statement.executeUpdate();
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             Logger.getLogger(PersonDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
             throw new RuntimeException("Cannot delete person", e);
         }
@@ -78,7 +79,7 @@ public class PersonDatabaseDao implements PersonDao {
             statement.setInt(4, person.getId());
             statement.executeUpdate();
             return person;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot update person", e);
         }
     }
@@ -99,7 +100,7 @@ public class PersonDatabaseDao implements PersonDao {
                 outerPeople.add(person);
             }
             return outerPeople;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot getAllPerson", e);
         }
     }
@@ -126,7 +127,7 @@ public class PersonDatabaseDao implements PersonDao {
             }
 
             return person;
-        } catch (SQLException e) {
+        } catch (SQLException | NamingException e) {
             Logger.getLogger(PersonDatabaseDao.class.getName()).log(Level.WARNING, "Cannot get user by login = %s");
             throw new RuntimeException("Cannot getByLoginAndPass person", e);
         }

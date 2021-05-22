@@ -17,12 +17,12 @@ public class Solution {
     }
 
     public static void main(String[] args) throws DataBaseException, ServiceException {
-        PersonDatabaseDao personDao = new PersonDatabaseDao();
+//        PersonDatabaseDao personDao = new PersonDatabaseDao();
 //        BookDatabaseDao bookDao = new BookDatabaseDao();
 //        BookPhotoDatabaseDao book_photoDao = new BookPhotoDatabaseDao();
 //        CartDatabaseDao cartDao = new CartDatabaseDao();
 
-//        personDao.add(new Person("ivanov", "Nikita@gmail.com", "123123",1));
+  //      personDao.add(new Person("admin", "admin@gmail.com", "1111",3));
 //        personDao.add(new Person("petrov", "pitrov@gmail.com", "12345678",2));
 //        personDao.add(new Person("obama", "Abama@gmail.com", "qazwsxedc",3));
 

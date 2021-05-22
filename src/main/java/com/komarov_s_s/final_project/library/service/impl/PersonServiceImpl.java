@@ -23,13 +23,14 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getByLoginAndPass(String login, String password) throws NotFoundPersonException, WrongDataException {
-        return null;
-    }
+        Person person = personDao.getByLoginAndPass(login, password);
 
-//    @Override
-//    public List<Person> registrationUserForSite(Person person, String[] personId) throws ServiceException {
-//        return null;
-//    }
+        if (person == null) {
+            throw new NotFoundPersonException();
+        }
+
+        return person;
+    }
 
     @Override
     public Person getEntity(Integer id) throws DataBaseException, ServiceException {
@@ -43,8 +44,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public boolean add(Person entity) {
-        return false;
+    public boolean add(Person entity) throws ServiceException {
+        try {
+            personDao.add(entity);
+            return true;
+        } catch (DataBaseException e) {
+            throw new ServiceException(e);
+        }
     }
 
     @Override

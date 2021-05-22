@@ -62,7 +62,7 @@ public class ServiceFactory {
 //    }
 
 
-    public PersonService getUserService() {
+    public PersonService getPersonService() {
         return personService;
     }
 }

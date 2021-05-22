@@ -8,16 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title><fmt:message key="registration"/></title>
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <title>REGISTRATION</title>
 </head>
 <body>
 <div align="center">
   <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
     <div class=" w3-green">
       <div class="w3-center">
-        <h3><fmt:message key="registration"/></h3>
+        <h3>REGISTRATION</h3>
       </div>
+      <a href="${pageContext.request.contextPath}/login.jsp">login</a>
       <a href="${pageContext.request.contextPath}/view/language/registration?language=RU">RU</a>
       <a href="${pageContext.request.contextPath}/view/language/registration?language=EN">EN</a>
     </div>
@@ -27,15 +27,8 @@
 
       <p>
         <label>
-          <input class="w3-input" type="text" required placeholder="<fmt:message key="name"/>"
+          <input class="w3-input" type="text" required placeholder="firstName"
                  name="firstName">
-        </label>
-      </p>
-
-      <p>
-        <label>
-          <input class="w3-input" type="text" required placeholder="<fmt:message key="surName"/>"
-                 name="secondName">
         </label>
       </p>
 
@@ -48,18 +41,13 @@
       <p>
         <label>
           <input class="w3-input" type="password" required
-                 placeholder="<fmt:message key="password"/>"
+                 placeholder="password"
                  name="password">
         </label>
       </p>
 
 
-      <input class="w3-button w3-green" type="submit" value="<fmt:message key="registration"/>">
-      <c:if test="${requestScope.wrongData}">
-        <div class="w3-container">
-          <fmt:message key="incorrectEmailOrPass"/>
-        </div>
-      </c:if>
+      <input class="w3-button w3-green" type="submit" value="registration">
     </form>
   </div>
 </div>
