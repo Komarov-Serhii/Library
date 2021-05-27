@@ -17,7 +17,8 @@
       <div class="w3-center">
         <h3>REGISTRATION</h3>
       </div>
-      <a href="${pageContext.request.contextPath}/login.jsp">login</a>
+      <a href="${pageContext.request.contextPath}/view/login">login</a>
+      <a href="${pageContext.request.contextPath}/mainPage.jsp">mainPage</a>
       <a href="${pageContext.request.contextPath}/view/language/registration?language=RU">RU</a>
       <a href="${pageContext.request.contextPath}/view/language/registration?language=EN">EN</a>
     </div>
