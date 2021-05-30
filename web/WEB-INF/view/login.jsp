@@ -1,4 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/nicepage.css" media="screen">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/Page-1.css" media="screen">
+
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="text"/>
 
 <html>
 <head>

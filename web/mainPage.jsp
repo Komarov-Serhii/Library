@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/nicepage.css" media="screen">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/styles/Page-1.css" media="screen">
 <html>
 <head>
     <title>MAIN PAGE</title>

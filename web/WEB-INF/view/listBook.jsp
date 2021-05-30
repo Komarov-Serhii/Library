@@ -60,9 +60,123 @@
             <td><a href="${pageContext.request.contextPath}/view/listBook?id=${a.id}&button=delete"
                    onclick="return confirm('Are you sure you want to remove this book?')">delete</a>
             </td>
-            <td><a href="${pageContext.request.contextPath}/view/listBook">set</a></td>
+            <td>
+                <form class="w3-container" align="center" method="post"
+                      action="${pageContext.request.contextPath}/view/listBook?id=${a.id}&button=set&name=${a.name}&author=${a.author}&genre=${a.genre}&publisher=${a.publisher}&publisher_date=${a.publisher_date}&description=${a.description}&price=${a.price}"
+                      onclick="return confirm('Are you sure you want to setting this book?')">
+
+                    <button type="submit" value="set" name="button">SET</button>
+                </form>
+            </td>
         </tr>
     </c:forEach>
+
+    <c:if test="${win}">
+        <form class="w3-container" align="center" method="post"
+              action="${pageContext.request.contextPath}/view/listBook?id=${param.get("id")}&button=update"
+              onclick="return confirm('Are you sure you want to update this book?')">
+
+
+            <p>
+                <label>
+                    <input class="w3-input" type="text" value="${param.get("name")}"
+                           name="name">
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    <input class="w3-input" type="text" value="${param.get("author")}" name="author">
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    <input class="w3-input" type="text" value="${param.get("genre")}" name="genre">
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    <input class="w3-input" type="text" value="${param.get("publisher")}" name="publisher">
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input class="w3-input" type="text" value="${param.get("publisher_date")}" name="publisher_date">
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input class="w3-input" type="text" value="${param.get("description")}" name="description">
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    <input class="w3-input" type="text" value="${param.get("price")}" name="price">
+                </label>
+            </p>
+
+                <button type="submit" value="update" name="button">Update</button>
+        </form>
+    </c:if>
 </table>
+
+
+<form class="w3-container" align="center" method="post"
+      action="${pageContext.request.contextPath}/view/listBook">
+
+    <button type="submit" value="add" name="button">ADD</button>
+</form>
+<c:if test="${window}">
+    <form class="w3-container" align="center" method="post"
+          action="${pageContext.request.contextPath}/view/listBook">
+
+        <p>
+            <label>
+                <input class="w3-input" type="text" required placeholder="name"
+                       name="name">
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input class="w3-input" type="text" required placeholder="author" name="author">
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input class="w3-input" type="text" required placeholder="genre" name="genre">
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input class="w3-input" type="text" required placeholder="publisher" name="publisher">
+            </label>
+        </p>
+        <p>
+            <label>
+                <input class="w3-input" type="text" required placeholder="publisher_date" name="publisher_date">
+            </label>
+        </p>
+        <p>
+            <label>
+                <input class="w3-input" type="text" required placeholder="description" name="description">
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input class="w3-input" type="text" required placeholder="price" name="price">
+            </label>
+        </p>
+
+
+        <input class="w3-button w3-green" type="submit" value="addSubmit" name="button">
+    </form>
+</c:if>
 </body>
 </html>
