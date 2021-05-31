@@ -3,7 +3,7 @@ package model.dao.Constant;
 public final class Constants {
     private Constants() {}
     public static final String UPDATE_PERSON = "UPDATE PERSON SET NAME = ?, EMAIL = ?, PASSWORD = ?, STATUS = ? WHERE ID = ?";
-    public static final String UPDATE_BOOK = "UPDATE BOOK SET NAME = ?, AUTHOR = ?, PUBLISHER = ?, PUBLISHER_DATE = ?, DESCRIPTION = ?, PRICE = ?, GENRE = ? WHERE ID = ?";
+    public static final String UPDATE_BOOK = "UPDATE BOOK SET NAME = ?, AUTHOR = ?, PUBLISHER = ?, PUBLISHER_DATE = ?, DESCRIPTION = ?, PRICE = ?, GENRE = ?, STATUS = ? WHERE ID = ?";
     public static final String UPDATE_BOOK_PHOTO = "UPDATE BOOK_PHOTO SET  URL = ?, book_id = ? WHERE ID = ?";
     public static final String UPDATE_CART = "UPDATE CART SET  person_id = ?, book_id = ? WHERE ID = ?";
 
@@ -20,7 +20,7 @@ public final class Constants {
     public static final String SELECT_BY_LOGIN = "SELECT * FROM person WHERE email = ? AND password = ?";
 
     public static final String INSERT_PERSON = "INSERT INTO PERSON (name, email, password, level, status) VALUES (?,?,?,?,?)";
-    public static final String INSERT_BOOK = "INSERT INTO BOOK (name, author, publisher, publisher_date, description, price, genre) VALUES (?,?,?,?,?,?,?)";
+    public static final String INSERT_BOOK = "INSERT INTO BOOK (name, author, publisher, publisher_date, description, price, genre, status) VALUES (?,?,?,?,?,?,?,?)";
     public static final String INSERT_BOOK_PHOTO = "INSERT INTO BOOK_PHOTO (url, book_id) VALUES (?,?)";
     public static final String INSERT_CART = "INSERT INTO CART (person_id, book_id) VALUES (?,?)";
 

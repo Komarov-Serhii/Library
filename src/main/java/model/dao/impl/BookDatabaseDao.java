@@ -32,6 +32,7 @@ public class BookDatabaseDao implements BookDao {
             statement.setString(5, book.getDescription());
             statement.setInt(6, book.getPrice());
             statement.setString(7, book.getGenre());
+            statement.setInt(8, book.getStatus());
             statement.execute();
             return true;
         } catch (SQLException | NamingException e) {
@@ -55,8 +56,9 @@ public class BookDatabaseDao implements BookDao {
             String description = resultSet.getString("description");
             int price = resultSet.getInt("price");
             String genre = resultSet.getString("genre");
+            int status = resultSet.getInt("status");
 
-            return new Book(id, name, author, publisher, publisher_date, description, price, genre);
+            return new Book(id, name, author, publisher, publisher_date, description, price, genre, status);
         } catch (SQLException | NamingException e) {
             throw new DataBaseException(String.format("Cannot get book by id=%d", id), e);
         }
@@ -88,7 +90,8 @@ public class BookDatabaseDao implements BookDao {
             statement.setString(5, book.getDescription());
             statement.setInt(6, book.getPrice());
             statement.setString(7, book.getGenre());
-            statement.setInt(8, book.getId());
+            statement.setInt(8, book.getStatus());
+            statement.setInt(9, book.getId());
             statement.executeUpdate();
             return book;
         } catch (SQLException | NamingException e) {
@@ -113,6 +116,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setDescription(rs.getString(6));
                 book.setPrice(rs.getInt(7));
                 book.setGenre(rs.getString(8));
+                book.setStatus(rs.getInt(9));
                 outerBooks.add(book);
             }
             return outerBooks;

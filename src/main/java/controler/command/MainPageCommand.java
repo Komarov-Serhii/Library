@@ -28,11 +28,18 @@ public class MainPageCommand implements Command {
         ServiceFactory factory = ServiceFactory.getInstance();
         BookService bookService = factory.getBookService();
 
-        String sort = req.getParameter("sort");
-        String test = req.getParameter("test");
-        if (Objects.nonNull(test)) {
+//        String search = req.getParameter("sear");
+        String text = req.getParameter("search");
+
+        if (Objects.nonNull(text)) {
+            logger.info("search");
             req.setAttribute("win", true);
+            List<Book> bookList = bookService.findByAuthorOrName(text);
+            req.setAttribute("list", bookList);
         }
+
+        String sort = req.getParameter("sort");
+
         try {
             List<Book> list = bookService.getAll();
 
@@ -50,6 +57,7 @@ public class MainPageCommand implements Command {
             }
 
             req.setAttribute("books", list);
+
 
             logger.info("in page listBook");
 //            if (person.getAccessLevel() == 0) {

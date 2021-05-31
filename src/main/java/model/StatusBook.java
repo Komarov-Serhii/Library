@@ -1,13 +1,12 @@
 package model;
 
-public enum Status {
-
-    UNBLOCKED(1),
-    BLOCKED(2);
+public enum StatusBook {
+    FREE(1),
+    BUSY(2);
 
     private int status;
 
-    Status(int status) {
+    StatusBook(int status) {
         this.status = status;
     }
 

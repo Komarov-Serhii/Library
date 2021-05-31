@@ -51,7 +51,7 @@ public class ListBookCommand implements Command {
             String genre = req.getParameter("genre");
 
             Book book = new Book(name, author, publisher, publisher_date, description, price, genre);
-
+            book.setStatus(1);
             try {
                 bookService.add(book);
             } catch (ServiceException e) {

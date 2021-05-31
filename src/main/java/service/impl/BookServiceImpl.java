@@ -1,14 +1,13 @@
 package service.impl;
 
 import model.Book;
-import model.Person;
 import model.dao.BookDao;
 import model.dao.factory.DaoFactory;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.BookService;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService {
 
@@ -45,4 +44,10 @@ public class BookServiceImpl implements BookService {
     }
 
 
+    @Override
+    public List<Book> findByAuthorOrName(String text) {
+        return bookDAO.getAll().stream()
+                .filter(o -> o.getName().contains(text) || o.getAuthor().contains(text))
+                .collect(Collectors.toList());
+    }
 }

@@ -11,6 +11,7 @@ public class Book extends Model {
     private String description;
     private int price;
     private String genre;
+    private int status;
 
     public Book() {
 
@@ -27,6 +28,18 @@ public class Book extends Model {
         this.genre = genre;
     }
 
+    public Book(String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status) {
+
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.publisher_date = publisher_date;
+        this.description = description;
+        this.price = price;
+        this.genre = genre;
+        this.status = status;
+    }
+
     public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre) {
         super(id);
         this.name = name;
@@ -36,6 +49,17 @@ public class Book extends Model {
         this.description = description;
         this.price = price;
         this.genre = genre;
+    }
+    public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status) {
+        super(id);
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.publisher_date = publisher_date;
+        this.description = description;
+        this.price = price;
+        this.genre = genre;
+        this.status = status;
     }
 
     public Book(String name) {
@@ -96,6 +120,14 @@ public class Book extends Model {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override
