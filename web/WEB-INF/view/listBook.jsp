@@ -32,6 +32,16 @@
     </div>
 </div>
 
+<div align="left">
+    <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
+        <div class=" w3-green">
+            <a href="${pageContext.request.contextPath}/view/listBook?sort=sortName">Name</a>
+            <a href="${pageContext.request.contextPath}/view/listBook?sort=sortAuthor">Author</a>
+            <a href="${pageContext.request.contextPath}/view/listBook?sort=sortPublisher">Publisher</a>
+            <a href="${pageContext.request.contextPath}/view/listBook?sort=sortPublisherDate">Publisher_Date</a>
+        </div>
+    </div>
+</div>
 
 <table>
     <tr>

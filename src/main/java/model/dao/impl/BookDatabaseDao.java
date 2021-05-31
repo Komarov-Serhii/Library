@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BookDatabaseDao  implements BookDao {
+public class BookDatabaseDao implements BookDao {
 
     public BookDatabaseDao() {
     }
@@ -103,21 +103,22 @@ public class BookDatabaseDao  implements BookDao {
         try (Connection connection = Connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.ALL_BOOK)) {
             ResultSet rs = statement.executeQuery();
-                while (rs.next()) {
-                    Book book = new Book();
-                    book.setId(rs.getInt(1));
-                    book.setName(rs.getString(2));
-                    book.setAuthor(rs.getString(3));
-                    book.setPublisher(rs.getString(4));
-                    book.setPublisher_date(rs.getString(5));
-                    book.setDescription(rs.getString(6));
-                    book.setPrice(rs.getInt(7));
-                    book.setGenre(rs.getString(8));
-                    outerBooks.add(book);
-                }
+            while (rs.next()) {
+                Book book = new Book();
+                book.setId(rs.getInt(1));
+                book.setName(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setPublisher(rs.getString(4));
+                book.setPublisher_date(rs.getString(5));
+                book.setDescription(rs.getString(6));
+                book.setPrice(rs.getInt(7));
+                book.setGenre(rs.getString(8));
+                outerBooks.add(book);
+            }
             return outerBooks;
-            } catch (SQLException | NamingException e) {
+        } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot getAllEntity book", e);
         }
     }
+
 }

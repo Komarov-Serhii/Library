@@ -1,15 +1,17 @@
 package controler.command;
 
 import controler.command.utils.CommandUtil;
+import model.Book;
 import model.Person;
+import model.exception.DataBaseException;
 import model.exception.ServiceException;
-import service.factory.ItemService;
+import service.PersonService;
 import service.factory.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 import java.util.logging.Logger;
+
 
 public class PersonProfilePageCommand implements Command {
 
@@ -18,19 +20,37 @@ public class PersonProfilePageCommand implements Command {
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
         ServiceFactory factory = ServiceFactory.getInstance();
-        try {
-            ItemService itemService = factory.getPersonService();
-            List<Person> list = itemService.getAll();
+        PersonService personService = factory.getPersonService();
 
-            req.setAttribute("people", list.size());
-            req.setAttribute("active", list.size() - factory.getPersonService().getAllBlocked());
-            req.setAttribute("blocked", factory.getPersonService().getAllBlocked());
+        String button = req.getParameter("button");
 
-            logger.info("in page admin");
-        } catch (ServiceException e) {
-            logger.info("serviceException");
-            CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfilePage.jsp");
+        String name = req.getParameter("name");
+        String email = req.getParameter("email");
+        String password = req.getParameter("password");
+
+        if (button != null && button.equals("set")) {
+            req.setAttribute("tab", true);
+            logger.info("Successful set profile");
         }
-        CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfilePage.jsp");
+
+
+        if (button != null && button.equals("update")) {
+            int id = Integer.parseInt(req.getParameter("id"));
+
+            try {
+                Person person = personService.getEntity(id);
+
+                person.setName(name);
+                person.setEmail(email);
+                person.setPassword(password);
+                personService.update(person);
+                logger.info("Update info person");
+            } catch (DataBaseException|ServiceException e) {
+                logger.info("Bad update person");
+                CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
+            }
+        }
+        CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
+
     }
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Comparator;
 import java.util.Objects;
 
 public class Book extends Model {
@@ -121,5 +122,33 @@ public class Book extends Model {
         if (obj == null || getClass() != obj.getClass()) return false;
         Book book = (Book) obj;
         return Objects.equals(name, book.name);
+    }
+
+    public static class NameComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book p1, Book p2) {
+            return p1.getName().compareTo(p2.getName());
+        }
+    }
+
+    public static class AuthorComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book p1, Book p2) {
+            return p1.getAuthor().compareTo(p2.getAuthor());
+        }
+    }
+
+    public static class PublisherComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book p1, Book p2) {
+            return p1.getPublisher().compareTo(p2.getPublisher());
+        }
+    }
+
+    public static class PublisherDateComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book p1, Book p2) {
+            return p1.getPublisher_date().compareTo(p2.getPublisher_date());
+        }
     }
 }

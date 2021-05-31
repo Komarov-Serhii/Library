@@ -7,8 +7,9 @@ public interface Operation {
 
     String ADMIN_MENU = "/view/adminPage";
     String PERSON_MENU = "/view/personPage";
-    String PERSON_PROFILE = "/view/personProfilePage";
-    String MAIN_MENU = "/mainPage";
+    String PERSON_PROFILE = "/view/personProfile";
+    String PERSON_BOOKS = "/view/personBooksPage";
+    String MAIN_MENU = "/view/mainPage";
     String LIST_PERSON = "/view/listPerson";
     String LIST_BOOK = "/view/listBook";
 }

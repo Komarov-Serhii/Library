@@ -21,7 +21,7 @@
                 <h3>LOGIN</h3>
             </div>
             <a href="${pageContext.request.contextPath}/view/registration">registration</a>
-            <a href="${pageContext.request.contextPath}/mainPage.jsp">mainPage</a>
+            <a href="${pageContext.request.contextPath}/WEB-INF/view/mainPage.jsp">mainPage</a>
             <a href="${pageContext.request.contextPath}/view/language//?language=RU">
                 <%--<img src="image/ru.png"/>--%>
                 RU

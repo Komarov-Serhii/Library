@@ -23,8 +23,11 @@ public abstract class CommandUtil {
     public static String getPersonPageByRole(int accessLevel) {
         String page = "";
         switch (accessLevel) {
+            case 0:
+                page = "/view/mainPage";
+                break;
             case 2:
-                page = "/WEB-INF/view/personPage.jsp";
+                page = "/view/personPage";
                 break;
             case 3:
                 page = "/WEB-INF/view/adminPage.jsp";

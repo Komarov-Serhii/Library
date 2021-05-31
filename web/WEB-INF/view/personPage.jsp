@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
     <title>PERSON PAGE</title>
@@ -27,12 +30,52 @@
 <div align="right">
     <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
         <div class=" w3-green">
-            <a href="${pageContext.request.contextPath}/mainPage.jsp">logout</a>
-            <a href="${pageContext.request.contextPath}/view/personProfilePage">My profile</a>
+            <a href="${pageContext.request.contextPath}/WEB-INF/view/mainPage.jsp">logout</a>
+            <a href="${pageContext.request.contextPath}/view/personBooksPage">My books</a>
+            <a href="${pageContext.request.contextPath}/view/personProfile">My Profile</a>
             <a href="${pageContext.request.contextPath}/view/language/registration?language=RU">RU</a>
             <a href="${pageContext.request.contextPath}/view/language/registration?language=EN">EN</a>
         </div>
         </div>
         </div>
+
+<div align="left">
+    <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
+        <div class=" w3-green">
+            <a href="${pageContext.request.contextPath}/view/personPage?sort=sortName">Name</a>
+            <a href="${pageContext.request.contextPath}/view/personPage?sort=sortAuthor">Author</a>
+            <a href="${pageContext.request.contextPath}/view/personPage?sort=sortPublisher">Publisher</a>
+            <a href="${pageContext.request.contextPath}/view/personPage?sort=sortPublisherDate">Publisher_Date</a>
+        </div>
+    </div>
+</div>
+
+
+    <table>
+        <tr>
+            <th>Название</th>
+            <th>Автор</th>
+            <th>Жанр</th>
+            <th>Издательство</th>
+            <th>Год издательства</th>
+            <th>Описание</th>
+            <th>Цена</th>
+
+        </tr>
+
+        <c:forEach items="${books}" var="a">
+            <tr>
+                <td> ${a.name}</td>
+                <td> ${a.author}</td>
+                <td> ${a.genre}</td>
+                <td> ${a.publisher}</td>
+                <td> ${a.publisher_date}</td>
+                <td> ${a.description}</td>
+                <td> ${a.price}</td>
+            </tr>
+        </c:forEach>
+
+    </table>
+
 </body>
 </html>
