@@ -3,6 +3,8 @@ package controler.command;
 import controler.command.utils.CommandUtil;
 import model.Book;
 import model.Person;
+import model.exception.DataBaseException;
+import model.exception.ServiceException;
 import service.BookService;
 import service.factory.ServiceFactory;
 import javax.servlet.http.HttpServletRequest;
@@ -30,12 +32,25 @@ public class OrderAdminCommand implements Command {
             logger.info("Update add book");
         }
 
+        if (Objects.nonNull(button) && button.equals("reject")) {
+            int id = Integer.parseInt(req.getParameter("id"));
+            try {
+                Book book = bookService.getEntity(id);
+                book.setStatus(1);
+                book.setOrderStatus(1);
+                bookService.update(book);
+                logger.info("Successful reject order");
+            } catch (DataBaseException|ServiceException e) {
+                e.printStackTrace();
+            }
+        }
+
         Map<Person, Book> map = bookService.getAllInfoByOrder();
 
 
-        req.setAttribute("contract", map);
+        req.setAttribute("order", map);
 
-        logger.info("in page listContract");
+        logger.info("in page order");
 
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/orderPage.jsp");
     }

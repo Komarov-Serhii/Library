@@ -15,6 +15,7 @@ public class Book extends Model {
     private int person_id;
     private int orderStatus;
 
+
     public Book() {
 
     }

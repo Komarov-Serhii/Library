@@ -43,7 +43,7 @@
         <th>Accept</th>
         <th>Reject</th>
     </tr>
-    <c:forEach items="#{contract}" var="a">
+    <c:forEach items="#{order}" var="a">
         <tr>
             <td> ${a.key.id} <br></td>
             <td> ${a.key.name} <br></td>
@@ -51,10 +51,10 @@
             <td> ${a.value.id} <br></td>
             <td> ${a.value.name} <br></td>
             <td> ${a.value.author} <br></td>
-            <td><a href="${pageContext.request.contextPath}/view/orderPage?button=accept"
+            <td><a href="${pageContext.request.contextPath}/view/orderPage?id=${a.value.id}&button=accept"
                    onclick="return confirm('Are you sure you want to accept this book?')">accept</a>
             </td>
-            <td><a href="${pageContext.request.contextPath}/view/orderPage?button=reject"
+            <td><a href="${pageContext.request.contextPath}/view/orderPage?id=${a.value.id}&button=reject"
                    onclick="return confirm('Are you sure you want to reject this book?')">reject</a>
             </td>
         </tr>
