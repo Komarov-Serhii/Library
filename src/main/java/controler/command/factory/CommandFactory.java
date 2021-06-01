@@ -23,6 +23,7 @@ public class CommandFactory {
         allKnownCommandMap.put(Operation.LIST_BOOK, new ListBookCommand());
         allKnownCommandMap.put(Operation.PERSON_BOOKS, new PersonBookPageCommand());
         allKnownCommandMap.put(Operation.PERSON_PROFILE, new PersonProfilePageCommand());
+        allKnownCommandMap.put(Operation.ORDER, new OrderAdminCommand());
     }
 
 

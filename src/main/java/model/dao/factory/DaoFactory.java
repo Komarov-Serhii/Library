@@ -21,6 +21,4 @@ public abstract class DaoFactory {
     public abstract BookDao getBookDAO();
 
     public abstract BookPhotoDao getBookPhotoDAO();
-
-    public abstract CartDao getCartDAO();
 }

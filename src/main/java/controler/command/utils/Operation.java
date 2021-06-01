@@ -12,4 +12,5 @@ public interface Operation {
     String MAIN_MENU = "/view/mainPage";
     String LIST_PERSON = "/view/listPerson";
     String LIST_BOOK = "/view/listBook";
+    String ORDER = "/view/orderPage";
 }

@@ -12,6 +12,8 @@ public class Book extends Model {
     private int price;
     private String genre;
     private int status;
+    private int person_id;
+    private int orderStatus;
 
     public Book() {
 
@@ -40,6 +42,20 @@ public class Book extends Model {
         this.status = status;
     }
 
+    public Book(String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status, int person_id , int orderStatus) {
+
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.publisher_date = publisher_date;
+        this.description = description;
+        this.price = price;
+        this.genre = genre;
+        this.status = status;
+        this.person_id = person_id;
+        this.orderStatus = orderStatus;
+    }
+
     public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre) {
         super(id);
         this.name = name;
@@ -60,6 +76,20 @@ public class Book extends Model {
         this.price = price;
         this.genre = genre;
         this.status = status;
+    }
+
+    public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status, int person_id, int orderStatus) {
+        super(id);
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.publisher_date = publisher_date;
+        this.description = description;
+        this.price = price;
+        this.genre = genre;
+        this.status = status;
+        this.person_id = person_id;
+        this.orderStatus = orderStatus;
     }
 
     public Book(String name) {
@@ -128,6 +158,22 @@ public class Book extends Model {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getPerson_id() {
+        return person_id;
+    }
+
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
+    }
+
+    public int getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(int orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override

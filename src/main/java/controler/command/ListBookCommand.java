@@ -1,14 +1,15 @@
 package controler.command;
 
 import controler.command.utils.CommandUtil;
+import controler.command.utils.Utils;
 import model.Book;
+import model.Person;
 import model.exception.ServiceException;
 import service.BookService;
 import service.factory.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -23,8 +24,8 @@ public class ListBookCommand implements Command {
         ServiceFactory factory = ServiceFactory.getInstance();
         BookService bookService = factory.getBookService();
 
+
         String button = req.getParameter("button");
-        String sort = req.getParameter("sort");
 
 
         if (button != null && button.equals("delete")) {
@@ -38,7 +39,7 @@ public class ListBookCommand implements Command {
 
         if (button != null && button.equals("add")) {
             req.setAttribute("window", true);
-            logger.info("Successful delete book");
+            logger.info("Successful open window add");
         }
 
         if (button != null && button.equals("addSubmit")) {
@@ -52,6 +53,9 @@ public class ListBookCommand implements Command {
 
             Book book = new Book(name, author, publisher, publisher_date, description, price, genre);
             book.setStatus(1);
+            Person person = (Person) req.getSession().getAttribute("person");
+            book.setPerson_id(person.getId());
+            book.setOrderStatus(1);
             try {
                 bookService.add(book);
             } catch (ServiceException e) {
@@ -88,18 +92,7 @@ public class ListBookCommand implements Command {
         try {
             List<Book> list = bookService.getAll();
 
-            if (Objects.nonNull(sort) && sort.equals("sortName")) {
-                Collections.sort(list, new Book.NameComparator());
-            }
-            if (Objects.nonNull(sort) && sort.equals("sortAuthor")) {
-                Collections.sort(list, new Book.AuthorComparator());
-            }
-            if (Objects.nonNull(sort) && sort.equals("sortPublisher")) {
-                Collections.sort(list, new Book.PublisherComparator());
-            }
-            if (Objects.nonNull(sort) && sort.equals("sortPublisherDate")) {
-                Collections.sort(list, new Book.PublisherDateComparator());
-            }
+            Utils.sortBooks(req, list);
 
             req.setAttribute("books", list);
 

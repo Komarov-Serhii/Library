@@ -25,6 +25,7 @@
                 <h4 class="u-align-left u-text u-text-4">Users count: ${people}</h4>
                 <h4 class="u-align-left u-text u-text-6">Active clients: ${active}</h4>
                 <h4 class="u-align-left u-text u-text-8">Blocked clients : ${blocked}</h4>
+                <h4 class="u-align-left u-text u-text-8">Orders count : ${order}</h4>
             </div>
         </div>
         <div class="u-border-1 u-border-grey-75 u-container-style u-group u-hidden-md u-hidden-sm u-hidden-xs u-white u-group-3">
@@ -32,6 +33,7 @@
                 <a href="${pageContext.request.contextPath}/view/adminPage" class="u-border-0 u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-1">Main page</a>
                 <a href="${pageContext.request.contextPath}/view/listBook" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-2">Books</a>
                 <a href="${pageContext.request.contextPath}/view/listPerson" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-3">Users</a>
+                <a href="${pageContext.request.contextPath}/view/orderPage" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-3">Order</a>
                 <a href="${pageContext.request.contextPath}/view/logout" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-4">Log Out</a>
             </div>
         </div>

@@ -15,6 +15,7 @@ public class ServiceFactory {
     private PersonService personService = new PersonServiceImpl();
     private BookService bookService = new BookServiceImpl();
 
+
     private static ServiceFactory instance;
 
     public static ServiceFactory getInstance() {
@@ -37,4 +38,5 @@ public class ServiceFactory {
     public BookService getBookService() {
         return bookService;
     }
+
 }

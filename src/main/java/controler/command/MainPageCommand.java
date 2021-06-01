@@ -5,6 +5,7 @@ import controler.command.utils.CommandUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controler.command.utils.Utils;
 import model.Book;
 import model.Person;
 import model.exception.ServiceException;
@@ -43,21 +44,9 @@ public class MainPageCommand implements Command {
         try {
             List<Book> list = bookService.getAll();
 
-            if (Objects.nonNull(sort) && sort.equals("sortName")) {
-                Collections.sort(list, new Book.NameComparator());
-            }
-            if (Objects.nonNull(sort) && sort.equals("sortAuthor")) {
-                Collections.sort(list, new Book.AuthorComparator());
-            }
-            if (Objects.nonNull(sort) && sort.equals("sortPublisher")) {
-                Collections.sort(list, new Book.PublisherComparator());
-            }
-            if (Objects.nonNull(sort) && sort.equals("sortPublisherDate")) {
-                Collections.sort(list, new Book.PublisherDateComparator());
-            }
+            Utils.sortBooks(req, list);
 
             req.setAttribute("books", list);
-
 
             logger.info("in page listBook");
 //            if (person.getAccessLevel() == 0) {

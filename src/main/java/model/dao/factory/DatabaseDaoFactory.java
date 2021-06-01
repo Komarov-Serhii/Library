@@ -15,7 +15,7 @@ public class DatabaseDaoFactory extends DaoFactory{
     private PersonDao personDao = new PersonDatabaseDao();
     private BookDao bookDao = new BookDatabaseDao();
     private BookPhotoDao book_photoDao = new BookPhotoDatabaseDao();
-    private CartDao cartDao = new CartDatabaseDao();
+
 
 
     @Override
@@ -36,9 +36,5 @@ public class DatabaseDaoFactory extends DaoFactory{
         return book_photoDao;
     }
 
-    @Override
-    public CartDao getCartDAO() {
-        logger.info("Get CartDatabaseDao");
-        return cartDao;
-    }
+
 }

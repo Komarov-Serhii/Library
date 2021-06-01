@@ -1,14 +1,15 @@
 package controler.command;
 
 import controler.command.utils.CommandUtil;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import model.exception.NotFoundPersonException;
 import model.exception.WrongDataException;
 import model.Person;
 import service.PersonService;
 import service.factory.ServiceFactory;
-
 
 
 import java.util.Objects;
@@ -38,8 +39,7 @@ public class LoginCommand implements Command {
                 req.setAttribute("wrongData", true);
                 CommandUtil.goToPage(req, resp, "/");
             }
-        } else {
-            CommandUtil.goToPage(req, resp, "/WEB-INF/view/login.jsp");
         }
+        CommandUtil.goToPage(req, resp, "/WEB-INF/view/login.jsp");
     }
 }

@@ -52,7 +52,6 @@ public class ListPersonCommand implements Command {
         } catch (ServiceException e) {
             logger.info("DatabaseException update");
         }
-        System.out.println(id);
 
         try {
             List<Person> list = personService.getAllPerson();

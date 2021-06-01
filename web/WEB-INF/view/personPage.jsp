@@ -30,7 +30,7 @@
 <div align="right">
     <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
         <div class=" w3-green">
-            <a href="${pageContext.request.contextPath}/WEB-INF/view/mainPage.jsp">logout</a>
+            <a href="${pageContext.request.contextPath}/view/logout">logout</a>
             <a href="${pageContext.request.contextPath}/view/personBooksPage">My books</a>
             <a href="${pageContext.request.contextPath}/view/personProfile">My Profile</a>
             <a href="${pageContext.request.contextPath}/view/language/registration?language=RU">RU</a>
@@ -60,6 +60,7 @@
             <th>Год издательства</th>
             <th>Описание</th>
             <th>Цена</th>
+            <th>Заказать</th>
 
         </tr>
 
@@ -72,6 +73,9 @@
                 <td> ${a.publisher_date}</td>
                 <td> ${a.description}</td>
                 <td> ${a.price}</td>
+                <td><a href="${pageContext.request.contextPath}/view/personPage?id=${a.id}&button=order"
+                       onclick="return confirm('Are you sure you want to order this book?')">Order</a>
+                </td>
             </tr>
         </c:forEach>
 

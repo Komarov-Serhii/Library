@@ -4,15 +4,14 @@ import controler.command.utils.CommandUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controler.command.utils.Utils;
 import model.Book;
 import model.Person;
 import model.exception.ServiceException;
 import service.BookService;
 import service.factory.ServiceFactory;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 public class PersonPageCommand implements Command {
@@ -32,24 +31,21 @@ public class PersonPageCommand implements Command {
         ServiceFactory factory = ServiceFactory.getInstance();
         BookService bookService = factory.getBookService();
 
-        String sort = req.getParameter("sort");
+        String button = req.getParameter("button");
 
 
+        if (button != null && button.equals("order")) {
+            int id_book = Integer.parseInt(req.getParameter("id"));
+
+
+            Person person = (Person) req.getSession().getAttribute("person");
+            bookService.setBookForApprove(id_book, person.getId());
+
+        }
         try {
             List<Book> list = bookService.getAll();
 
-            if (Objects.nonNull(sort) && sort.equals("sortName")) {
-                Collections.sort(list, new Book.NameComparator());
-            }
-            if (Objects.nonNull(sort) && sort.equals("sortAuthor")) {
-                Collections.sort(list, new Book.AuthorComparator());
-            }
-            if (Objects.nonNull(sort) && sort.equals("sortPublisher")) {
-                Collections.sort(list, new Book.PublisherComparator());
-            }
-            if (Objects.nonNull(sort) && sort.equals("sortPublisherDate")) {
-                Collections.sort(list, new Book.PublisherDateComparator());
-            }
+            Utils.sortBooks(req, list);
 
             req.setAttribute("books", list);
 
