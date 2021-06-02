@@ -1,6 +1,6 @@
 package service.impl;
 
-import controler.command.ListBookCommand;
+import controler.command.utils.CommandUtil;
 import model.Book;
 import model.Person;
 import model.dao.BookDao;
@@ -10,7 +10,7 @@ import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.BookService;
 
-import javax.servlet.http.HttpServlet;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -104,8 +104,13 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> getAllBooksByPersonID(int person_id) {
-        return bookDAO.getAllBooksByPersonID(person_id);
+    public List<Book> getAllBooksByPersonIDAndAddDebt(int person_id) {
+        List<Book> list = bookDAO.getAllBooksByPersonID(person_id);
+
+        list.stream()
+                .filter(o -> CommandUtil.getNextBill().after(o.getReturnDate()))
+                .forEach(o -> o.setDebt(o.getPrice() / 100 * 30));
+        return list;
     }
 
     @Override

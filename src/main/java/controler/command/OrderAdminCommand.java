@@ -9,8 +9,6 @@ import service.BookService;
 import service.factory.ServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -33,7 +31,7 @@ public class OrderAdminCommand implements Command {
             try {
                 Book book = bookService.getEntity(id);
                 book.setOrderStatus(2);
-                //book.setReturnDate(CommandUtil.getNextBill());
+                book.setReturnDate(CommandUtil.getNextBill());
                 bookService.update(book);
                 logger.info("Successful accept order");
             } catch (DataBaseException|ServiceException e) {

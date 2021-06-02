@@ -36,6 +36,7 @@ public class BookDatabaseDao implements BookDao {
             statement.setInt(9, book.getPerson_id());
             statement.setInt(10, book.getOrderStatus());
             statement.setDate(11, book.getReturnDate());
+            statement.setInt(12, book.getDebt());
             statement.execute();
             return true;
         } catch (SQLException | NamingException e) {
@@ -63,8 +64,9 @@ public class BookDatabaseDao implements BookDao {
             int person_id = resultSet.getInt("person_id");
             int orderStatus = resultSet.getInt("order_status");
             Date returnDate = resultSet.getDate("return_date");
+            int dept = resultSet.getInt("debt");
 
-            return new Book(id, name, author, publisher, publisher_date, description, price, genre, status, person_id, orderStatus, returnDate);
+            return new Book(id, name, author, publisher, publisher_date, description, price, genre, status, person_id, orderStatus, returnDate, dept);
         } catch (SQLException | NamingException e) {
             throw new DataBaseException(String.format("Cannot get book by id=%d", id), e);
         }
@@ -100,7 +102,8 @@ public class BookDatabaseDao implements BookDao {
             statement.setInt(9, book.getPerson_id());
             statement.setInt(10, book.getOrderStatus());
             statement.setDate(11, book.getReturnDate());
-            statement.setInt(12, book.getId());
+            statement.setInt(12, book.getDebt());
+            statement.setInt(13, book.getId());
             statement.executeUpdate();
             return book;
         } catch (SQLException | NamingException e) {
@@ -129,6 +132,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setPerson_id(rs.getInt(10));
                 book.setOrderStatus(rs.getInt(11));
                 book.setReturnDate(rs.getDate(12));
+                book.setDebt(rs.getInt(13));
                 outerBooks.add(book);
             }
             return outerBooks;
@@ -157,6 +161,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setPerson_id(rs.getInt(10));
                 book.setOrderStatus(rs.getInt(11));
                 book.setReturnDate(rs.getDate(12));
+                book.setDebt(rs.getInt(13));
                 outerBooks.add(book);
             }
             return outerBooks;
@@ -186,6 +191,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setPerson_id(rs.getInt(10));
                 book.setOrderStatus(rs.getInt(11));
                 book.setReturnDate(rs.getDate(12));
+                book.setDebt(rs.getInt(13));
                 outerBooks.add(book);
             }
             return outerBooks;
@@ -215,6 +221,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setPerson_id(rs.getInt(10));
                 book.setOrderStatus(rs.getInt(11));
                 book.setReturnDate(rs.getDate(12));
+                book.setDebt(rs.getInt(13));
                 outerBooks.add(book);
             }
             return outerBooks;

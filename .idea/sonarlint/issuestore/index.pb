@@ -7,8 +7,6 @@ G
 web/js/time.js,7/4/745c67436f7da27c70c70c54a5508073c1f0de38
 >
 app.properties,0/4/04b02bfcfbb59e2ce9803e449df2cd081600b104
-\
-,src/main/java/controler/command/Command.java,5/d/5d9ab484de352429cb56eb7e8911ebc279bcc797
 J
 web/WEB-INF/view/login.jsp,5/b/5be2e3be2c56074462f297f8fc63d9e70ab0d675
 a
@@ -17,10 +15,6 @@ S
 #src/main/java/model/Book_Photo.java,5/d/5def34ea31dbe953fc799219c92b8fb5109dbffd
 b
 2src/main/java/controler/command/LogoutCommand.java,8/8/889ccf9c253fb0efd736de33cc6110df34b7aa5b
-U
-%src/main/java/model/StatusPerson.java,7/f/7f5f4ff4790fa749db1f8457496cf974004585b8
-O
-src/main/java/model/Person.java,d/e/de79464f0bdf6673dba8ecb903704c783d5ec95a
 g
 7src/main/java/controler/filter/AuthorizationFilter.java,5/6/560228c5ea2ffc543e9210b12bf9cf31f47175e2
 b
@@ -31,27 +25,17 @@ b
 web/Welcome.jsp,f/5/f5664bd07edd4367aa72e0105d0c4ce1fdda880f
 V
 &src/main/java/model/dao/PersonDao.java,f/c/fc3050d75953bfdff1de5edda05e50f74799cfcc
-O
-web/WEB-INF/view/listPerson.jsp,b/f/bf5b6c0f42eba02c7e0002533323e1aa7da2614e
 N
 web/WEB-INF/view/not_found.jsp,5/e/5e76b09b6c64e7f82acf39317c4acd56785f0888
-Q
-!web/WEB-INF/view/registration.jsp,c/d/cd359028851ba3690b4ef937e5d0ff87b97dcffb
 T
 $src/main/java/model/dao/CrudDao.java,4/a/4ad577f407ef2f039828b16dc8b867cce797bc09
-S
-#src/main/java/model/StatusBook.java,7/f/7f8b093d6492e83c3e4ff18198acabad04e80966
 g
 7src/main/java/model/dao/factory/DatabaseDaoFactory.java,0/7/071e58f0dbcc6a18f0f584a6f1a504d2fac0e922
 _
 /src/main/java/model/dao/factory/DaoFactory.java,2/b/2b80a0a5195bd61eeee638418f295381d1e701bc
 ^
 .src/main/java/service/factory/ItemService.java,c/4/c4662ff0850d97d991c14e761bcf03cac944a155
-i
-9src/main/java/controler/command/utils/ValidationData.java,e/1/e1e7c695b16a6a9cc4a8531ca02af2dd9cc5671f
 a
 1src/main/java/service/factory/ServiceFactory.java,1/4/149ff007edb260220bd934060a5807166a50338e
-d
-4src/main/java/model/exception/DataBaseException.java,a/9/a99840283f8ae5ebddbaf34a2c1d7d4cc45cc06f
 c
 3src/main/java/model/dao/impl/PersonDatabaseDao.java,c/3/c399b92621ebdd92e456a50a469dbf52fd837a9e

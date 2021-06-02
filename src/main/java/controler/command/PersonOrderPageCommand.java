@@ -39,7 +39,6 @@ public class PersonOrderPageCommand implements Command {
             } catch (DataBaseException|ServiceException e) {
                 e.printStackTrace();
             }
-
         }
 
 

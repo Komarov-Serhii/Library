@@ -34,7 +34,6 @@
 
 <table>
     <tr>
-        <th>№</th>
         <th>Название</th>
         <th>Автор</th>
         <th>Жанр</th>
@@ -42,12 +41,13 @@
         <th>Год издательства</th>
         <th>Описание</th>
         <th>Цена</th>
+        <th>Штраф</th>
+        <th>Дедлайн</th>
         <th>Возвратить</th>
     </tr>
 
     <c:forEach items="#{books}" var="a">
     <tr>
-        <td> ${a.id}</td>
         <td> ${a.name}</td>
         <td> ${a.author}</td>
         <td> ${a.genre}</td>
@@ -55,9 +55,18 @@
         <td> ${a.publisher_date}</td>
         <td> ${a.description}</td>
         <td> ${a.price}</td>
+        <td> ${a.debt}</td>
+        <td> ${a.returnDate}</td>
+        <c:if test="${a.debt == 0}">
         <td><a href="${pageContext.request.contextPath}/view/personBookPage?id=${a.id}&button=return"
-               onclick="return confirm('Are you sure you want to return this book?')">return</a>
+               onclick="return confirm('Are you sure you want to return this book?')">Return</a>
         </td>
+        </c:if>
+        <c:if test="${a.debt > 0}">
+        <td><a href="${pageContext.request.contextPath}/view/personBookPage?id=${a.id}&button=pay"
+               onclick="return confirm('Are you sure you want to pay this book?')">Pay debt</a>
+        </td>
+        </c:if>
     </tr>
     </c:forEach>
 </table>

@@ -17,6 +17,8 @@ public class Book extends Model {
     private int person_id;
     private int orderStatus;
     private Date returnDate;
+    private int debt;
+
 
     public Book() {
 
@@ -60,6 +62,22 @@ public class Book extends Model {
         this.returnDate = returnDate;
     }
 
+    public Book(String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status, int person_id, int orderStatus, Date returnDate, int debt) {
+
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.publisher_date = publisher_date;
+        this.description = description;
+        this.price = price;
+        this.genre = genre;
+        this.status = status;
+        this.person_id = person_id;
+        this.orderStatus = orderStatus;
+        this.returnDate = returnDate;
+        this.debt = debt;
+    }
+
     public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre) {
         super(id);
         this.name = name;
@@ -96,6 +114,21 @@ public class Book extends Model {
         this.person_id = person_id;
         this.orderStatus = orderStatus;
         this.returnDate = returnDate;
+    }
+    public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status, int person_id, int orderStatus, Date returnDate, int debt) {
+        super(id);
+        this.name = name;
+        this.author = author;
+        this.publisher = publisher;
+        this.publisher_date = publisher_date;
+        this.description = description;
+        this.price = price;
+        this.genre = genre;
+        this.status = status;
+        this.person_id = person_id;
+        this.orderStatus = orderStatus;
+        this.returnDate = returnDate;
+        this.debt = debt;
     }
 
 
@@ -191,6 +224,14 @@ public class Book extends Model {
         this.returnDate = returnDate;
     }
 
+    public int getDebt() {
+        return debt;
+    }
+
+    public void setDebt(int debt) {
+        this.debt = debt;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name);
@@ -210,6 +251,7 @@ public class Book extends Model {
                 ", person_id=" + person_id +
                 ", orderStatus=" + orderStatus +
                 ", returnDate=" + returnDate +
+                ", debt=" + debt +
                 '}';
     }
 

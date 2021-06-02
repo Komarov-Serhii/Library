@@ -67,7 +67,40 @@
     </c:forEach>
   </table>
 
+<form class="w3-container" align="center" method="post"
+      action="${pageContext.request.contextPath}/view/listPerson">
 
+    <button type="submit" value="add" name="button">Add admin</button>
+</form>
+<c:if test="${window}">
+    <form class="w3-container" align="center" method="post"
+          action="${pageContext.request.contextPath}/view/listPerson">
+
+        <p>
+            <label>
+                <input class="w3-input" type="text" required placeholder="Name"
+                       name="name">
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input class="w3-input" type="text" required placeholder="Email" name="email">
+            </label>
+        </p>
+
+        <p>
+            <label>
+                <input class="w3-input" type="password" required
+                       placeholder="password"
+                       name="password">
+            </label>
+        </p>
+
+
+        <input class="w3-button w3-green" type="submit" value="addSubmit" name="button">
+    </form>
+</c:if>
 
 
 
