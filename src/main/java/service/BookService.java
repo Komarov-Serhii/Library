@@ -17,4 +17,9 @@ public interface BookService extends ItemService<Integer, Book> {
 
         public List<Book> getAllOrder();
 
+        List<Book> getAllBooksByPersonID(int person_id);
+
+        List<Book> getAllOrderByPersonID(int person_id);
+
+
 }

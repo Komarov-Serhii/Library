@@ -102,4 +102,14 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllOrder() {
         return bookDAO.getAllOrder();
     }
+
+    @Override
+    public List<Book> getAllBooksByPersonID(int person_id) {
+        return bookDAO.getAllBooksByPersonID(person_id);
+    }
+
+    @Override
+    public List<Book> getAllOrderByPersonID(int person_id) {
+        return bookDAO.getAllOrderByPersonID(person_id);
+    }
 }

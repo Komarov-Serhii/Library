@@ -21,9 +21,11 @@ public class CommandFactory {
         allKnownCommandMap.put(Operation.MAIN_MENU, new MainPageCommand());
         allKnownCommandMap.put(Operation.LIST_PERSON, new ListPersonCommand());
         allKnownCommandMap.put(Operation.LIST_BOOK, new ListBookCommand());
-        allKnownCommandMap.put(Operation.PERSON_BOOKS, new PersonBookPageCommand());
+        allKnownCommandMap.put(Operation.PERSON_INFO_BOOKS, new PersonInfoBookPageCommand());
         allKnownCommandMap.put(Operation.PERSON_PROFILE, new PersonProfilePageCommand());
         allKnownCommandMap.put(Operation.ORDER, new OrderAdminCommand());
+        allKnownCommandMap.put(Operation.PERSON_BOOKS, new PersonBookPageCommand());
+        allKnownCommandMap.put(Operation.PERSON_ORDER, new PersonOrderPageCommand());
     }
 
 

@@ -1,6 +1,8 @@
 package model;
 
+import java.sql.Date;
 import java.util.Comparator;
+
 import java.util.Objects;
 
 public class Book extends Model {
@@ -14,7 +16,7 @@ public class Book extends Model {
     private int status;
     private int person_id;
     private int orderStatus;
-
+    private Date returnDate;
 
     public Book() {
 
@@ -43,7 +45,7 @@ public class Book extends Model {
         this.status = status;
     }
 
-    public Book(String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status, int person_id , int orderStatus) {
+    public Book(String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status, int person_id, int orderStatus, Date returnDate) {
 
         this.name = name;
         this.author = author;
@@ -55,6 +57,7 @@ public class Book extends Model {
         this.status = status;
         this.person_id = person_id;
         this.orderStatus = orderStatus;
+        this.returnDate = returnDate;
     }
 
     public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre) {
@@ -67,6 +70,7 @@ public class Book extends Model {
         this.price = price;
         this.genre = genre;
     }
+
     public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status) {
         super(id);
         this.name = name;
@@ -79,7 +83,7 @@ public class Book extends Model {
         this.status = status;
     }
 
-    public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status, int person_id, int orderStatus) {
+    public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status, int person_id, int orderStatus, Date returnDate) {
         super(id);
         this.name = name;
         this.author = author;
@@ -91,7 +95,9 @@ public class Book extends Model {
         this.status = status;
         this.person_id = person_id;
         this.orderStatus = orderStatus;
+        this.returnDate = returnDate;
     }
+
 
     public Book(String name) {
         this.name = name;
@@ -177,6 +183,14 @@ public class Book extends Model {
         this.orderStatus = orderStatus;
     }
 
+    public Date getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(Date returnDate) {
+        this.returnDate = returnDate;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(name);
@@ -192,6 +206,10 @@ public class Book extends Model {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", genre='" + genre + '\'' +
+                ", status=" + status +
+                ", person_id=" + person_id +
+                ", orderStatus=" + orderStatus +
+                ", returnDate=" + returnDate +
                 '}';
     }
 

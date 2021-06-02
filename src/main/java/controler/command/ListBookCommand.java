@@ -4,12 +4,14 @@ import controler.command.utils.CommandUtil;
 import controler.command.utils.Utils;
 import model.Book;
 import model.Person;
+import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.BookService;
 import service.factory.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -81,11 +83,23 @@ public class ListBookCommand implements Command {
             int price = Integer.parseInt(req.getParameter("price"));
             String genre = req.getParameter("genre");
 
-            Book book = new Book(id, name, author, publisher, publisher_date, description, price, genre);
 
-            bookService.update(book);
+            try {
+                Book book = bookService.getEntity(id);
+                book.setName(name);
+                book.setAuthor(author);
+                book.setPublisher(publisher);
+                book.setPublisher_date(publisher_date);
+                book.setDescription(description);
+                book.setPrice(price);
+                book.setGenre(genre);
 
-            logger.info("Update add book");
+                bookService.update(book);
+
+                logger.info("Update add book");
+            } catch (DataBaseException|ServiceException e) {
+                e.printStackTrace();
+            }
         }
 
 

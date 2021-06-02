@@ -23,7 +23,7 @@ public class MainPageCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-        Person person = (Person) req.getSession().getAttribute("person");
+        //Person person = (Person) req.getSession().getAttribute("person");
         logger.info("in main page");
 
         ServiceFactory factory = ServiceFactory.getInstance();

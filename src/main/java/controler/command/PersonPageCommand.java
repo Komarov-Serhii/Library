@@ -12,6 +12,7 @@ import service.BookService;
 import service.factory.ServiceFactory;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class PersonPageCommand implements Command {
@@ -32,7 +33,14 @@ public class PersonPageCommand implements Command {
         BookService bookService = factory.getBookService();
 
         String button = req.getParameter("button");
+        String text = req.getParameter("search");
 
+        if (Objects.nonNull(text)) {
+            logger.info("search");
+            req.setAttribute("win", true);
+            List<Book> bookList = bookService.findByAuthorOrName(text);
+            req.setAttribute("list", bookList);
+        }
 
         if (button != null && button.equals("order")) {
             int id_book = Integer.parseInt(req.getParameter("id"));

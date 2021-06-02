@@ -35,6 +35,7 @@ public class BookDatabaseDao implements BookDao {
             statement.setInt(8, book.getStatus());
             statement.setInt(9, book.getPerson_id());
             statement.setInt(10, book.getOrderStatus());
+            statement.setDate(11, book.getReturnDate());
             statement.execute();
             return true;
         } catch (SQLException | NamingException e) {
@@ -61,8 +62,9 @@ public class BookDatabaseDao implements BookDao {
             int status = resultSet.getInt("status");
             int person_id = resultSet.getInt("person_id");
             int orderStatus = resultSet.getInt("order_status");
+            Date returnDate = resultSet.getDate("return_date");
 
-            return new Book(id, name, author, publisher, publisher_date, description, price, genre, status, person_id, orderStatus);
+            return new Book(id, name, author, publisher, publisher_date, description, price, genre, status, person_id, orderStatus, returnDate);
         } catch (SQLException | NamingException e) {
             throw new DataBaseException(String.format("Cannot get book by id=%d", id), e);
         }
@@ -97,7 +99,8 @@ public class BookDatabaseDao implements BookDao {
             statement.setInt(8, book.getStatus());
             statement.setInt(9, book.getPerson_id());
             statement.setInt(10, book.getOrderStatus());
-            statement.setInt(11, book.getId());
+            statement.setDate(11, book.getReturnDate());
+            statement.setInt(12, book.getId());
             statement.executeUpdate();
             return book;
         } catch (SQLException | NamingException e) {
@@ -123,8 +126,9 @@ public class BookDatabaseDao implements BookDao {
                 book.setPrice(rs.getInt(7));
                 book.setGenre(rs.getString(8));
                 book.setStatus(rs.getInt(9));
-                book.setOrderStatus(rs.getInt(10));
-                book.setPerson_id(rs.getInt(11));
+                book.setPerson_id(rs.getInt(10));
+                book.setOrderStatus(rs.getInt(11));
+                book.setReturnDate(rs.getDate(12));
                 outerBooks.add(book);
             }
             return outerBooks;
@@ -152,6 +156,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setStatus(rs.getInt(9));
                 book.setPerson_id(rs.getInt(10));
                 book.setOrderStatus(rs.getInt(11));
+                book.setReturnDate(rs.getDate(12));
                 outerBooks.add(book);
             }
             return outerBooks;
@@ -160,4 +165,61 @@ public class BookDatabaseDao implements BookDao {
         }
     }
 
+    @Override
+    public List<Book> getAllBooksByPersonID(int person_id) {
+        List<Book> outerBooks = new ArrayList<>();
+        try (Connection connection = Connector.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(Constants.ALL_BOOK_PERSON_ID)) {
+            statement.setInt(1, person_id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Book book = new Book();
+                book.setId(rs.getInt(1));
+                book.setName(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setPublisher(rs.getString(4));
+                book.setPublisher_date(rs.getString(5));
+                book.setDescription(rs.getString(6));
+                book.setPrice(rs.getInt(7));
+                book.setGenre(rs.getString(8));
+                book.setStatus(rs.getInt(9));
+                book.setPerson_id(rs.getInt(10));
+                book.setOrderStatus(rs.getInt(11));
+                book.setReturnDate(rs.getDate(12));
+                outerBooks.add(book);
+            }
+            return outerBooks;
+        } catch (SQLException | NamingException e) {
+            throw new RuntimeException("Cannot getAllBooksByPersonID book", e);
+        }
+    }
+
+    @Override
+    public List<Book> getAllOrderByPersonID(int person_id) {
+        List<Book> outerBooks = new ArrayList<>();
+        try (Connection connection = Connector.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(Constants.ALL_ORDER_PERSON_ID)) {
+            statement.setInt(1, person_id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Book book = new Book();
+                book.setId(rs.getInt(1));
+                book.setName(rs.getString(2));
+                book.setAuthor(rs.getString(3));
+                book.setPublisher(rs.getString(4));
+                book.setPublisher_date(rs.getString(5));
+                book.setDescription(rs.getString(6));
+                book.setPrice(rs.getInt(7));
+                book.setGenre(rs.getString(8));
+                book.setStatus(rs.getInt(9));
+                book.setPerson_id(rs.getInt(10));
+                book.setOrderStatus(rs.getInt(11));
+                book.setReturnDate(rs.getDate(12));
+                outerBooks.add(book);
+            }
+            return outerBooks;
+        } catch (SQLException | NamingException e) {
+            throw new RuntimeException("Cannot getAllBooksByPersonID book", e);
+        }
+    }
 }

@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,5 +38,12 @@ public abstract class CommandUtil {
             default:
         }
         return page;
+    }
+
+    public static Date getNextBill() {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 30);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return Date.valueOf(sdf.format(cal.getTime()));
     }
 }

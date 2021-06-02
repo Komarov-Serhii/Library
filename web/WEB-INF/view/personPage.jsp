@@ -22,16 +22,53 @@
 </div>
 <div align="left">
     <h2>My Library</h2>
-    <form>
-        <p><input type="search" name="q" placeholder="Поиск по сайту">
-            <input type="submit" value="Найти"></p>
+    <form class="w3-container" align="left" method="post"
+          action="${pageContext.request.contextPath}/view/personPage">
+        <p>
+            <label>
+                <input class="w3-input" type="search" required placeholder="Поиск по сайту"
+                       name="search">
+            </label>
+        </p>
+        <div>
+            <input class="w3-button w3-margin-bottom w3-green" type="submit"
+                   value="Найти" name="sear">
+        </div>
     </form>
+
+    <div align="center">
+        <c:if test="${win}">
+        <table>
+            <tr>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Жанр</th>
+                <th>Издательство</th>
+                <th>Год издательства</th>
+                <th>Описание</th>
+                <th>Цена</th>
+
+            </tr>
+
+            <c:forEach items="${list}" var="b">
+            <tr>
+                <td> ${b.name}</td>
+                <td> ${b.author}</td>
+                <td> ${b.genre}</td>
+                <td> ${b.publisher}</td>
+                <td> ${b.publisher_date}</td>
+                <td> ${b.description}</td>
+                <td> ${b.price}</td>
+            </tr>
+            </c:forEach>
+            </c:if>
+    </div>
 </div>
 <div align="right">
     <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
         <div class=" w3-green">
             <a href="${pageContext.request.contextPath}/view/logout">logout</a>
-            <a href="${pageContext.request.contextPath}/view/personBooksPage">My books</a>
+            <a href="${pageContext.request.contextPath}/view/personInfoBookPage">My books</a>
             <a href="${pageContext.request.contextPath}/view/personProfile">My Profile</a>
             <a href="${pageContext.request.contextPath}/view/language/registration?language=RU">RU</a>
             <a href="${pageContext.request.contextPath}/view/language/registration?language=EN">EN</a>

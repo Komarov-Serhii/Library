@@ -10,6 +10,7 @@ import service.factory.ServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -28,8 +29,16 @@ public class OrderAdminCommand implements Command {
         String button = req.getParameter("button");
 
         if (Objects.nonNull(button) && button.equals("accept")) {
-
-            logger.info("Update add book");
+            int id = Integer.parseInt(req.getParameter("id"));
+            try {
+                Book book = bookService.getEntity(id);
+                book.setOrderStatus(2);
+                //book.setReturnDate(CommandUtil.getNextBill());
+                bookService.update(book);
+                logger.info("Successful accept order");
+            } catch (DataBaseException|ServiceException e) {
+                e.printStackTrace();
+            }
         }
 
         if (Objects.nonNull(button) && button.equals("reject")) {
