@@ -47,7 +47,7 @@
         <tr>
             <td> ${person.name}</td>
             <td> ${person.email}</td>
-            <td> ${person.password}</td>
+            <td> **** </td>
             <td>
                 <form class="w3-container" align="left" method="post"
                       action="${pageContext.request.contextPath}/view/personProfile?id=${person.id}&button=set&name=${person.name}&email=${person.email}&password=${person.password}&status=${person.status}"
@@ -81,7 +81,7 @@
 
         <p>
             <label>
-                <input class="w3-input" type="text" value="${param.get("password")}" name="password">
+                <input class="w3-input" type="text" value="****" name="password">
             </label>
         </p>
 

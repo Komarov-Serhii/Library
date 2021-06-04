@@ -39,7 +39,7 @@ public class PersonProfilePageCommand implements Command {
 
                 person.setName(name);
                 person.setEmail(email);
-                person.setPassword(password);
+                person.setPassword(CommandUtil.cryptWithMD5(password));
                 personService.update(person);
                 logger.info("Update info person");
 

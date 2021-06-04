@@ -40,7 +40,7 @@
       <p>
         <label>
           <input class="w3-input" type="text" required placeholder="<fmt:message key="name"/>"
-                 name="firstName">
+                 name="name">
         </label>
       </p>
 

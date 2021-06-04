@@ -19,7 +19,7 @@ public class Book extends Model {
     private Date returnDate;
     private int debt;
 
-        public Book() {
+    public Book() {
 
     }
 
@@ -115,6 +115,7 @@ public class Book extends Model {
         this.orderStatus = orderStatus;
         this.returnDate = returnDate;
     }
+
     public Book(int id, String name, String author, String publisher, String publisher_date, String description, int price, String genre, int status, int person_id, int orderStatus, Date returnDate, int debt) {
         super(id);
         this.name = name;
@@ -232,25 +233,6 @@ public class Book extends Model {
         this.debt = debt;
     }
 
-
-    @Override
-    public int hashCode() {
-        int result;
-        result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (author != null ? author.hashCode() : 0);
-        result = 31 * result + (publisher != null ? publisher.hashCode() : 0);
-        result = 31 * result + (publisher_date != null ? publisher_date.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (genre != null ? genre.hashCode() : 0);
-        result = 31 * result + (returnDate != null ? returnDate.hashCode() : 0);
-        result = 31 * result + price;
-        result = 31 * result + status;
-        result = 31 * result + person_id;
-        result = 31 * result + orderStatus;
-        result = 31 * result + debt;
-        return result;
-    }
-
     @Override
     public String toString() {
         return "Book{" +
@@ -270,24 +252,20 @@ public class Book extends Model {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        var book = (Book) o;
+        return price == book.price && status == book.status && person_id == book.person_id
+                && orderStatus == book.orderStatus && debt == book.debt && Objects.equals(name, book.name)
+                && Objects.equals(author, book.author) && Objects.equals(publisher, book.publisher)
+                && Objects.equals(publisher_date, book.publisher_date) && Objects.equals(description, book.description)
+                && Objects.equals(genre, book.genre) && Objects.equals(returnDate, book.returnDate);
+    }
 
-        var book = (Book) obj;
-
-        if (price != book.price) return false;
-        if (status != book.status) return false;
-        if (person_id != book.person_id) return false;
-        if (orderStatus != book.orderStatus) return false;
-        if (returnDate != book.returnDate) return false;
-        if (debt != book.debt) return false;
-        if (!Objects.equals(name, book.name)) return false;
-        if (!Objects.equals(author, book.author)) return false;
-        if (!Objects.equals(publisher, book.publisher)) return false;
-        if (!Objects.equals(publisher_date, book.publisher_date)) return false;
-        if (!Objects.equals(description, book.description)) return false;
-        return Objects.equals(genre, book.genre);
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, author, publisher, publisher_date, description, price, genre, status, person_id, orderStatus, returnDate, debt);
     }
 
     public static class NameComparator implements Comparator<Book> {

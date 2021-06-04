@@ -101,27 +101,16 @@ public class Person extends Model{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         var person = (Person) o;
-
-        if (accessLevel != person.accessLevel) return false;
-        if (status != person.status) return false;
-        if (!Objects.equals(name, person.name)) return false;
-        if (!Objects.equals(email, person.email)) return false;
-        return Objects.equals(password, person.password);
+        return accessLevel == person.accessLevel && status == person.status
+                && Objects.equals(name, person.name) && Objects.equals(email, person.email)
+                && Objects.equals(password, person.password);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + accessLevel;
-        result = 31 * result + status;
-        return result;
+        return Objects.hash(name, email, password, accessLevel, status);
     }
-
 
     @Override
     public String toString() {

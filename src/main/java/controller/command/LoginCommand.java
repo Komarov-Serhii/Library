@@ -26,7 +26,8 @@ public class LoginCommand implements Command {
             PersonService personService = factory.getPersonService();
 
             try {
-                Person person = personService.getByLoginAndPass(login, password);
+
+                Person person = personService.getByLoginAndPass(login, CommandUtil.cryptWithMD5(password));
 
                 if (person.getStatus() == 1) {
                     req.getSession().setAttribute("person", person);

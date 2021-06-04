@@ -6,9 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
 import org.apache.log4j.Logger;
 
 public abstract class CommandUtil {
@@ -57,5 +60,24 @@ public abstract class CommandUtil {
         String date = sdf.format(cal.getTime());
         logger.info(date + "output date");
         return Date.valueOf(date);
+    }
+
+    public static String cryptWithMD5(String pass) {
+        MessageDigest md;
+        try {
+            md = MessageDigest.getInstance("MD5");
+            byte[] passBytes = pass.getBytes();
+            md.reset();
+            byte[] digested = md.digest(passBytes);
+            var sb = new StringBuffer();
+            for (int i = 0; i < digested.length; i++) {
+                sb.append(Integer.toHexString(0xff & digested[i]));
+            }
+            logger.info("successful hash password");
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            logger.info("bad hash password");
+        }
+        return null;
     }
 }
