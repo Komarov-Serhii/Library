@@ -1,28 +1,27 @@
-package controler.command;
+package controller.command;
 
-import controler.command.utils.CommandUtil;
+import controller.command.utils.CommandUtil;
 import model.Book;
 import model.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
-import service.BookService;
 import service.factory.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public class PersonBookPageCommand implements Command {
 
-    Logger logger = Logger.getLogger(String.valueOf(PersonBookPageCommand.class));
+    Logger logger = Logger.getLogger(PersonBookPageCommand.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
         Person person = (Person) req.getSession().getAttribute("person");
-        ServiceFactory factory = ServiceFactory.getInstance();
-        BookService bookService = factory.getBookService();
+        var factory = ServiceFactory.getInstance();
+        var bookService = factory.getBookService();
 
 
 
@@ -59,6 +58,9 @@ public class PersonBookPageCommand implements Command {
 
             List<Book> list = bookService.getAllBooksByPersonIDAndAddDebt(person.getId());
 
+        for (Book book : list) {
+            bookService.update(book);
+        }
             req.setAttribute("books", list);
 
             logger.info("in page personPage");

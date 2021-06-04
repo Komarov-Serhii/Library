@@ -6,16 +6,16 @@ import model.dao.Constant.Constants;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import model.Book;
-
-
 import javax.naming.NamingException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public class BookDatabaseDao implements BookDao {
+
+    private static Logger logger = Logger.getLogger(BookDatabaseDao.class);
+
 
     public BookDatabaseDao() {
     }
@@ -81,7 +81,7 @@ public class BookDatabaseDao implements BookDao {
             statement.executeUpdate();
             return true;
         } catch (SQLException | NamingException e) {
-            Logger.getLogger(BookDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
+
             throw new RuntimeException("Cannot delete book", e);
         }
     }
@@ -107,7 +107,7 @@ public class BookDatabaseDao implements BookDao {
             statement.executeUpdate();
             return book;
         } catch (SQLException | NamingException e) {
-            Logger.getLogger(BookDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
+            logger.info(e);
             throw new RuntimeException("Cannot update book", e);
         }
     }

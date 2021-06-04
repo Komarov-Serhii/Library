@@ -1,30 +1,26 @@
-package controler.command;
+package controller.command;
 
-import controler.command.utils.CommandUtil;
-import controler.command.utils.Utils;
+import controller.command.utils.CommandUtil;
+import controller.command.utils.Utils;
 import model.Book;
 import model.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
-import service.BookService;
 import service.factory.ServiceFactory;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.Date;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+
 
 public class ListBookCommand implements Command {
 
-    Logger logger = Logger.getLogger(String.valueOf(ListBookCommand.class));
+    Logger logger = Logger.getLogger(ListBookCommand.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-        ServiceFactory factory = ServiceFactory.getInstance();
-        BookService bookService = factory.getBookService();
+        var factory = ServiceFactory.getInstance();
+        var bookService = factory.getBookService();
 
 
         String button = req.getParameter("button");

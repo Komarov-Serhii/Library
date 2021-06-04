@@ -4,13 +4,11 @@ package model.dao.factory;
 import model.dao.*;
 import model.dao.PersonDao;
 import model.dao.impl.*;
-
-
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public class DatabaseDaoFactory extends DaoFactory{
 
-    private static Logger logger = Logger.getLogger(String.valueOf(DatabaseDaoFactory.class)); // setting variable
+    private static Logger logger = Logger.getLogger(DatabaseDaoFactory.class);
 
     private PersonDao personDao = new PersonDatabaseDao();
     private BookDao bookDao = new BookDatabaseDao();

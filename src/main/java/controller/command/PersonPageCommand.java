@@ -1,52 +1,44 @@
-package controler.command;
+package controller.command;
 
-import controler.command.utils.CommandUtil;
+import controller.command.utils.CommandUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import controler.command.utils.Utils;
+import controller.command.utils.Utils;
 import model.Book;
 import model.Person;
 import model.exception.ServiceException;
-import service.BookService;
 import service.factory.ServiceFactory;
-
 import java.util.List;
-import java.util.Objects;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+
 
 public class PersonPageCommand implements Command {
 
-    Logger logger = Logger.getLogger(String.valueOf(PersonPageCommand.class));
+    Logger logger = Logger.getLogger(PersonPageCommand.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-//        Person person = (Person) req.getSession().getAttribute("person");
-//        logger.info("in page person");
+        Person person = (Person) req.getSession().getAttribute("person");
+        logger.info("in page person");
 //        if (person.getAccessLevel() == 2) {
 //            String page = CommandUtil.getPersonPageByRole(2);
 //            CommandUtil.goToPage(req, resp, page);
 //
 //        }
 
-        ServiceFactory factory = ServiceFactory.getInstance();
-        BookService bookService = factory.getBookService();
+        var factory = ServiceFactory.getInstance();
+        var bookService = factory.getBookService();
 
         String button = req.getParameter("button");
-        String text = req.getParameter("search");
 
-        if (Objects.nonNull(text)) {
-            logger.info("search");
-            req.setAttribute("win", true);
-            List<Book> bookList = bookService.findByAuthorOrName(text);
-            req.setAttribute("list", bookList);
-        }
+
+        Utils.search(req);
 
         if (button != null && button.equals("order")) {
             int id_book = Integer.parseInt(req.getParameter("id"));
 
 
-            Person person = (Person) req.getSession().getAttribute("person");
+
             bookService.setBookForApprove(id_book, person.getId());
 
         }

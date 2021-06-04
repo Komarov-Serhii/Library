@@ -1,8 +1,8 @@
-package controler.command.factory;
+package controller.command.factory;
 
-import controler.command.Command;
-import controler.command.*;
-import controler.command.utils.Operation;
+import controller.command.Command;
+import controller.command.*;
+import controller.command.utils.Operation;
 import model.exception.*;
 import java.util.HashMap;
 import java.util.Map;

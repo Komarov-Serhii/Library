@@ -4,12 +4,11 @@ import service.BookService;
 import service.PersonService;
 import service.impl.BookServiceImpl;
 import service.impl.PersonServiceImpl;
-
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public class ServiceFactory {
 
-    private static Logger logger = Logger.getLogger(String.valueOf(ServiceFactory.class));
+    private static Logger logger = Logger.getLogger(ServiceFactory.class);
 
 
     private PersonService personService = new PersonServiceImpl();

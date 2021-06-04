@@ -1,6 +1,6 @@
 package service.impl;
 
-import controler.command.utils.CommandUtil;
+import controller.command.utils.CommandUtil;
 import model.Book;
 import model.Person;
 import model.dao.BookDao;
@@ -9,18 +9,13 @@ import model.dao.factory.DaoFactory;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.BookService;
-
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
+import java.util.*;
+import org.apache.log4j.Logger;
 import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService {
 
-    Logger logger = Logger.getLogger(String.valueOf(BookServiceImpl.class));
+    Logger logger = Logger.getLogger(BookServiceImpl.class);
 
     private final DaoFactory daoFactory = DaoFactory.getInstance();
     private BookDao bookDAO = daoFactory.getBookDAO();
@@ -59,7 +54,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findByAuthorOrName(String text) {
         return bookDAO.getAll().stream()
-                .filter(o -> o.getName().contains(text) || o.getAuthor().contains(text))
+                .filter(o -> o.getName().toUpperCase().contains(text.toUpperCase()) || o.getAuthor().toUpperCase().contains(text.toUpperCase()))
                 .collect(Collectors.toList());
     }
 
@@ -108,8 +103,9 @@ public class BookServiceImpl implements BookService {
         List<Book> list = bookDAO.getAllBooksByPersonID(person_id);
 
         list.stream()
-                .filter(o -> CommandUtil.getNextBill().after(o.getReturnDate()))
+                .filter(o -> CommandUtil.getCurrentDate().after(o.getReturnDate()))
                 .forEach(o -> o.setDebt(o.getPrice() / 100 * 30));
+
         return list;
     }
 

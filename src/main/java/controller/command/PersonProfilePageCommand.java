@@ -1,26 +1,23 @@
-package controler.command;
+package controller.command;
 
-import controler.command.utils.CommandUtil;
-import model.Book;
+import controller.command.utils.CommandUtil;
 import model.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
-import service.PersonService;
 import service.factory.ServiceFactory;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 
 public class PersonProfilePageCommand implements Command {
 
-    Logger logger = Logger.getLogger(String.valueOf(PersonProfilePageCommand.class));
+    Logger logger = Logger.getLogger(PersonProfilePageCommand.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-        ServiceFactory factory = ServiceFactory.getInstance();
-        PersonService personService = factory.getPersonService();
+        var factory = ServiceFactory.getInstance();
+        var personService = factory.getPersonService();
 
         String button = req.getParameter("button");
 
@@ -45,11 +42,15 @@ public class PersonProfilePageCommand implements Command {
                 person.setPassword(password);
                 personService.update(person);
                 logger.info("Update info person");
+
+                req.getSession().setAttribute("person", person);
             } catch (DataBaseException|ServiceException e) {
                 logger.info("Bad update person");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
             }
         }
+
+
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
 
     }

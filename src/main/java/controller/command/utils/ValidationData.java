@@ -1,4 +1,4 @@
-package controler.command.utils;
+package controller.command.utils;
 
 public class ValidationData {
 

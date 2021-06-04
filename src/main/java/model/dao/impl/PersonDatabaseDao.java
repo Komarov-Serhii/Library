@@ -6,15 +6,17 @@ import model.dao.PersonDao;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import model.Person;
-
 import javax.naming.NamingException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+
 
 public class PersonDatabaseDao implements PersonDao {
+
+    private static Logger logger = Logger.getLogger(PersonDatabaseDao.class);
+
 
     public PersonDatabaseDao() {
     }
@@ -65,7 +67,7 @@ public class PersonDatabaseDao implements PersonDao {
             statement.executeUpdate();
             return true;
         } catch (SQLException | NamingException e) {
-            Logger.getLogger(PersonDatabaseDao.class.getName()).log(Level.WARNING, e.getMessage(), e);
+            logger.info(e);
             throw new RuntimeException("Cannot delete person", e);
         }
     }
@@ -132,7 +134,7 @@ public class PersonDatabaseDao implements PersonDao {
 
             return person;
         } catch (SQLException | NamingException e) {
-            Logger.getLogger(PersonDatabaseDao.class.getName()).log(Level.WARNING, "Cannot get user by login = %s");
+            logger.info("Cannot get user by login = %s");
             throw new RuntimeException("Cannot getByLoginAndPass person", e);
         }
     }

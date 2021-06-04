@@ -1,32 +1,29 @@
-package controler.command;
+package controller.command;
 
-import controler.command.utils.CommandUtil;
+import controller.command.utils.CommandUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.Book;
 import model.Person;
-
 import model.exception.ServiceException;
-import service.BookService;
-import service.factory.ItemService;
 import service.factory.ServiceFactory;
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public class AdminPageCommand implements Command {
 
-    Logger logger = Logger.getLogger(String.valueOf(AdminPageCommand.class));
+    Logger logger = Logger.getLogger(AdminPageCommand.class);
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
 
-        ServiceFactory factory = ServiceFactory.getInstance();
-        BookService bookService = factory.getBookService();
-        try {
-        ItemService itemService = factory.getPersonService();
+        var factory = ServiceFactory.getInstance();
+        var bookService = factory.getBookService();
+        var personService = factory.getPersonService();
 
-        List<Person> list = itemService.getAll();
+        try {
+
+        List<Person> list = personService.getAll();
         List<Book> books = bookService.getAllOrder();
 
 

@@ -6,13 +6,14 @@ import model.exception.*;
 import model.dao.factory.DaoFactory;
 import service.PersonService;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 import java.util.stream.Collectors;
 
 public class PersonServiceImpl implements PersonService {
 
-    // private static Logger logger = Logger.getLogger(String.valueOf(PersonServiceImpl.class));
+     private static Logger logger = Logger.getLogger(PersonServiceImpl.class);
 
     private final DaoFactory daoFactory = DaoFactory.getInstance();
     private PersonDao personDao = daoFactory.getPersonDAO();
@@ -21,7 +22,7 @@ public class PersonServiceImpl implements PersonService {
     public Person getByLoginAndPass(String login, String password) throws NotFoundPersonException, WrongDataException {
         Person person = personDao.getByLoginAndPass(login, password);
 
-        if (person == null) {
+        if (Objects.isNull(person)) {
             throw new NotFoundPersonException();
         }
 
@@ -34,7 +35,7 @@ public class PersonServiceImpl implements PersonService {
             Person person = personDao.getById(id);
             return person;
         } catch (DataBaseException e) {
-            Logger.getLogger(PersonServiceImpl.class.getName()).log(Level.WARNING, e.getMessage(), e);
+           logger.info(e);
             throw new ServiceException("Cannot get person in service", e);
         }
     }

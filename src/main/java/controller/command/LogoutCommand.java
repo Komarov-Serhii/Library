@@ -1,13 +1,14 @@
-package controler.command;
+package controller.command;
 
-import controler.command.utils.CommandUtil;
+import controller.command.utils.CommandUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+
 
 public class LogoutCommand implements Command {
-    private static Logger logger = Logger.getLogger(String.valueOf(LogoutCommand.class));
+    private static Logger logger = Logger.getLogger(LogoutCommand.class);
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) {

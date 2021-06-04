@@ -1,6 +1,4 @@
-package controler.command.utils;
-
-import controler.command.OrderAdminCommand;
+package controller.command.utils;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +9,11 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 public abstract class CommandUtil {
 
-    static Logger logger = Logger.getLogger(String.valueOf(CommandUtil.class));
+    static Logger logger = Logger.getLogger(CommandUtil.class);
 
 
     public static void goToPage(HttpServletRequest req, HttpServletResponse resp, String url) {
@@ -24,25 +21,33 @@ public abstract class CommandUtil {
         try {
             requestDispatcher.forward(req, resp);
         } catch (ServletException | IOException e) {
-            Logger.getLogger(CommandUtil.class.getName()).log(Level.WARNING, e.getMessage(), e);
+            logger.info(e);
         }
     }
 
     public static String getPersonPageByRole(int accessLevel) {
         String page = "";
         switch (accessLevel) {
-            case 0:
+            case 1:
                 page = "/view/mainPage";
                 break;
             case 2:
                 page = "/view/personPage";
                 break;
             case 3:
-                page = "/WEB-INF/view/adminPage.jsp";
+                page = "/view/adminPage";
                 break;
             default:
         }
         return page;
+    }
+
+    public static Date getCurrentDate() {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(cal.getTime());
+        logger.info(date + "output date");
+        return Date.valueOf(date);
     }
 
     public static Date getNextBill() {

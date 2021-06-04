@@ -1,12 +1,9 @@
-package controler.servlet;
+package controller.servlet;
 
-import controler.command.Command;
-import controler.command.factory.CommandFactory;
-import controler.command.utils.CommandUtil;
-
+import controller.command.Command;
+import controller.command.factory.CommandFactory;
+import controller.command.utils.CommandUtil;
 import model.exception.NotFoundOperationException;
-
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,6 +27,7 @@ public class DispatcherServlet extends HttpServlet {
 
         Command command = null;
         try {
+
             command = CommandFactory.getCommand(path);
             command.execute(req, resp);
         } catch (NotFoundOperationException e) {

@@ -10,9 +10,15 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/nicepage.css" media="screen">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/Page-1.css" media="screen">
+
+<c:set var="language" value="${not empty sessionScope.language ? sessionScope.language : pageContext.request.locale}"
+       scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="text"/>
+
 <html>
 <head>
-    <title>MAIN PAGE</title>
+    <title><fmt:message key="mainPage"/></title>
 </head>
 <body>
 <div>
@@ -22,27 +28,32 @@
               action="${pageContext.request.contextPath}/view/mainPage">
             <p>
                 <label>
-                    <input class="w3-input" type="search" required placeholder="Поиск по сайту"
+                    <input class="w3-input" type="search" required placeholder="<fmt:message key="searchSite"/>"
                            name="search">
                 </label>
             </p>
             <div>
                 <input class="w3-button w3-margin-bottom w3-green" type="submit"
-                       value="Найти" name="sear">
+                       value="<fmt:message key="search"/>" name="sear">
             </div>
+            <c:if test="${requestScope.notFoundSearch}">
+                <div class="w3-container">
+                    <p><fmt:message key="notFoundSearch"/></p>
+                </div>
+            </c:if>
         </form>
     </div>
     <div align="center">
         <c:if test="${win}">
         <table>
             <tr>
-                <th>Название</th>
-                <th>Автор</th>
-                <th>Жанр</th>
-                <th>Издательство</th>
-                <th>Год издательства</th>
-                <th>Описание</th>
-                <th>Цена</th>
+                <th><fmt:message key="name"/></th>
+                <th><fmt:message key="author"/></th>
+                <th><fmt:message key="genre"/></th>
+                <th><fmt:message key="publisher"/></th>
+                <th><fmt:message key="publisherDate"/></th>
+                <th><fmt:message key="description"/></th>
+                <th><fmt:message key="price"/></th>
 
             </tr>
 
@@ -59,18 +70,25 @@
             </c:forEach>
             </c:if>
     </div>
+
     <div align="center">
         <div class="w3-center">
-            <h3>MAIN PAGE</h3>
+            <h3><fmt:message key="mainPage"/></h3>
         </div>
     </div>
     <div align="right">
         <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
             <div class=" w3-green">
-                <a href="${pageContext.request.contextPath}/view/registration">registration</a>
-                <a href="${pageContext.request.contextPath}/view/login">login</a>
-                <a href="${pageContext.request.contextPath}/view/language/registration?language=RU">RU</a>
-                <a href="${pageContext.request.contextPath}/view/language/registration?language=EN">EN</a>
+                <a href="${pageContext.request.contextPath}/view/registration"><fmt:message key="registration"/></a>
+                <a href="${pageContext.request.contextPath}/view/login"><fmt:message key="login"/></a>
+                <a href="${pageContext.request.contextPath}/view/language/mainPage?language=RU">
+                    <%--<img src="image/ru.png"/>--%>
+                    RU
+                </a>
+                <a href="${pageContext.request.contextPath}/view/language/mainPage?language=EN">
+                    <%--<img src="${pageContext.request.contextPath}image/en.png"/>--%>
+                    EN
+                </a>
             </div>
         </div>
     </div>
@@ -78,23 +96,23 @@
     <div align="left">
         <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
             <div class=" w3-green">
-                <a href="${pageContext.request.contextPath}/view/mainPage?sort=sortName">Name</a>
-                <a href="${pageContext.request.contextPath}/view/mainPage?sort=sortAuthor">Author</a>
-                <a href="${pageContext.request.contextPath}/view/mainPage?sort=sortPublisher">Publisher</a>
-                <a href="${pageContext.request.contextPath}/view/mainPage?sort=sortPublisherDate">Publisher_Date</a>
+                <a href="${pageContext.request.contextPath}/view/mainPage?sort=sortName"><fmt:message key="name"/></a>
+                <a href="${pageContext.request.contextPath}/view/mainPage?sort=sortAuthor"><fmt:message key="author"/></a>
+                <a href="${pageContext.request.contextPath}/view/mainPage?sort=sortPublisher"><fmt:message key="publisher"/></a>
+                <a href="${pageContext.request.contextPath}/view/mainPage?sort=sortPublisherDate"><fmt:message key="publisherDate"/></a>
             </div>
         </div>
     </div>
     <div align="left">
         <table>
             <tr>
-                <th>Название</th>
-                <th>Автор</th>
-                <th>Жанр</th>
-                <th>Издательство</th>
-                <th>Год издательства</th>
-                <th>Описание</th>
-                <th>Цена</th>
+                <th><fmt:message key="name"/></th>
+                <th><fmt:message key="author"/></th>
+                <th><fmt:message key="genre"/></th>
+                <th><fmt:message key="publisher"/></th>
+                <th><fmt:message key="publisherDate"/></th>
+                <th><fmt:message key="description"/></th>
+                <th><fmt:message key="price"/></th>
 
             </tr>
 
