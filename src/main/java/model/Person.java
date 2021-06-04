@@ -98,9 +98,30 @@ public class Person extends Model{
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(name);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        var person = (Person) o;
+
+        if (accessLevel != person.accessLevel) return false;
+        if (status != person.status) return false;
+        if (!Objects.equals(name, person.name)) return false;
+        if (!Objects.equals(email, person.email)) return false;
+        return Objects.equals(password, person.password);
     }
+
+    @Override
+    public int hashCode() {
+        int result;
+        result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + accessLevel;
+        result = 31 * result + status;
+        return result;
+    }
+
 
     @Override
     public String toString() {
@@ -108,15 +129,8 @@ public class Person extends Model{
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", accessLevel='" + accessLevel + '\'' +
+                ", accessLevel=" + accessLevel +
+                ", status=" + status +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Person person = (Person) obj;
-        return Objects.equals(name, person.name);
     }
 }

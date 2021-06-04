@@ -29,9 +29,9 @@
     <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
         <div class=" w3-green">
             <a href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a>
-            <a href="${pageContext.request.contextPath}/view/adminPage"><fmt:message key="admin"/></a>
-            <a href="${pageContext.request.contextPath}/view/language/listBook?language=RU">RU</a>
-            <a href="${pageContext.request.contextPath}/view/language/listBook?language=EN">EN</a>
+            <a href="${pageContext.request.contextPath}/view/admin/adminPage"><fmt:message key="admin"/></a>
+            <a href="${pageContext.request.contextPath}/view/language/admin/listBook?language=RU">RU</a>
+            <a href="${pageContext.request.contextPath}/view/language/admin/listBook?language=EN">EN</a>
         </div>
     </div>
 </div>
@@ -39,10 +39,13 @@
 <div align="left">
     <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
         <div class=" w3-green">
-            <a href="${pageContext.request.contextPath}/view/listBook?sort=sortName"><fmt:message key="name"/></a>
-            <a href="${pageContext.request.contextPath}/view/listBook?sort=sortAuthor"><fmt:message key="author"/></a>
-            <a href="${pageContext.request.contextPath}/view/listBook?sort=sortPublisher"><fmt:message key="publisher"/></a>
-            <a href="${pageContext.request.contextPath}/view/listBook?sort=sortPublisherDate"><fmt:message key="publisherDate"/></a>
+            <a href="${pageContext.request.contextPath}/view/admin/listBook?sort=sortName"><fmt:message key="name"/></a>
+            <a href="${pageContext.request.contextPath}/view/admin/listBook?sort=sortAuthor"><fmt:message
+                    key="author"/></a>
+            <a href="${pageContext.request.contextPath}/view/admin/listBook?sort=sortPublisher"><fmt:message
+                    key="publisher"/></a>
+            <a href="${pageContext.request.contextPath}/view/admin/listBook?sort=sortPublisherDate"><fmt:message
+                    key="publisherDate"/></a>
         </div>
     </div>
 </div>
@@ -71,13 +74,13 @@
             <td> ${a.publisher_date}</td>
             <td> ${a.description}</td>
             <td> ${a.price}</td>
-            <td><a href="${pageContext.request.contextPath}/view/listBook?id=${a.id}&button=delete"
-                   onclick="return confirm('Are you sure you want to remove this book?'<fmt:message key="removeBookConfirm"/>)"><fmt:message key="delete"/></a>
+            <td><a href="${pageContext.request.contextPath}/view/admin/listBook?id=${a.id}&button=delete"
+                   onclick="return confirm('<fmt:message key="removeBookConfirm"/>')"><fmt:message key="delete"/></a>
             </td>
             <td>
                 <form class="w3-container" align="center" method="post"
-                      action="${pageContext.request.contextPath}/view/listBook?id=${a.id}&button=set&name=${a.name}&author=${a.author}&genre=${a.genre}&publisher=${a.publisher}&publisher_date=${a.publisher_date}&description=${a.description}&price=${a.price}"
-                      onclick="return confirm(<fmt:message key="editBookConfirm"/>)">
+                      action="${pageContext.request.contextPath}/view/admin/listBook?id=${a.id}&button=set&name=${a.name}&author=${a.author}&genre=${a.genre}&publisher=${a.publisher}&publisher_date=${a.publisher_date}&description=${a.description}&price=${a.price}"
+                      onclick="return confirm('<fmt:message key="editBookConfirm"/>')">
 
                     <button type="submit" value="set" name="button"><fmt:message key="edit"/></button>
                 </form>
@@ -87,8 +90,8 @@
 
     <c:if test="${win}">
         <form class="w3-container" align="center" method="post"
-              action="${pageContext.request.contextPath}/view/listBook?id=${param.get("id")}&button=update"
-              onclick="return confirm('Are you sure you want to update this book?')">
+              action="${pageContext.request.contextPath}/view/admin/listBook?id=${param.get("id")}&button=update"
+              onclick="return confirm('<fmt:message key="updateBookConfirm"/>')">
 
 
             <p>
@@ -132,20 +135,21 @@
                 </label>
             </p>
 
-                <button type="submit" value="update" name="button"><fmt:message key="update"/></button>
+            <button type="submit" value="update" name="button"><fmt:message key="update"/></button>
         </form>
     </c:if>
 </table>
 
 
 <form class="w3-container" align="center" method="post"
-      action="${pageContext.request.contextPath}/view/listBook">
+      action="${pageContext.request.contextPath}/view/admin/listBook">
 
     <button type="submit" value="add" name="button"><fmt:message key="add"/></button>
 </form>
 <c:if test="${window}">
     <form class="w3-container" align="center" method="post"
-          action="${pageContext.request.contextPath}/view/listBook">
+          action="${pageContext.request.contextPath}/view/admin/listBook?button=addSubmit"
+          onclick="return confirm('<fmt:message key="addBookConfirm"/>')">
 
         <p>
             <label>
@@ -168,17 +172,20 @@
 
         <p>
             <label>
-                <input class="w3-input" type="text" required placeholder="<fmt:message key="publisher"/>" name="publisher">
+                <input class="w3-input" type="text" required placeholder="<fmt:message key="publisher"/>"
+                       name="publisher">
             </label>
         </p>
         <p>
             <label>
-                <input class="w3-input" type="text" required placeholder="<fmt:message key="publisherDate"/>" name="publisher_date">
+                <input class="w3-input" type="text" required placeholder="<fmt:message key="publisherDate"/>"
+                       name="publisher_date">
             </label>
         </p>
         <p>
             <label>
-                <input class="w3-input" type="text" required placeholder="<fmt:message key="description"/>" name="description">
+                <input class="w3-input" type="text" required placeholder="<fmt:message key="description"/>"
+                       name="description">
             </label>
         </p>
 

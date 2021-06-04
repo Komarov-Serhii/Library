@@ -19,7 +19,7 @@ public class PersonBookPageCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-        Person person = (Person) req.getSession().getAttribute("person");
+        var person = (Person) req.getSession().getAttribute("person");
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
 
@@ -31,7 +31,7 @@ public class PersonBookPageCommand implements Command {
         if (Objects.nonNull(button) && button.equals("return")) {
             int id = Integer.parseInt(req.getParameter("id"));
             try {
-                Book book = bookService.getEntity(id);
+                var book = bookService.getEntity(id);
                 book.setStatus(1);
                 book.setOrderStatus(1);
                 bookService.update(book);
@@ -44,7 +44,7 @@ public class PersonBookPageCommand implements Command {
         if (Objects.nonNull(button) && button.equals("pay")) {
             int id = Integer.parseInt(req.getParameter("id"));
             try {
-                Book book = bookService.getEntity(id);
+                var book = bookService.getEntity(id);
                 book.setStatus(1);
                 book.setOrderStatus(1);
                 book.setDebt(0);

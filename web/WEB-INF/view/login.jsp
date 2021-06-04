@@ -52,7 +52,7 @@
 
             <div>
                 <input class="w3-button w3-margin-bottom w3-green" type="submit"
-                       value=<fmt:message key="logout"/>>
+                       value=<fmt:message key="login"/>>
             </div>
 
             <c:if test="${requestScope.notFound}">

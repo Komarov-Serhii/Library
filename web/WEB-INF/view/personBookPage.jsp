@@ -63,12 +63,12 @@
         <td> ${a.returnDate}</td>
         <c:if test="${a.debt == 0}">
         <td><a href="${pageContext.request.contextPath}/view/personBookPage?id=${a.id}&button=return"
-               onclick="return confirm(<fmt:message key="returnConfirm"/>)"><fmt:message key="return"/></a>
+               onclick="return confirm('<fmt:message key="returnConfirm"/>')"><fmt:message key="return"/></a>
         </td>
         </c:if>
         <c:if test="${a.debt > 0}">
         <td><a href="${pageContext.request.contextPath}/view/personBookPage?id=${a.id}&button=pay"
-               onclick="return confirm(<fmt:message key="payConfirm"/>)"><fmt:message key="payFine"/></a>
+               onclick="return confirm('<fmt:message key="payConfirm"/>')"><fmt:message key="payFine"/></a>
         </td>
         </c:if>
     </tr>

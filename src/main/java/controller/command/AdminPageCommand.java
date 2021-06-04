@@ -36,8 +36,8 @@ public class AdminPageCommand implements Command {
         logger.info("in page admin");
         } catch (ServiceException e) {
             logger.info("serviceException");
-            CommandUtil.goToPage(req, resp, "/WEB-INF/view/adminPage.jsp");
+            CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/adminPage.jsp");
         }
-            CommandUtil.goToPage(req, resp, "/WEB-INF/view/adminPage.jsp");
+            CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/adminPage.jsp");
     }
 }

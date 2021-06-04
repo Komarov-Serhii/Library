@@ -109,9 +109,9 @@ public class ListBookCommand implements Command {
             logger.info("in page listBook");
         } catch (ServiceException e) {
             logger.info("serviceException");
-            CommandUtil.goToPage(req, resp, "/WEB-INF/view/listBook.jsp");
+            CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/listBook.jsp");
         }
 
-        CommandUtil.goToPage(req, resp, "/WEB-INF/view/listBook.jsp");
+        CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/listBook.jsp");
     }
 }

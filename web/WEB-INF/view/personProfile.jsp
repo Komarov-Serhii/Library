@@ -51,7 +51,7 @@
             <td>
                 <form class="w3-container" align="left" method="post"
                       action="${pageContext.request.contextPath}/view/personProfile?id=${person.id}&button=set&name=${person.name}&email=${person.email}&password=${person.password}&status=${person.status}"
-                      onclick="return confirm('Are you sure you want to setting your profile?')">
+                      onclick="return confirm('<fmt:message key="editPersonConfirm"/>')">
 
                     <button type="submit" value="set" name="button"><fmt:message key="edit"/></button>
                 </form>

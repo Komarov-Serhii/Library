@@ -70,7 +70,7 @@ public class ListPersonCommand implements Command {
 
             } catch (WrongDataException e) {
                 req.setAttribute("wrongData", false);
-                CommandUtil.goToPage(req, resp, "/WEB-INF/view/listPerson.jsp");
+                CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/listPerson.jsp");
             }
 
 
@@ -118,9 +118,9 @@ public class ListPersonCommand implements Command {
             logger.info("in page listPerson");
         } catch (ServiceException e) {
             logger.info("serviceException");
-            CommandUtil.goToPage(req, resp, "/WEB-INF/view/listPerson.jsp");
+            CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/listPerson.jsp");
         }
 
-        CommandUtil.goToPage(req, resp, "/WEB-INF/view/listPerson.jsp");
+        CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/listPerson.jsp");
     }
 }

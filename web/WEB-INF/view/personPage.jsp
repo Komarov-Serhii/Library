@@ -122,7 +122,7 @@
                 <td> ${a.description}</td>
                 <td> ${a.price}</td>
                 <td><a href="${pageContext.request.contextPath}/view/personPage?id=${a.id}&button=order"
-                       onclick="return confirm('Are you sure you want to order this book?')"><fmt:message key="order"/></a>
+                       onclick="return confirm('<fmt:message key="orderBookConfirm"/>')"><fmt:message key="order"/></a>
                 </td>
             </tr>
         </c:forEach>

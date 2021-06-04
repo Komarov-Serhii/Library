@@ -31,11 +31,12 @@ public class RoleFilter implements Filter {
         if (Objects.nonNull(person)) {
             if (person.getAccessLevel() == 3) {
                 filterChain.doFilter(req, resp);
+            }else {
+                req.getRequestDispatcher("/view/mainPage").forward(req, resp);
             }
 
         } else {
             req.getRequestDispatcher("/view/mainPage").forward(req, resp);
-
         }
     }
 }

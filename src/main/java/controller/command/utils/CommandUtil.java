@@ -35,7 +35,7 @@ public abstract class CommandUtil {
                 page = "/view/personPage";
                 break;
             case 3:
-                page = "/view/adminPage";
+                page = "/view/admin/adminPage";
                 break;
             default:
         }

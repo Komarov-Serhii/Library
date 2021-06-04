@@ -29,9 +29,9 @@
     <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
         <div class=" w3-green">
             <a href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a>
-            <a href="${pageContext.request.contextPath}/view/adminPage"><fmt:message key="admin"/></a>
-            <a href="${pageContext.request.contextPath}/view/language/registration?language=RU">RU</a>
-            <a href="${pageContext.request.contextPath}/view/language/registration?language=EN">EN</a>
+            <a href="${pageContext.request.contextPath}/view/admin/adminPage"><fmt:message key="admin"/></a>
+            <a href="${pageContext.request.contextPath}/view/language/admin/orderPage?language=RU">RU</a>
+            <a href="${pageContext.request.contextPath}/view/language/admin/orderPage?language=EN">EN</a>
         </div>
     </div>
 </div>
@@ -55,11 +55,11 @@
             <td> ${a.value.id} <br></td>
             <td> ${a.value.name} <br></td>
             <td> ${a.value.author} <br></td>
-            <td><a href="${pageContext.request.contextPath}/view/orderPage?id=${a.value.id}&button=accept"
-                   onclick="return confirm(<fmt:message key="acceptConfirm"/>)"><fmt:message key="accept"/></a>
+            <td><a href="${pageContext.request.contextPath}/view/admin/orderPage?id=${a.value.id}&button=accept"
+                   onclick="return confirm('<fmt:message key="acceptConfirm"/>')"><fmt:message key="accept"/></a>
             </td>
-            <td><a href="${pageContext.request.contextPath}/view/orderPage?id=${a.value.id}&button=reject"
-                   onclick="return confirm(<fmt:message key="rejectConfirm"/>)"><fmt:message key="reject"/></a>
+            <td><a href="${pageContext.request.contextPath}/view/admin/orderPage?id=${a.value.id}&button=reject"
+                   onclick="return confirm('<fmt:message key="rejectConfirm"/>')"><fmt:message key="reject"/></a>
             </td>
         </tr>
     </c:forEach>

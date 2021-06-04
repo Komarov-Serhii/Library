@@ -59,6 +59,6 @@ public class OrderAdminCommand implements Command {
 
         logger.info("in page order");
 
-        CommandUtil.goToPage(req, resp, "/WEB-INF/view/orderPage.jsp");
+        CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/orderPage.jsp");
     }
 }

@@ -29,9 +29,9 @@
     <div class="w3-card-4 w3-quarter w3-margin-top w3-display-topmiddle">
         <div class=" w3-green">
             <a href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a>
-            <a href="${pageContext.request.contextPath}/view/adminPage"><fmt:message key="admin"/></a>
-            <a href="${pageContext.request.contextPath}/view/language/listPerson?language=RU">RU</a>
-            <a href="${pageContext.request.contextPath}/view/language/listPerson?language=EN">EN</a>
+            <a href="${pageContext.request.contextPath}/view/admin/adminPage"><fmt:message key="admin"/></a>
+            <a href="${pageContext.request.contextPath}/view/language/admin/listPerson?language=RU">RU</a>
+            <a href="${pageContext.request.contextPath}/view/language/admin/listPerson?language=EN">EN</a>
         </div>
     </div>
 </div>
@@ -42,7 +42,6 @@
       <th>№</th>
       <th><fmt:message key="name"/></th>
       <th>Email</th>
-      <th><fmt:message key="delete"/></th>
       <th><fmt:message key="status"/></th>
       <th><fmt:message key="check"/></th>
     </tr>
@@ -52,24 +51,20 @@
         <td> ${a.id}</td>
         <td> ${a.name}</td>
         <td> ${a.email}</td>
-          <td><a href="${pageContext.request.contextPath}/view/listPerson?id=${a.id}&button=delete"
-              onclick="return confirm('Are you sure you want to remove this client?')"><fmt:message key="delete"/></a>
-          </td>
-
           <c:if test="${a.status == 1}">
               <td><a class="block"
-                     href="${pageContext.request.contextPath}/view/listPerson?button=block&id=${a.id}"
-                     onclick="return confirm('Are you sure you want to block this client?')"><fmt:message key="block"/></a>
+                     href="${pageContext.request.contextPath}/view/admin/listPerson?button=block&id=${a.id}"
+                     onclick="return confirm('<fmt:message key="blockPersonConfirm"/>')"><fmt:message key="block"/></a>
               </td>
           </c:if>
           <c:if test="${a.status == 2}">
               <td><a class="unblock"
-                     href="${pageContext.request.contextPath}/view/listPerson?button=unblock&id=${a.id}"
-                     onclick="return confirm('Are you sure you want to unblock this client?')"><fmt:message key="unblock"/></a>
+                     href="${pageContext.request.contextPath}/view/admin/listPerson?button=unblock&id=${a.id}"
+                     onclick="return confirm('<fmt:message key="unblockPersonConfirm"/>')"><fmt:message key="unblock"/></a>
               </td>
           </c:if>
 
-          <td><a href="${pageContext.request.contextPath}/view/listPerson?id=${a.id}&button=book"><fmt:message key="checkBooks"/></a></td>
+          <td><a href="${pageContext.request.contextPath}/view/admin/listPerson?id=${a.id}&button=book"><fmt:message key="checkBooks"/></a></td>
       </tr>
     </c:forEach>
   </table>
@@ -104,47 +99,6 @@
 </table>
 </c:if>
 </div>
-
-
-
-
-
-<form class="w3-container" align="center" method="post"
-      action="${pageContext.request.contextPath}/view/listPerson">
-
-    <button type="submit" value="add" name="button"><fmt:message key="addAdmin"/></button>
-</form>
-<c:if test="${window}">
-    <form class="w3-container" align="center" method="post"
-          action="${pageContext.request.contextPath}/view/listPerson">
-
-        <p>
-            <label>
-                <input class="w3-input" type="text" required placeholder="<fmt:message key="name"/>"
-                       name="name">
-            </label>
-        </p>
-
-        <p>
-            <label>
-                <input class="w3-input" type="text" required placeholder="Email" name="email">
-            </label>
-        </p>
-
-        <p>
-            <label>
-                <input class="w3-input" type="password" required
-                       placeholder="<fmt:message key="password"/>"
-                       name="password">
-            </label>
-        </p>
-
-
-        <input class="w3-button w3-green" type="submit" value="<fmt:message key="add"/>" name="button">
-    </form>
-</c:if>
-
-
 
 </body>
 </html>
