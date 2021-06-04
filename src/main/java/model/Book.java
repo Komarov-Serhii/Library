@@ -19,10 +19,10 @@ public class Book extends Model {
     private Date returnDate;
     private int debt;
 
-
-    public Book() {
+        public Book() {
 
     }
+
 
     public Book(String name, String author, String publisher, String publisher_date, String description, int price, String genre) {
 

@@ -37,8 +37,6 @@ public class PersonPageCommand implements Command {
         if (button != null && button.equals("order")) {
             int id_book = Integer.parseInt(req.getParameter("id"));
 
-
-
             bookService.setBookForApprove(id_book, person.getId());
 
         }

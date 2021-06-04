@@ -24,6 +24,26 @@
         <url-pattern>/view/language/*</url-pattern>
     </filter-mapping>
 
+    <filter>
+        <filter-name>AuthorizationFilter</filter-name>
+        <filter-class>controller.filter.AuthorizationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/view/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>RoleFilter</filter-name>
+        <filter-class>controller.filter.RoleFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>RoleFilter</filter-name>
+        <url-pattern>/view/admin/*</url-pattern>
+    </filter-mapping>
+
     <servlet>
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>controller.servlet.DispatcherServlet</servlet-class>
