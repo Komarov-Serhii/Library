@@ -10,6 +10,8 @@ public interface PersonDao extends CrudDao<Integer, Person> {
 
      Person getByLoginAndPass(String login, String password);
 
+     Person getByLogin(String login);
+
      int getAllBlocked(List<Person> person);
 
      int getAllUnblocked(List<Person> person);

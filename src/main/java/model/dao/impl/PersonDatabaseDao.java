@@ -113,7 +113,7 @@ public class PersonDatabaseDao implements PersonDao {
     @Override
     public Person getByLoginAndPass(String login, String password) {
         try (Connection connection = Connector.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_LOGIN)) {
+             PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_LOGIN_AND_PASS)) {
             statement.setString(1, login);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
@@ -134,7 +134,35 @@ public class PersonDatabaseDao implements PersonDao {
 
             return person;
         } catch (SQLException | NamingException e) {
-            logger.info("Cannot get user by login = %s");
+            logger.info("Cannot get person by login = %s");
+            throw new RuntimeException("Cannot getByLoginAndPass person", e);
+        }
+    }
+
+@Override
+    public Person getByLogin(String login) {
+        try (Connection connection = Connector.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_LOGIN)) {
+            statement.setString(1, login);
+            ResultSet resultSet = statement.executeQuery();
+
+            Person person = null;
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String pass = resultSet.getString("password");
+                int level = resultSet.getInt("level");
+                int status = resultSet.getInt("status");
+
+
+                person = new Person(id, name, email, pass, level, status);
+            }
+
+            return person;
+        } catch (SQLException | NamingException e) {
+            logger.info("Cannot get person by login = %s");
             throw new RuntimeException("Cannot getByLoginAndPass person", e);
         }
     }

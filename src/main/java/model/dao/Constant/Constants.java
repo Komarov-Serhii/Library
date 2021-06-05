@@ -16,7 +16,8 @@ public final class Constants {
     public static final String SELECT_BY_ID_PERSON = "SELECT * FROM person WHERE id = ?";
     public static final String SELECT_BY_ID_BOOK = "SELECT * FROM book WHERE id = ?";
     public static final String SELECT_BY_ID_BOOK_PHOTO = "SELECT * FROM book_photo WHERE id = ?";
-    public static final String SELECT_BY_LOGIN = "SELECT * FROM person WHERE email = ? AND password = ?";
+    public static final String SELECT_BY_LOGIN_AND_PASS = "SELECT * FROM person WHERE email = ? AND password = ?";
+    public static final String SELECT_BY_LOGIN = "SELECT * FROM person WHERE email = ?";
 
     public static final String INSERT_PERSON = "INSERT INTO PERSON (name, email, password, level, status) VALUES (?,?,?,?,?)";
     public static final String INSERT_BOOK = "INSERT INTO BOOK (name, author, publisher, publisher_date, description, price, genre, status, person_id, order_status, return_date, debt) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";

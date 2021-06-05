@@ -62,22 +62,23 @@ public abstract class CommandUtil {
         return Date.valueOf(date);
     }
 
-    public static String cryptWithMD5(String pass) {
-        MessageDigest md;
+    public static String encrypt(String pass) {
         try {
-            md = MessageDigest.getInstance("MD5");
-            byte[] passBytes = pass.getBytes();
-            md.reset();
-            byte[] digested = md.digest(passBytes);
-            var sb = new StringBuffer();
-            for (int i = 0; i < digested.length; i++) {
-                sb.append(Integer.toHexString(0xff & digested[i]));
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+
+            messageDigest.update(pass.getBytes());
+
+            byte[] digest = messageDigest.digest();
+            StringBuffer stringBuffer = new StringBuffer();
+
+            for (byte theByte : digest) {
+                stringBuffer.append(String.format("%02x", theByte & 0xff));
             }
-            logger.info("successful hash password");
-            return sb.toString();
+            return stringBuffer.toString();
         } catch (NoSuchAlgorithmException e) {
-            logger.info("bad hash password");
+            e.printStackTrace();
+            logger.info(e.getMessage());
         }
-        return null;
+        return "";
     }
 }

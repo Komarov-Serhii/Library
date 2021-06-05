@@ -4,7 +4,7 @@ import controller.command.utils.CommandUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
+
 import model.exception.NotFoundPersonException;
 import model.exception.WrongDataException;
 import model.Person;
@@ -27,7 +27,7 @@ public class LoginCommand implements Command {
 
             try {
 
-                Person person = personService.getByLoginAndPass(login, CommandUtil.cryptWithMD5(password));
+                Person person = personService.getByLoginAndPass(login, CommandUtil.encrypt(password));
 
                 if (person.getStatus() == 1) {
                     req.getSession().setAttribute("person", person);

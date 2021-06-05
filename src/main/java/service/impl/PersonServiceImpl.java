@@ -30,6 +30,11 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Person getByLogin(String login) {
+        return personDao.getByLogin(login);
+    }
+
+    @Override
     public Person getEntity(Integer id) throws DataBaseException, ServiceException {
         try {
             Person person = personDao.getById(id);

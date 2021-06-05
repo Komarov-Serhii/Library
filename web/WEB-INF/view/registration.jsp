@@ -66,6 +66,11 @@
           <fmt:message key="incorrectEmailOrPass"/>
         </div>
       </c:if>
+      <c:if test="${requestScope.alreadyExist}">
+        <div class="w3-container">
+          <fmt:message key="alreadyExistPerson"/>
+        </div>
+      </c:if>
     </form>
   </div>
 

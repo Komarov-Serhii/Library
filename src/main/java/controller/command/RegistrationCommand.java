@@ -1,20 +1,14 @@
 package controller.command;
 
-
-import at.favre.lib.crypto.bcrypt.BCrypt;
 import controller.command.utils.CommandUtil;
 import controller.command.utils.ValidationData;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import model.exception.*;
 import model.Person;
 import service.PersonService;
 import service.factory.ServiceFactory;
-
 import java.util.Objects;
-
 import org.apache.log4j.Logger;
 
 
@@ -41,29 +35,34 @@ public class RegistrationCommand implements Command {
 
                 String name = req.getParameter("name");
 
-                Person person = new Person(name, email);
-                person.setPassword(CommandUtil.cryptWithMD5(password));
-                person.setAccessLevel(2);
-                person.setStatus(1);
-                personService.add(person);
-                person = personService.getByLoginAndPass(email, password);
+                var person = personService.getByLogin(email);
 
-                req.getSession().setAttribute("person", person);
+                if (Objects.nonNull(person)) {
+                    throw new AlreadyExistPersonException();
+                } else {
+                    person = new Person(name, email);
+                    person.setPassword(CommandUtil.encrypt(password));
+                    person.setAccessLevel(2);
+                    person.setStatus(1);
+                    personService.add(person);
 
-                String page = CommandUtil.getPersonPageByRole(person.getAccessLevel());
+                    req.getSession().setAttribute("person", person);
 
-                CommandUtil.goToPage(req, resp, page);
+                    String page = CommandUtil.getPersonPageByRole(person.getAccessLevel());
 
-                logger.info(page);
+                    CommandUtil.goToPage(req, resp, page);
 
+                    logger.info("successful registration");
+                }
             } catch (ServiceException e) {
                 req.setAttribute("notFound", true);
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");
             } catch (WrongDataException e) {
                 req.setAttribute("wrongData", true);
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");
-            } catch (NotFoundPersonException e) {
-                logger.info("Not found person");
+            } catch (AlreadyExistPersonException e) {
+                req.setAttribute("alreadyExist", true);
+                CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");
             }
         }
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");
