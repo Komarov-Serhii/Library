@@ -1,16 +1,19 @@
 package service.impl;
 
 import controller.command.utils.CommandUtil;
-import model.Book;
-import model.Person;
+import model.entity.Book;
+import model.entity.Person;
 import model.dao.BookDao;
 import model.dao.PersonDao;
 import model.dao.factory.DaoFactory;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.BookService;
+
 import java.util.*;
+
 import org.apache.log4j.Logger;
+
 import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService {
@@ -54,14 +57,14 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findByAuthorOrName(String text) {
         return bookDAO.getAll().stream()
-                .filter(o -> o.getName().toUpperCase().contains(text.toUpperCase()) || o.getAuthor().toUpperCase().contains(text.toUpperCase()))
+                .filter(o -> o.getName().toUpperCase().contains(text.toUpperCase())
+                        || o.getAuthor().toUpperCase().contains(text.toUpperCase()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public void setBookForApprove(int book_id, int person_id) {
         try {
-            Person person = personDao.getById(person_id);
             Book book = bookDAO.getById(book_id);
             book.setStatus(2);
             book.setPerson_id(person_id);

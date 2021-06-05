@@ -1,13 +1,13 @@
 package service.impl;
 
 import model.dao.*;
-import model.*;
+import model.entity.Person;
 import model.exception.*;
 import model.dao.factory.DaoFactory;
 import service.PersonService;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
+
 import org.apache.log4j.Logger;
 import java.util.stream.Collectors;
 

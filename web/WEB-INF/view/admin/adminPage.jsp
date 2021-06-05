@@ -47,7 +47,7 @@
                 <a href="${pageContext.request.contextPath}/view/admin/adminPage" class="u-border-0 u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-1"><fmt:message key="mainPage"/></a>
                 <a href="${pageContext.request.contextPath}/view/admin/listBook" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-2"><fmt:message key="books"/></a>
                 <a href="${pageContext.request.contextPath}/view/admin/listPerson" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-3"><fmt:message key="users"/></a>
-                <a href="${pageContext.request.contextPath}/view/admin/orderPage" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-3"><fmt:message key="order"/></a>
+                <a href="${pageContext.request.contextPath}/view/admin/orderPage" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-3"><fmt:message key="orders"/></a>
                 <a href="${pageContext.request.contextPath}/view/logout" class="u-border-1 u-border-active-palette-2-base u-border-hover-palette-1-base u-btn u-button-style u-none u-text-palette-5-dark-1 u-btn-4"><fmt:message key="logout"/></a>
             </div>
         </div>

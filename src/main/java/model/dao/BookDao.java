@@ -1,6 +1,6 @@
 package model.dao;
 
-import model.Book;
+import model.entity.Book;
 import java.util.List;
 
 public interface BookDao extends CrudDao<Integer, Book> {

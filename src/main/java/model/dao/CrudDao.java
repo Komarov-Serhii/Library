@@ -2,7 +2,7 @@ package model.dao;
 
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
-import model.Model;
+import model.entity.Model;
 
 
 

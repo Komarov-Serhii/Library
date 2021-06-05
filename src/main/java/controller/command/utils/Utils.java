@@ -1,6 +1,6 @@
 package controller.command.utils;
 
-import model.Book;
+import model.entity.Book;
 import service.BookService;
 import service.factory.ServiceFactory;
 

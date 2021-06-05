@@ -71,7 +71,7 @@
             <td> ${a.author}</td>
             <td> ${a.genre}</td>
             <td> ${a.publisher}</td>
-            <td> ${a.publisher_date}</td>
+            <td> ${a.publisherDate}</td>
             <td> ${a.description}</td>
             <td> ${a.price}</td>
             <td><a href="${pageContext.request.contextPath}/view/admin/listBook?id=${a.id}&button=delete"
@@ -120,7 +120,7 @@
             </p>
             <p>
                 <label>
-                    <input class="w3-input" type="text" value="${param.get("publisher_date")}" name="publisher_date">
+                    <input class="w3-input" type="text" value="${param.get("publisherDate")}" name="publisherDate">
                 </label>
             </p>
             <p>

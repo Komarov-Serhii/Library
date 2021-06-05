@@ -63,7 +63,7 @@
                 <td> ${b.author}</td>
                 <td> ${b.genre}</td>
                 <td> ${b.publisher}</td>
-                <td> ${b.publisher_date}</td>
+                <td> ${b.publisherDate}</td>
                 <td> ${b.description}</td>
                 <td> ${b.price}</td>
             </tr>
@@ -122,7 +122,7 @@
                 <td> ${a.author}</td>
                 <td> ${a.genre}</td>
                 <td> ${a.publisher}</td>
-                <td> ${a.publisher_date}</td>
+                <td> ${a.publisherDate}</td>
                 <td> ${a.description}</td>
                 <td> ${a.price}</td>
             </tr>

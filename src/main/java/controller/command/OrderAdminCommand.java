@@ -1,8 +1,8 @@
 package controller.command;
 
 import controller.command.utils.CommandUtil;
-import model.Book;
-import model.Person;
+import model.entity.Book;
+import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.factory.ServiceFactory;
@@ -19,7 +19,8 @@ public class OrderAdminCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-
+        int id;
+        Book book;
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
 
@@ -27,9 +28,9 @@ public class OrderAdminCommand implements Command {
         String button = req.getParameter("button");
 
         if (Objects.nonNull(button) && button.equals("accept")) {
-            int id = Integer.parseInt(req.getParameter("id"));
+            id = Integer.parseInt(req.getParameter("id"));
             try {
-                Book book = bookService.getEntity(id);
+                book = bookService.getEntity(id);
                 book.setOrderStatus(2);
                 book.setReturnDate(CommandUtil.getNextBill());
                 bookService.update(book);
@@ -40,9 +41,9 @@ public class OrderAdminCommand implements Command {
         }
 
         if (Objects.nonNull(button) && button.equals("reject")) {
-            int id = Integer.parseInt(req.getParameter("id"));
+            id = Integer.parseInt(req.getParameter("id"));
             try {
-                Book book = bookService.getEntity(id);
+                book = bookService.getEntity(id);
                 book.setStatus(1);
                 book.setOrderStatus(1);
                 bookService.update(book);
@@ -53,7 +54,6 @@ public class OrderAdminCommand implements Command {
         }
 
         Map<Person, Book> map = bookService.getAllInfoByOrder();
-
 
         req.setAttribute("order", map);
 

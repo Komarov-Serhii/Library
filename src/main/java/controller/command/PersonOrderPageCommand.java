@@ -1,8 +1,8 @@
 package controller.command;
 
 import controller.command.utils.CommandUtil;
-import model.Book;
-import model.Person;
+import model.entity.Book;
+import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.factory.ServiceFactory;
@@ -17,15 +17,11 @@ public class PersonOrderPageCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
         var person = (Person) req.getSession().getAttribute("person");
 
-
         String button = req.getParameter("button");
-
-
 
         if (button != null && button.equals("decline")) {
             int id = Integer.parseInt(req.getParameter("id"));
@@ -40,13 +36,11 @@ public class PersonOrderPageCommand implements Command {
             }
         }
 
-
         List<Book> list = bookService.getAllOrderByPersonID(person.getId());
 
         req.setAttribute("books", list);
 
         logger.info("in page personPage");
-
 
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/personOrderPage.jsp");
     }

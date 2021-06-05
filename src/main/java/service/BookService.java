@@ -1,8 +1,8 @@
 package service;
 
-import model.Person;
+import model.entity.Person;
 import service.factory.ItemService;
-import model.Book;
+import model.entity.Book;
 
 import java.util.List;
 import java.util.Map;

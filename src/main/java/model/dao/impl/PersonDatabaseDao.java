@@ -5,11 +5,13 @@ import model.dao.Constant.Constants;
 import model.dao.PersonDao;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
-import model.Person;
+import model.entity.Person;
+
 import javax.naming.NamingException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 
 
@@ -52,7 +54,8 @@ public class PersonDatabaseDao implements PersonDao {
             int level = resultSet.getInt("level");
             int status = resultSet.getInt("status");
 
-            return new Person(id, name, email, password , level, status);
+            return new Person.PersonBuilderImpl().setId(id).setName(name).setEmail(email).setPassword(password)
+                    .setAccessLevel(level).setStatus(status).build();
         } catch (SQLException | NamingException e) {
             throw new DataBaseException(String.format("Cannot get person by id=%d", id), e);
         }
@@ -128,8 +131,8 @@ public class PersonDatabaseDao implements PersonDao {
                 int level = resultSet.getInt("level");
                 int status = resultSet.getInt("status");
 
-
-                person = new Person(id, name, email, pass, level, status);
+                person = new Person.PersonBuilderImpl().setId(id).setName(name).setEmail(email).setPassword(pass)
+                        .setAccessLevel(level).setStatus(status).build();
             }
 
             return person;
@@ -139,7 +142,7 @@ public class PersonDatabaseDao implements PersonDao {
         }
     }
 
-@Override
+    @Override
     public Person getByLogin(String login) {
         try (Connection connection = Connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_LOGIN)) {
@@ -156,8 +159,8 @@ public class PersonDatabaseDao implements PersonDao {
                 int level = resultSet.getInt("level");
                 int status = resultSet.getInt("status");
 
-
-                person = new Person(id, name, email, pass, level, status);
+                person = new Person.PersonBuilderImpl().setId(id).setName(name).setEmail(email).setPassword(pass)
+                        .setAccessLevel(level).setStatus(status).build();
             }
 
             return person;

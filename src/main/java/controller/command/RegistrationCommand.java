@@ -5,7 +5,7 @@ import controller.command.utils.ValidationData;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.exception.*;
-import model.Person;
+import model.entity.Person;
 import service.PersonService;
 import service.factory.ServiceFactory;
 import java.util.Objects;
@@ -40,7 +40,7 @@ public class RegistrationCommand implements Command {
                 if (Objects.nonNull(person)) {
                     throw new AlreadyExistPersonException();
                 } else {
-                    person = new Person(name, email);
+                    person = new Person.PersonBuilderImpl().setName(name).setEmail(email).build();
                     person.setPassword(CommandUtil.encrypt(password));
                     person.setAccessLevel(2);
                     person.setStatus(1);

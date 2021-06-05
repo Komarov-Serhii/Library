@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.exception.NotFoundPersonException;
 import model.exception.WrongDataException;
-import model.Person;
+import model.entity.Person;
 import service.PersonService;
 import service.factory.ServiceFactory;
 

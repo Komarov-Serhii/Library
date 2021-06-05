@@ -57,7 +57,7 @@
             <td> ${a.author}</td>
             <td> ${a.genre}</td>
             <td> ${a.publisher}</td>
-            <td> ${a.publisher_date}</td>
+            <td> ${a.publisherDate}</td>
             <td> ${a.description}</td>
             <td> ${a.price}</td>
             <td><a href="${pageContext.request.contextPath}/view/personOrderPage?id=${a.id}&button=decline"

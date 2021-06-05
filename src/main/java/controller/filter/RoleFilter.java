@@ -1,8 +1,8 @@
 package controller.filter;
 
 
-import model.Person;
-import model.Role;
+
+import model.entity.Person;
 import org.apache.log4j.Logger;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

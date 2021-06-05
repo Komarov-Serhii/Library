@@ -1,60 +1,80 @@
-package model;
+package model.entity;
+
+import model.builder.PersonBuilder;
 
 import java.util.Objects;
 
-public class Person extends Model{
+public class Person extends Model {
     private String name;
     private String email;
     private String password;
     private int accessLevel;
     private int status;
 
+
+    private Person(PersonBuilderImpl builder) {
+        super(builder.id);
+        this.name = builder.name;
+        this.email = builder.email;
+        this.password = builder.password;
+        this.accessLevel = builder.accessLevel;
+        this.status = builder.status;
+    }
+
+    public static class PersonBuilderImpl implements PersonBuilder {
+
+        private int id;
+        private String name;
+        private String email;
+        private String password;
+        private int accessLevel;
+        private int status;
+
+
+
+        @Override
+        public PersonBuilder setId(int id) {
+            this.id = id;
+            return this;
+        }
+
+        @Override
+        public PersonBuilder setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        @Override
+        public PersonBuilder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        @Override
+        public PersonBuilder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        @Override
+        public PersonBuilder setAccessLevel(int accessLevel) {
+            this.accessLevel = accessLevel;
+            return this;
+        }
+
+        @Override
+        public PersonBuilder setStatus(int status) {
+            this.status = status;
+            return this;
+        }
+
+        @Override
+        public Person build() {
+            return new Person(this);
+        }
+    }
+
     public Person() {
-    }
-
-    public Person(String name) {
-        this.name = name;
-    }
-
-    public Person(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-
-    public Person(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
-    public Person(String name, String email, String password, int accessLevel, int status) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.accessLevel = accessLevel;
-        this.status = status;
-    }
-
-    public Person(String name, String email, String password, int accessLevel) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.accessLevel = accessLevel;
-    }
-
-    public Person(int id, String name, String email, String password) {
-        super(id);
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-    public Person(int id, String name, String email, String password, int accessLevel, int status) {
-        super(id);
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.accessLevel = accessLevel;
-        this.status = status;
     }
 
     public void setName(String name) {

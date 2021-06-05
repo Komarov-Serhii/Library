@@ -4,8 +4,8 @@ import controller.command.utils.CommandUtil;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import controller.command.utils.Utils;
-import model.Book;
-import model.Person;
+import model.entity.Book;
+import model.entity.Person;
 import model.exception.ServiceException;
 import service.factory.ServiceFactory;
 import java.util.List;
@@ -20,11 +20,6 @@ public class PersonPageCommand implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
         Person person = (Person) req.getSession().getAttribute("person");
         logger.info("in page person");
-//        if (person.getAccessLevel() == 2) {
-//            String page = CommandUtil.getPersonPageByRole(2);
-//            CommandUtil.goToPage(req, resp, page);
-//
-//        }
 
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();

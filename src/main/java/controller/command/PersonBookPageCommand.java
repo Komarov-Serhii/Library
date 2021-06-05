@@ -1,8 +1,8 @@
 package controller.command;
 
 import controller.command.utils.CommandUtil;
-import model.Book;
-import model.Person;
+import model.entity.Book;
+import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.factory.ServiceFactory;
@@ -23,38 +23,20 @@ public class PersonBookPageCommand implements Command {
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
 
-
-
         String button = req.getParameter("button");
 
-
-        if (Objects.nonNull(button) && button.equals("return")) {
-            int id = Integer.parseInt(req.getParameter("id"));
+        if ("pay".equals(button) || "return".equals(button)) {
+            var id = Integer.parseInt(req.getParameter("id"));
             try {
                 var book = bookService.getEntity(id);
                 book.setStatus(1);
                 book.setOrderStatus(1);
                 bookService.update(book);
-                logger.info("Successful return book");
+                logger.info("Successful return or pay book");
             } catch (DataBaseException|ServiceException e) {
-                logger.info("Error return book");
+                logger.info("Error return or pay book");
             }
         }
-
-        if (Objects.nonNull(button) && button.equals("pay")) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            try {
-                var book = bookService.getEntity(id);
-                book.setStatus(1);
-                book.setOrderStatus(1);
-                book.setDebt(0);
-                bookService.update(book);
-                logger.info("Successful return book");
-            } catch (DataBaseException|ServiceException e) {
-                logger.info("Error return book");
-            }
-        }
-
 
             List<Book> list = bookService.getAllBooksByPersonIDAndAddDebt(person.getId());
 

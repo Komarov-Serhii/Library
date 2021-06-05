@@ -1,9 +1,8 @@
 package controller.command;
 
 import controller.command.utils.CommandUtil;
-import model.Book;
-import model.Person;
-import service.BookService;
+import model.entity.Book;
+import model.entity.Person;
 import service.factory.ServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +20,6 @@ public class PersonInfoBookPageCommand implements Command {
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
 
-
             List<Book> list = bookService.getAllBooksByPersonIDAndAddDebt(person.getId());
             List<Book> listOrders = bookService.getAllOrderByPersonID(person.getId());
 
@@ -29,7 +27,6 @@ public class PersonInfoBookPageCommand implements Command {
         for (Book book : list) {
             count += book.getDebt();
         }
-
 
             req.setAttribute("books", list.size());
             req.setAttribute("orders", listOrders.size());

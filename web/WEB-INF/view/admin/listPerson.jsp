@@ -91,7 +91,7 @@
         <td> ${b.author}</td>
         <td> ${b.genre}</td>
         <td> ${b.publisher}</td>
-        <td> ${b.publisher_date}</td>
+        <td> ${b.publisherDate}</td>
         <td> ${b.description}</td>
         <td> ${b.price}</td>
     </tr>

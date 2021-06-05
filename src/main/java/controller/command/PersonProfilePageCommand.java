@@ -1,7 +1,7 @@
 package controller.command;
 
 import controller.command.utils.CommandUtil;
-import model.Person;
+import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.factory.ServiceFactory;

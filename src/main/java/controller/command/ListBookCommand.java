@@ -2,14 +2,16 @@ package controller.command;
 
 import controller.command.utils.CommandUtil;
 import controller.command.utils.Utils;
-import model.Book;
-import model.Person;
+import model.entity.Book;
+import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.factory.ServiceFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+
 import org.apache.log4j.Logger;
 
 
@@ -21,7 +23,8 @@ public class ListBookCommand implements Command {
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
-
+        Person person = (Person) req.getSession().getAttribute("person");
+        Book book;
 
         String button = req.getParameter("button");
 
@@ -44,14 +47,14 @@ public class ListBookCommand implements Command {
             String name = req.getParameter("name");
             String author = req.getParameter("author");
             String publisher = req.getParameter("publisher");
-            String publisher_date = req.getParameter("publisher_date");
+            String publisherDate = req.getParameter("publisher_date");
             String description = req.getParameter("description");
             int price = Integer.parseInt(req.getParameter("price"));
             String genre = req.getParameter("genre");
 
-            Book book = new Book(name, author, publisher, publisher_date, description, price, genre);
+            book = new Book.BookBuilderImpl().setName(name).setAuthor(author).setPublisher(publisher)
+                    .setPublisherDate(publisherDate).setDescription(description).setPrice(price).setGenre(genre).build();
             book.setStatus(1);
-            Person person = (Person) req.getSession().getAttribute("person");
             book.setPerson_id(person.getId());
             book.setOrderStatus(1);
             try {
@@ -68,7 +71,6 @@ public class ListBookCommand implements Command {
             logger.info("Successful set book");
         }
 
-
         if (button != null && button.equals("update")) {
             int id = Integer.parseInt(req.getParameter("id"));
             String name = req.getParameter("name");
@@ -79,25 +81,22 @@ public class ListBookCommand implements Command {
             int price = Integer.parseInt(req.getParameter("price"));
             String genre = req.getParameter("genre");
 
-
             try {
-                Book book = bookService.getEntity(id);
+                book = bookService.getEntity(id);
                 book.setName(name);
                 book.setAuthor(author);
                 book.setPublisher(publisher);
-                book.setPublisher_date(publisher_date);
+                book.setPublisherDate(publisher_date);
                 book.setDescription(description);
                 book.setPrice(price);
                 book.setGenre(genre);
-
                 bookService.update(book);
 
                 logger.info("Update add book");
-            } catch (DataBaseException|ServiceException e) {
+            } catch (DataBaseException | ServiceException e) {
                 e.printStackTrace();
             }
         }
-
 
         try {
             List<Book> list = bookService.getAll();

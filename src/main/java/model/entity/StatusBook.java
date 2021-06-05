@@ -1,13 +1,12 @@
-package model;
+package model.entity;
 
-public enum StatusPerson {
-
-    UNBLOCKED(1),
-    BLOCKED(2);
+public enum StatusBook {
+    FREE(1),
+    BUSY(2);
 
     private int status;
 
-    StatusPerson(int status) {
+    StatusBook(int status) {
         this.status = status;
     }
 

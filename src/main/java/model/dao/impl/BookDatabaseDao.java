@@ -5,7 +5,7 @@ import model.dao.Connection.Connector;
 import model.dao.Constant.Constants;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
-import model.Book;
+import model.entity.Book;
 import javax.naming.NamingException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class BookDatabaseDao implements BookDao {
             statement.setString(1, book.getName());
             statement.setString(2, book.getAuthor());
             statement.setString(3, book.getPublisher());
-            statement.setString(4, book.getPublisher_date());
+            statement.setString(4, book.getPublisherDate());
             statement.setString(5, book.getDescription());
             statement.setInt(6, book.getPrice());
             statement.setString(7, book.getGenre());
@@ -56,17 +56,20 @@ public class BookDatabaseDao implements BookDao {
             String name = resultSet.getString("name");
             String author = resultSet.getString("author");
             String publisher = resultSet.getString("publisher");
-            String publisher_date = resultSet.getString("publisher_date");
+            String publisherDate = resultSet.getString("publisher_date");
             String description = resultSet.getString("description");
             int price = resultSet.getInt("price");
             String genre = resultSet.getString("genre");
             int status = resultSet.getInt("status");
-            int person_id = resultSet.getInt("person_id");
+            int personId = resultSet.getInt("person_id");
             int orderStatus = resultSet.getInt("order_status");
             Date returnDate = resultSet.getDate("return_date");
             int dept = resultSet.getInt("debt");
 
-            return new Book(id, name, author, publisher, publisher_date, description, price, genre, status, person_id, orderStatus, returnDate, dept);
+            return new Book.BookBuilderImpl().setId(id).setName(name).setAuthor(author).setPublisher(publisher)
+                    .setPublisherDate(publisherDate).setDescription(description).setPrice(price).setGenre(genre)
+                    .setStatus(status).setPersonId(personId).setOrderStatus(orderStatus).setReturnDate(returnDate)
+                    .setDebt(dept).build();
         } catch (SQLException | NamingException e) {
             throw new DataBaseException(String.format("Cannot get book by id=%d", id), e);
         }
@@ -94,7 +97,7 @@ public class BookDatabaseDao implements BookDao {
             statement.setString(1, book.getName());
             statement.setString(2, book.getAuthor());
             statement.setString(3, book.getPublisher());
-            statement.setString(4, book.getPublisher_date());
+            statement.setString(4, book.getPublisherDate());
             statement.setString(5, book.getDescription());
             statement.setInt(6, book.getPrice());
             statement.setString(7, book.getGenre());
@@ -124,7 +127,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setName(rs.getString(2));
                 book.setAuthor(rs.getString(3));
                 book.setPublisher(rs.getString(4));
-                book.setPublisher_date(rs.getString(5));
+                book.setPublisherDate(rs.getString(5));
                 book.setDescription(rs.getString(6));
                 book.setPrice(rs.getInt(7));
                 book.setGenre(rs.getString(8));
@@ -153,7 +156,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setName(rs.getString(2));
                 book.setAuthor(rs.getString(3));
                 book.setPublisher(rs.getString(4));
-                book.setPublisher_date(rs.getString(5));
+                book.setPublisherDate(rs.getString(5));
                 book.setDescription(rs.getString(6));
                 book.setPrice(rs.getInt(7));
                 book.setGenre(rs.getString(8));
@@ -183,7 +186,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setName(rs.getString(2));
                 book.setAuthor(rs.getString(3));
                 book.setPublisher(rs.getString(4));
-                book.setPublisher_date(rs.getString(5));
+                book.setPublisherDate(rs.getString(5));
                 book.setDescription(rs.getString(6));
                 book.setPrice(rs.getInt(7));
                 book.setGenre(rs.getString(8));
@@ -213,7 +216,7 @@ public class BookDatabaseDao implements BookDao {
                 book.setName(rs.getString(2));
                 book.setAuthor(rs.getString(3));
                 book.setPublisher(rs.getString(4));
-                book.setPublisher_date(rs.getString(5));
+                book.setPublisherDate(rs.getString(5));
                 book.setDescription(rs.getString(6));
                 book.setPrice(rs.getInt(7));
                 book.setGenre(rs.getString(8));

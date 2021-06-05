@@ -1,7 +1,7 @@
 package service.factory;
 
 import model.exception.*;
-import model.Model;
+import model.entity.Model;
 
 import java.util.List;
 
