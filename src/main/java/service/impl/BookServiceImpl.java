@@ -1,16 +1,20 @@
 package service.impl;
 
 import controller.command.utils.CommandUtil;
-import model.entity.Book;
-import model.entity.Person;
 import model.dao.BookDao;
 import model.dao.PersonDao;
 import model.dao.factory.DaoFactory;
+import model.entity.Book;
+import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
-import service.BookService;
-import java.util.*;
 import org.apache.log4j.Logger;
+import service.BookService;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class BookServiceImpl implements BookService {
@@ -60,15 +64,17 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void setBookForApprove(int book_id, int person_id) {
-            Book book = null;
+    public boolean setBookForApprove(int book_id, int person_id) {
+        Book book = null;
         try {
             book = bookDAO.getById(book_id);
-        book.setStatus(2);
-                book.setPerson_id(person_id);
-                bookDAO.updateEntity(book);
+            book.setStatus(2);
+            book.setPerson_id(person_id);
+            bookDAO.updateEntity(book);
+            return true;
         } catch (DataBaseException e) {
             logger.error("error setBookForApprove");
+            return false;
         }
     }
 
@@ -102,11 +108,11 @@ public class BookServiceImpl implements BookService {
     public List<Book> getAllBooksByPersonIDAndAddDebt(int person_id) {
         List<Book> list = bookDAO.getAllBooksByPersonID(person_id);
         list.stream()
-                        .filter(o -> CommandUtil.getCurrentDate().after(o.getReturnDate()))
-                        .forEach(o -> o.setDebt(o.getPrice() / 100 * 30));
-                for (Book book : list) {
-                    bookDAO.updateEntity(book);
-                }
+                .filter(o -> CommandUtil.getCurrentDate().after(o.getReturnDate()))
+                .forEach(o -> o.setDebt(o.getPrice() / 100 * 30));
+        for (Book book : list) {
+            bookDAO.updateEntity(book);
+        }
         return list;
     }
 

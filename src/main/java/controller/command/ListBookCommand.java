@@ -82,7 +82,7 @@ public class ListBookCommand implements Command {
                     bookService.update(book);
                     logger.info("Update add book");
                 } catch (DataBaseException | ServiceException e) {
-                    logger.info(e.getMessage());
+                    logger.error(e.getMessage());
                 }
             }
         }
@@ -96,7 +96,7 @@ public class ListBookCommand implements Command {
 
 
         } catch (ServiceException e) {
-            logger.info(e.getMessage());
+            logger.error(e.getMessage());
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/listBook.jsp");
         }
 

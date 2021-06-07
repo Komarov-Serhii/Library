@@ -35,7 +35,7 @@ public class AdminPageCommand implements Command {
             req.setAttribute("order", books.size());
 
         } catch (ServiceException e) {
-            logger.info("serviceException in page admin ");
+            logger.error("serviceException in page admin ");
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/adminPage.jsp");
         }
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/adminPage.jsp");

@@ -42,7 +42,7 @@ public class PersonProfilePageCommand implements Command {
 
                 req.getSession().setAttribute("person", person);
             } catch (DataBaseException|ServiceException e) {
-                logger.info("Bad update person" + e.getMessage());
+                logger.error("Bad update person" + e.getMessage());
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
             }
         }

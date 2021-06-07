@@ -32,7 +32,7 @@ public class PersonOrderPageCommand implements Command {
                 bookService.update(book);
                 logger.info("Successful decline book");
             } catch (DataBaseException|ServiceException e) {
-                e.printStackTrace();
+                logger.error("error decline book" + e);
             }
         }
 

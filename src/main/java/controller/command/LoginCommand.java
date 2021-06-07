@@ -47,11 +47,11 @@ public class LoginCommand implements Command {
 
             } catch (NotFoundPersonException e) {
                 req.setAttribute("notFound", true);
-                logger.info("not found person");
+                logger.error("not found person");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/login.jsp");
             } catch (WrongDataException e) {
                 req.setAttribute("wrongData", true);
-                logger.info("Incorrect login or password");
+                logger.error("Incorrect login or password");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/login.jsp");
             }
         }

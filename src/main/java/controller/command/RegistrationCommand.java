@@ -2,18 +2,17 @@ package controller.command;
 
 import controller.command.utils.CommandUtil;
 import controller.command.utils.ValidationData;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import model.exception.*;
 import model.entity.Person;
+import model.exception.AlreadyExistPersonException;
+import model.exception.ServiceException;
+import model.exception.WrongDataException;
+import org.apache.log4j.Logger;
 import service.PersonService;
 import service.factory.ServiceFactory;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
-
-import org.apache.log4j.Logger;
 
 
 public class RegistrationCommand implements Command {
@@ -61,16 +60,16 @@ public class RegistrationCommand implements Command {
                     logger.info("successful registration");
                 }
             } catch (ServiceException e) {
-                logger.info(e.getMessage());
+                logger.error(e.getMessage());
                 req.setAttribute("notFound", true);
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");
             } catch (WrongDataException e) {
                 req.setAttribute("wrongData", true);
-                logger.info("Incorrect login or password");
+                logger.error("Incorrect login or password");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");
             } catch (AlreadyExistPersonException e) {
                 req.setAttribute("alreadyExist", true);
-                logger.info("person already exist");
+                logger.error("person already exist");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");
             }
         }

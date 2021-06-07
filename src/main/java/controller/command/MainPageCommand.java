@@ -1,14 +1,15 @@
 package controller.command;
 
 import controller.command.utils.CommandUtil;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import controller.command.utils.Utils;
 import model.entity.Book;
 import model.exception.ServiceException;
-import service.factory.ServiceFactory;
-import java.util.List;
 import org.apache.log4j.Logger;
+import service.factory.ServiceFactory;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 
 public class MainPageCommand implements Command {
@@ -33,7 +34,7 @@ public class MainPageCommand implements Command {
 
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/mainPage.jsp");
         } catch (ServiceException e) {
-            logger.info(e.getMessage());
+            logger.error(e.getMessage());
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/mainPage.jsp");
         }
     }

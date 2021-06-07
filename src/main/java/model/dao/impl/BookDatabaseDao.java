@@ -3,15 +3,17 @@ package model.dao.impl;
 import model.dao.BookDao;
 import model.dao.Connection.Connector;
 import model.dao.constant.Constants;
-import model.exception.DataBaseException;
 import model.entity.Book;
+import model.exception.DataBaseException;
+import org.apache.log4j.Logger;
 
 import javax.naming.NamingException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.log4j.Logger;
 
 public class BookDatabaseDao implements BookDao {
 
@@ -111,7 +113,7 @@ public class BookDatabaseDao implements BookDao {
             logger.info("successful update book");
             return book;
         } catch (SQLException | NamingException e) {
-            logger.info(e);
+            logger.error(e);
             throw new RuntimeException("Cannot update book", e);
         }
     }

@@ -5,12 +5,13 @@ import model.entity.Book;
 import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
+import org.apache.log4j.Logger;
 import service.factory.ServiceFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.Objects;
-import org.apache.log4j.Logger;
 
 
 public class OrderAdminCommand implements Command {
@@ -34,7 +35,7 @@ public class OrderAdminCommand implements Command {
                 bookService.update(book);
                 logger.info("Successful accept order");
             } catch (DataBaseException|ServiceException e) {
-                logger.info(e.getMessage());
+                logger.error(e.getMessage());
             }
         }
 
@@ -46,7 +47,7 @@ public class OrderAdminCommand implements Command {
                 bookService.update(book);
                 logger.info("Successful reject order");
             } catch (DataBaseException|ServiceException e) {
-                logger.info(e.getMessage());
+                logger.error(e.getMessage());
             }
         }
 

@@ -1,14 +1,17 @@
 package service.impl;
 
-import model.dao.*;
-import model.entity.Person;
-import model.exception.*;
+import model.dao.PersonDao;
 import model.dao.factory.DaoFactory;
+import model.entity.Person;
+import model.exception.DataBaseException;
+import model.exception.NotFoundPersonException;
+import model.exception.ServiceException;
+import model.exception.WrongDataException;
+import org.apache.log4j.Logger;
 import service.PersonService;
+
 import java.util.List;
 import java.util.Objects;
-
-import org.apache.log4j.Logger;
 import java.util.stream.Collectors;
 
 public class PersonServiceImpl implements PersonService {
@@ -40,7 +43,7 @@ public class PersonServiceImpl implements PersonService {
             Person person = personDao.getById(id);
             return person;
         } catch (DataBaseException e) {
-           logger.info(e);
+           logger.error(e);
             throw new ServiceException("Cannot get person in service", e);
         }
     }

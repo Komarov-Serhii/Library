@@ -1,22 +1,17 @@
 package controller.command;
 
 import controller.command.utils.CommandUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import controller.command.utils.ValidationData;
 import model.entity.Book;
 import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
-import model.exception.WrongDataException;
+import org.apache.log4j.Logger;
 import service.factory.ServiceFactory;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Objects;
-
-import org.apache.log4j.Logger;
 
 
 public class ListPersonCommand implements Command {
@@ -80,7 +75,7 @@ public class ListPersonCommand implements Command {
             List<Person> list = personService.getAllPerson();
             req.setAttribute("people", list);
         } catch (ServiceException e) {
-            logger.info(e.getMessage());
+            logger.error(e.getMessage());
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/listPerson.jsp");
         }
 
