@@ -79,7 +79,7 @@
             </td>
             <td>
                 <form class="w3-container" align="center" method="post"
-                      action="${pageContext.request.contextPath}/view/admin/listBook?id=${a.id}&button=set&name=${a.name}&author=${a.author}&genre=${a.genre}&publisher=${a.publisher}&publisher_date=${a.publisher_date}&description=${a.description}&price=${a.price}"
+                      action="${pageContext.request.contextPath}/view/admin/listBook?id=${a.id}&button=set&name=${a.name}&author=${a.author}&genre=${a.genre}&publisher=${a.publisher}&publisherDate=${a.publisherDate}&description=${a.description}&price=${a.price}"
                       onclick="return confirm('<fmt:message key="editBookConfirm"/>')">
 
                     <button type="submit" value="set" name="button"><fmt:message key="edit"/></button>

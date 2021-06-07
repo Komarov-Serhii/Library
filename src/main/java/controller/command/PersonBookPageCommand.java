@@ -10,7 +10,6 @@ import service.factory.ServiceFactory;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Objects;
 import org.apache.log4j.Logger;
 
 public class PersonBookPageCommand implements Command {
@@ -19,6 +18,7 @@ public class PersonBookPageCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
+        logger.info("in page personPage");
         var person = (Person) req.getSession().getAttribute("person");
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
@@ -38,15 +38,12 @@ public class PersonBookPageCommand implements Command {
             }
         }
 
-            List<Book> list = bookService.getAllBooksByPersonIDAndAddDebt(person.getId());
+            List<Book> list = bookService.getAllBooksByPersonIDAndAddDebt(person.getId()); // add code in service
 
-        for (Book book : list) {
-            bookService.update(book);
-        }
+//        for (Book book : list) {
+//            bookService.update(book);
+//        }
             req.setAttribute("books", list);
-
-            logger.info("in page personPage");
-
 
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/personBookPage.jsp");
     }

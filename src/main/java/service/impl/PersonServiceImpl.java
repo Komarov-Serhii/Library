@@ -82,6 +82,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public int getAllBlocked() {
-        return personDao.getAllBlocked(personDao.getAll());
+        return personDao.getCountBlocked(personDao.getAll());
     }
 }

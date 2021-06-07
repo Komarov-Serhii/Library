@@ -25,6 +25,7 @@ public class ListPersonCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
+        logger.info("in page listPerson");
         int id;
         Person person;
         var factory = ServiceFactory.getInstance();
@@ -33,49 +34,53 @@ public class ListPersonCommand implements Command {
 
         String button = req.getParameter("button");
 
-        if (button != null && button.equals("book")) {
-            id = Integer.parseInt(req.getParameter("id"));
-            req.setAttribute("win", true);
+        if (Objects.nonNull(button)) {
 
-            List<Book> books = bookService.getAllBooksByPersonIDAndAddDebt(id);
-
-            req.setAttribute("books", books);
-            logger.info("Successful open window list books Person");
-        }
-
-        if (button != null && button.equals("delete")) {
-            id = Integer.parseInt(req.getParameter("id"));
-            boolean b = personService.delete(id);
-
-            if (b) {
-                logger.info("Successful delete");
-            }
-        }
-
-        try {
-            if (button != null && button.equals("block")) {
+            if (button.equals("book")) {
                 id = Integer.parseInt(req.getParameter("id"));
-                person = personService.getEntity(id);
-                person.setStatus(2);
-                personService.update(person);
+                req.setAttribute("win", true);
+
+                List<Book> books = bookService.getAllBooksByPersonIDAndAddDebt(id);
+
+                req.setAttribute("books", books);
+                logger.info("Successful open window list books Person");
             }
-            if (button != null && button.equals("unblock")) {
+
+            if (button.equals("delete")) {
                 id = Integer.parseInt(req.getParameter("id"));
-                person = personService.getEntity(id);
-                person.setStatus(1);
-                personService.update(person);
+                boolean b = personService.delete(id);
+
+                if (b) {
+                    logger.info("Successful delete");
+                }
             }
-        } catch (DataBaseException | ServiceException e) {
-            logger.info("DatabaseException update");
+
+            try {
+                if (button.equals("block")) {
+                    id = Integer.parseInt(req.getParameter("id"));
+                    person = personService.getEntity(id);
+                    person.setStatus(2);
+                    personService.update(person);
+                    logger.info("Successful blocked person");
+                }
+                if (button.equals("unblock")) {
+                    id = Integer.parseInt(req.getParameter("id"));
+                    person = personService.getEntity(id);
+                    person.setStatus(1);
+                    personService.update(person);
+                    logger.info("Successful unblocked person");
+
+                }
+            } catch (DataBaseException | ServiceException e) {
+                logger.info(e.getMessage());
+            }
         }
 
         try {
             List<Person> list = personService.getAllPerson();
             req.setAttribute("people", list);
-
-            logger.info("in page listPerson");
         } catch (ServiceException e) {
-            logger.info("serviceException");
+            logger.info(e.getMessage());
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/listPerson.jsp");
         }
 

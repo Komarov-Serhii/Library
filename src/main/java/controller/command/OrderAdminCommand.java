@@ -19,45 +19,40 @@ public class OrderAdminCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-        int id;
+        logger.info("in orders page");
         Book book;
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
 
-
         String button = req.getParameter("button");
 
         if (Objects.nonNull(button) && button.equals("accept")) {
-            id = Integer.parseInt(req.getParameter("id"));
             try {
-                book = bookService.getEntity(id);
+                book = bookService.getEntity(Integer.parseInt(req.getParameter("id")));
                 book.setOrderStatus(2);
                 book.setReturnDate(CommandUtil.getNextBill());
                 bookService.update(book);
                 logger.info("Successful accept order");
             } catch (DataBaseException|ServiceException e) {
-                e.printStackTrace();
+                logger.info(e.getMessage());
             }
         }
 
         if (Objects.nonNull(button) && button.equals("reject")) {
-            id = Integer.parseInt(req.getParameter("id"));
             try {
-                book = bookService.getEntity(id);
+                book = bookService.getEntity(Integer.parseInt(req.getParameter("id")));
                 book.setStatus(1);
                 book.setOrderStatus(1);
                 bookService.update(book);
                 logger.info("Successful reject order");
             } catch (DataBaseException|ServiceException e) {
-                e.printStackTrace();
+                logger.info(e.getMessage());
             }
         }
 
         Map<Person, Book> map = bookService.getAllInfoByOrder();
 
         req.setAttribute("order", map);
-
-        logger.info("in page order");
 
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/orderPage.jsp");
     }

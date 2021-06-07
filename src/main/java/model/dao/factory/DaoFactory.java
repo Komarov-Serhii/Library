@@ -3,18 +3,16 @@ package model.dao.factory;
 
 import model.dao.*;
 
-
 public abstract class DaoFactory {
 
     private static DaoFactory instance;
 
-    public static DaoFactory getInstance() {
+    public static synchronized DaoFactory getInstance() {
         if (instance == null) {
             instance = new DatabaseDaoFactory();
         }
         return instance;
     }
-
 
     public abstract PersonDao getPersonDAO();
 

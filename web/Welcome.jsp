@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="tag" uri="/WEB-INF/myTag.tld" %>
+<%@ taglib prefix="Tag" uri="/WEB-INF/myTag.tld" %>
 
 <html>
 <head>
@@ -22,7 +22,7 @@
         </div>
     </div>
     <div align="left">
-        <tag:dateTag/>
+        <Tag:dateTag/>
     </div>
 </form>
 </body>

@@ -18,14 +18,13 @@ public class PersonPageCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
-        Person person = (Person) req.getSession().getAttribute("person");
         logger.info("in page person");
+        Person person = (Person) req.getSession().getAttribute("person");
 
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
 
         String button = req.getParameter("button");
-
 
         Utils.search(req);
 
@@ -42,10 +41,9 @@ public class PersonPageCommand implements Command {
 
             req.setAttribute("books", list);
 
-            logger.info("in page listBook");
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/personPage.jsp");
         } catch (ServiceException e) {
-            logger.info("serviceException");
+            logger.info(e.getMessage());
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/personPage.jsp");
         }
     }

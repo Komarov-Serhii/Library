@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
 import org.apache.log4j.Logger;
 
 public final class Utils {
@@ -21,32 +22,41 @@ public final class Utils {
     public static void sortBooks(HttpServletRequest req, List<Book> list) {
         String sort = req.getParameter("sort");
         if (Objects.nonNull(sort) && sort.equals("sortName")) {
-            Collections.sort(list, new Book.NameComparator());
+            list.sort(new Book.NameComparator());
+            logger.info("successful sorting by name books");
+
         }
         if (Objects.nonNull(sort) && sort.equals("sortAuthor")) {
-            Collections.sort(list, new Book.AuthorComparator());
+            list.sort(new Book.AuthorComparator());
+            logger.info("successful sorting by author books");
+
         }
         if (Objects.nonNull(sort) && sort.equals("sortPublisher")) {
-            Collections.sort(list, new Book.PublisherComparator());
+            list.sort(new Book.PublisherComparator());
+            logger.info("successful sorting by publisher books");
+
         }
         if (Objects.nonNull(sort) && sort.equals("sortPublisherDate")) {
-            Collections.sort(list, new Book.PublisherDateComparator());
+            list.sort(new Book.PublisherDateComparator());
+            logger.info("successful sorting by publisher date books");
         }
     }
 
     public static void search(HttpServletRequest req) {
-        ServiceFactory factory = ServiceFactory.getInstance();
-        BookService bookService = factory.getBookService();
+        logger.info("in search");
+        var factory = ServiceFactory.getInstance();
+        var bookService = factory.getBookService();
 
         String text = req.getParameter("search");
         if (Objects.nonNull(text)) {
-            logger.info("search");
             List<Book> bookList = bookService.findByAuthorOrName(text);
             if (!bookList.isEmpty()) {
                 req.setAttribute("win", true);
                 req.setAttribute("list", bookList);
+                logger.info("successful search");
             } else {
-                req.setAttribute("notFoundSearch",true);
+                req.setAttribute("notFoundSearch", true);
+                logger.info("not found search");
             }
         }
     }

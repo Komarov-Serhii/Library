@@ -1,10 +1,9 @@
 package model.dao.impl;
 
 import model.dao.Connection.Connector;
-import model.dao.Constant.Constants;
+import model.dao.constant.Constants;
 import model.dao.PersonDao;
 import model.exception.DataBaseException;
-import model.exception.ServiceException;
 import model.entity.Person;
 
 import javax.naming.NamingException;
@@ -33,6 +32,7 @@ public class PersonDatabaseDao implements PersonDao {
             statement.setInt(4, person.getAccessLevel());
             statement.setInt(5, person.getStatus());
             statement.execute();
+            logger.info("successful add person");
             return true;
         } catch (SQLException | NamingException e) {
             throw new DataBaseException("Cannot add person", e);
@@ -40,22 +40,22 @@ public class PersonDatabaseDao implements PersonDao {
     }
 
     @Override
-    public Person getById(Integer id) throws DataBaseException, ServiceException {
+    public Person getById(Integer id) throws DataBaseException {
         try (Connection connection = Connector.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(Constants.SELECT_BY_ID_PERSON)) {
             statement.setInt(1, id);
 
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-
-            String name = resultSet.getString("name");
-            String email = resultSet.getString("email");
-            String password = resultSet.getString("password");
-            int level = resultSet.getInt("level");
-            int status = resultSet.getInt("status");
-
-            return new Person.PersonBuilderImpl().setId(id).setName(name).setEmail(email).setPassword(password)
-                    .setAccessLevel(level).setStatus(status).build();
+            logger.info("successful getById person");
+            return new Person.PersonBuilderImpl()
+                    .setId(id)
+                    .setName(resultSet.getString("name"))
+                    .setEmail(resultSet.getString("email"))
+                    .setPassword(resultSet.getString("password"))
+                    .setAccessLevel(resultSet.getInt("level"))
+                    .setStatus(resultSet.getInt("status"))
+                    .build();
         } catch (SQLException | NamingException e) {
             throw new DataBaseException(String.format("Cannot get person by id=%d", id), e);
         }
@@ -68,9 +68,9 @@ public class PersonDatabaseDao implements PersonDao {
              PreparedStatement statement = connection.prepareStatement(Constants.DELETE_PERSON)) {
             statement.setInt(1, id);
             statement.executeUpdate();
+            logger.info("successful delete person");
             return true;
         } catch (SQLException | NamingException e) {
-            logger.info(e);
             throw new RuntimeException("Cannot delete person", e);
         }
     }
@@ -85,6 +85,8 @@ public class PersonDatabaseDao implements PersonDao {
             statement.setInt(4, person.getStatus());
             statement.setInt(5, person.getId());
             statement.executeUpdate();
+            logger.info("successful update person");
+
             return person;
         } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot update person", e);
@@ -107,6 +109,7 @@ public class PersonDatabaseDao implements PersonDao {
                 person.setStatus(rs.getInt(6));
                 outerPeople.add(person);
             }
+            logger.info("successful getAll person");
             return outerPeople;
         } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot getAllPerson", e);
@@ -124,20 +127,18 @@ public class PersonDatabaseDao implements PersonDao {
             Person person = null;
 
             if (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String email = resultSet.getString("email");
-                String pass = resultSet.getString("password");
-                int level = resultSet.getInt("level");
-                int status = resultSet.getInt("status");
-
-                person = new Person.PersonBuilderImpl().setId(id).setName(name).setEmail(email).setPassword(pass)
-                        .setAccessLevel(level).setStatus(status).build();
+                person = new Person.PersonBuilderImpl()
+                        .setId(resultSet.getInt("id"))
+                        .setName(resultSet.getString("name"))
+                        .setEmail(resultSet.getString("email"))
+                        .setPassword(resultSet.getString("password"))
+                        .setAccessLevel(resultSet.getInt("level"))
+                        .setStatus(resultSet.getInt("status"))
+                        .build();
             }
-
+            logger.info("successful getByLoginAndPass person");
             return person;
         } catch (SQLException | NamingException e) {
-            logger.info("Cannot get person by login = %s");
             throw new RuntimeException("Cannot getByLoginAndPass person", e);
         }
     }
@@ -152,40 +153,27 @@ public class PersonDatabaseDao implements PersonDao {
             Person person = null;
 
             if (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                String email = resultSet.getString("email");
-                String pass = resultSet.getString("password");
-                int level = resultSet.getInt("level");
-                int status = resultSet.getInt("status");
-
-                person = new Person.PersonBuilderImpl().setId(id).setName(name).setEmail(email).setPassword(pass)
-                        .setAccessLevel(level).setStatus(status).build();
+                person = new Person.PersonBuilderImpl()
+                        .setId(resultSet.getInt("id"))
+                        .setName(resultSet.getString("name"))
+                        .setEmail(resultSet.getString("email"))
+                        .setPassword(resultSet.getString("password"))
+                        .setAccessLevel(resultSet.getInt("level"))
+                        .setStatus(resultSet.getInt("status"))
+                        .build();
             }
-
+            logger.info("successful getByLogin person");
             return person;
         } catch (SQLException | NamingException e) {
-            logger.info("Cannot get person by login = %s");
-            throw new RuntimeException("Cannot getByLoginAndPass person", e);
+            throw new RuntimeException("Cannot getByLogin person", e);
         }
     }
 
     @Override
-    public int getAllBlocked(List<Person> person) {
-        int count = 0;
+    public int getCountBlocked(List<Person> person) {
+        var count = 0;
         for (Person num : person) {
             if (num.getStatus() == 2) {
-                count++;
-            }
-        }
-        return count;
-    }
-
-    @Override
-    public int getAllUnblocked(List<Person> person) {
-        int count = 0;
-        for (Person num : person) {
-            if (num.getStatus() == 1) {
                 count++;
             }
         }

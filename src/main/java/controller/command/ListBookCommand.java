@@ -7,10 +7,10 @@ import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import service.factory.ServiceFactory;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.log4j.Logger;
 
@@ -21,6 +21,7 @@ public class ListBookCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
+        logger.info("in page listBook");
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
         Person person = (Person) req.getSession().getAttribute("person");
@@ -28,73 +29,61 @@ public class ListBookCommand implements Command {
 
         String button = req.getParameter("button");
 
+        if (Objects.nonNull(button)) {
 
-        if (button != null && button.equals("delete")) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            boolean b = bookService.delete(id);
-
-            if (b) {
-                logger.info("Successful delete book");
-            }
-        }
-
-        if (button != null && button.equals("add")) {
-            req.setAttribute("window", true);
-            logger.info("Successful open window add");
-        }
-
-        if (button != null && button.equals("addSubmit")) {
-            String name = req.getParameter("name");
-            String author = req.getParameter("author");
-            String publisher = req.getParameter("publisher");
-            String publisherDate = req.getParameter("publisher_date");
-            String description = req.getParameter("description");
-            int price = Integer.parseInt(req.getParameter("price"));
-            String genre = req.getParameter("genre");
-
-            book = new Book.BookBuilderImpl().setName(name).setAuthor(author).setPublisher(publisher)
-                    .setPublisherDate(publisherDate).setDescription(description).setPrice(price).setGenre(genre).build();
-            book.setStatus(1);
-            book.setPerson_id(person.getId());
-            book.setOrderStatus(1);
-            try {
-                bookService.add(book);
-            } catch (ServiceException e) {
-                logger.info("Bad add book");
+            if (button.equals("delete")) {
+                boolean b = bookService.delete(Integer.parseInt(req.getParameter("id")));
+                if (b) {
+                    logger.info("Successful delete book");
+                }
             }
 
-            logger.info("Successful add book");
-        }
+            if (button.equals("add")) {
+                req.setAttribute("window", true);
+                logger.info("Successful open window add");
+            }
 
-        if (button != null && button.equals("set")) {
-            req.setAttribute("win", true);
-            logger.info("Successful set book");
-        }
+            if (button.equals("addSubmit")) {
+                book = new Book.BookBuilderImpl()
+                        .setName(req.getParameter("name"))
+                        .setAuthor(req.getParameter("author"))
+                        .setPublisher(req.getParameter("publisher"))
+                        .setPublisherDate(req.getParameter("publisher_date"))
+                        .setDescription(req.getParameter("description"))
+                        .setPrice(Integer.parseInt(req.getParameter("price")))
+                        .setGenre(req.getParameter("genre"))
+                        .build();
+                book.setStatus(1);
+                book.setPerson_id(person.getId());
+                book.setOrderStatus(1);
+                try {
+                    bookService.add(book);
+                } catch (ServiceException e) {
+                    logger.info("Bad add book");
+                }
+                logger.info("Successful add book");
+            }
 
-        if (button != null && button.equals("update")) {
-            int id = Integer.parseInt(req.getParameter("id"));
-            String name = req.getParameter("name");
-            String author = req.getParameter("author");
-            String publisher = req.getParameter("publisher");
-            String publisher_date = req.getParameter("publisher_date");
-            String description = req.getParameter("description");
-            int price = Integer.parseInt(req.getParameter("price"));
-            String genre = req.getParameter("genre");
+            if (button.equals("set")) {
+                req.setAttribute("win", true);
+                logger.info("Successful set book");
+            }
 
-            try {
-                book = bookService.getEntity(id);
-                book.setName(name);
-                book.setAuthor(author);
-                book.setPublisher(publisher);
-                book.setPublisherDate(publisher_date);
-                book.setDescription(description);
-                book.setPrice(price);
-                book.setGenre(genre);
-                bookService.update(book);
-
-                logger.info("Update add book");
-            } catch (DataBaseException | ServiceException e) {
-                e.printStackTrace();
+            if (button.equals("update")) {
+                try {
+                    book = bookService.getEntity(Integer.parseInt(req.getParameter("id")));
+                    book.setName(req.getParameter("name"));
+                    book.setAuthor(req.getParameter("author"));
+                    book.setPublisher(req.getParameter("publisher"));
+                    book.setPublisherDate(req.getParameter("publisherDate"));
+                    book.setDescription(req.getParameter("description"));
+                    book.setPrice(Integer.parseInt(req.getParameter("price")));
+                    book.setGenre(req.getParameter("genre"));
+                    bookService.update(book);
+                    logger.info("Update add book");
+                } catch (DataBaseException | ServiceException e) {
+                    logger.info(e.getMessage());
+                }
             }
         }
 
@@ -105,9 +94,9 @@ public class ListBookCommand implements Command {
 
             req.setAttribute("books", list);
 
-            logger.info("in page listBook");
+
         } catch (ServiceException e) {
-            logger.info("serviceException");
+            logger.info(e.getMessage());
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/admin/listBook.jsp");
         }
 

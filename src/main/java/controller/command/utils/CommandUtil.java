@@ -1,10 +1,8 @@
 package controller.command.utils;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -18,9 +16,12 @@ public abstract class CommandUtil {
 
     static Logger logger = Logger.getLogger(CommandUtil.class);
 
+    private CommandUtil() {
+
+    }
 
     public static void goToPage(HttpServletRequest req, HttpServletResponse resp, String url) {
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher(url);
+        var requestDispatcher = req.getRequestDispatcher(url);
         try {
             requestDispatcher.forward(req, resp);
         } catch (ServletException | IOException e) {
@@ -46,37 +47,34 @@ public abstract class CommandUtil {
     }
 
     public static Date getCurrentDate() {
-        Calendar cal = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        var cal = Calendar.getInstance();
+        var sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(cal.getTime());
-        logger.info(date + "output date");
         return Date.valueOf(date);
     }
 
     public static Date getNextBill() {
-        Calendar cal = Calendar.getInstance();
+        var cal = Calendar.getInstance();
         cal.add(Calendar.DATE, 30);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        var sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(cal.getTime());
-        logger.info(date + "output date");
         return Date.valueOf(date);
     }
 
     public static String encrypt(String pass) {
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            var messageDigest = MessageDigest.getInstance("SHA-256");
 
             messageDigest.update(pass.getBytes());
 
             byte[] digest = messageDigest.digest();
-            StringBuffer stringBuffer = new StringBuffer();
+            var stringBuilder = new StringBuilder();
 
             for (byte theByte : digest) {
-                stringBuffer.append(String.format("%02x", theByte & 0xff));
+                stringBuilder.append(String.format("%02x", theByte & 0xff));
             }
-            return stringBuffer.toString();
+            return stringBuilder.toString();
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
             logger.info(e.getMessage());
         }
         return "";

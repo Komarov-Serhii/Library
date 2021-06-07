@@ -17,6 +17,8 @@ public class MainPageCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
+        logger.info("in main page");
+
         var factory = ServiceFactory.getInstance();
         var bookService = factory.getBookService();
 
@@ -29,11 +31,9 @@ public class MainPageCommand implements Command {
 
             req.setAttribute("books", list);
 
-            logger.info("in mainPage");
-
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/mainPage.jsp");
         } catch (ServiceException e) {
-            logger.info("serviceException");
+            logger.info(e.getMessage());
             CommandUtil.goToPage(req, resp, "/WEB-INF/view/mainPage.jsp");
         }
     }

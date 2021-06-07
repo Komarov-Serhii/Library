@@ -127,6 +127,33 @@
             </tr>
         </c:forEach>
 
+
+        <c:if test="${win}">
+        <table>
+            <tr>
+                <th><fmt:message key="name"/></th>
+                <th><fmt:message key="author"/></th>
+                <th><fmt:message key="genre"/></th>
+                <th><fmt:message key="publisher"/></th>
+                <th><fmt:message key="publisherDate"/></th>
+                <th><fmt:message key="description"/></th>
+                <th><fmt:message key="price"/></th>
+
+            </tr>
+
+            <c:forEach items="${list}" var="b">
+                <tr>
+                    <td> ${b.name}</td>
+                    <td> ${b.author}</td>
+                    <td> ${b.genre}</td>
+                    <td> ${b.publisher}</td>
+                    <td> ${b.publisherDate}</td>
+                    <td> ${b.description}</td>
+                    <td> ${b.price}</td>
+                </tr>
+            </c:forEach>
+            </c:if>
+
     </table>
 
 </body>

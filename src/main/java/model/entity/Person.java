@@ -30,8 +30,6 @@ public class Person extends Model {
         private int accessLevel;
         private int status;
 
-
-
         @Override
         public PersonBuilder setId(int id) {
             this.id = id;

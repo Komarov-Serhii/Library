@@ -12,8 +12,6 @@ public interface PersonDao extends CrudDao<Integer, Person> {
 
      Person getByLogin(String login);
 
-     int getAllBlocked(List<Person> person);
-
-     int getAllUnblocked(List<Person> person);
+     int getCountBlocked(List<Person> person);
 
 }

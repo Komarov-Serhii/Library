@@ -16,6 +16,7 @@ public class PersonProfilePageCommand implements Command {
 
     @Override
     public void execute(HttpServletRequest req, HttpServletResponse resp) {
+        logger.info("in person profile page");
         var factory = ServiceFactory.getInstance();
         var personService = factory.getPersonService();
 
@@ -32,26 +33,20 @@ public class PersonProfilePageCommand implements Command {
 
 
         if (button != null && button.equals("update")) {
-            int id = Integer.parseInt(req.getParameter("id"));
-
             try {
-                Person person = personService.getEntity(id);
-
+                Person person = personService.getEntity(Integer.parseInt(req.getParameter("id")));
                 person.setName(name);
                 person.setEmail(email);
                 person.setPassword(CommandUtil.encrypt(password));
                 personService.update(person);
-                logger.info("Update info person");
 
                 req.getSession().setAttribute("person", person);
             } catch (DataBaseException|ServiceException e) {
-                logger.info("Bad update person");
+                logger.info("Bad update person" + e.getMessage());
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
             }
         }
 
-
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
-
     }
 }
