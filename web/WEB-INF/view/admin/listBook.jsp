@@ -284,27 +284,49 @@
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("name")}" required
-                                               placeholder="1"
+                                               placeholder="<fmt:message key="name"/>"
+                                               name="name">
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input class="tariff1" type="text" value="${param.get("author")}" required
+                                               placeholder="<fmt:message key="author"/>"
+                                               name="name">
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input class="tariff1" type="text" value="${param.get("publisher")}" required
+                                               placeholder="<fmt:message key="publisher"/>"
+                                               name="name">
+                                    </label>
+                                </p>
+
+                                <p>
+                                    <label>
+                                        <input class="tariff1" type="text" value="${param.get("publisherDate")}" required
+                                               placeholder="<fmt:message key="publisherDate"/>"
                                                name="name">
                                     </label>
                                 </p>
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("description")}" required
-                                               placeholder="2"
+                                               placeholder="<fmt:message key="description"/>"
                                                name="description">
                                     </label>
                                 </p>
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("price")}" required
-                                               placeholder="3"
+                                               placeholder="<fmt:message key="price"/>"
                                                name="price">
                                     </label>
                                 </p>
                                 <input class="submitBtn" type="submit"
-                                       onclick="return confirm('<fmt:message key="updateConfirm"/>')"
-                                       value="<fmt:message key="update"/>">
+                                       onclick="return confirm('<fmt:message key="addBookConfirm"/>')"
+                                       value="<fmt:message key="add"/>">
                             </form>
                         </div>
                     </c:if>
@@ -357,26 +379,48 @@
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("name")}" required
-                                               placeholder="1"
+                                               placeholder="<fmt:message key="name"/>"
+                                               name="name">
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input class="tariff1" type="text" value="${param.get("author")}" required
+                                               placeholder="<fmt:message key="author"/>"
+                                               name="name">
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input class="tariff1" type="text" value="${param.get("publisher")}" required
+                                               placeholder="<fmt:message key="publisher"/>"
+                                               name="name">
+                                    </label>
+                                </p>
+
+                                <p>
+                                    <label>
+                                        <input class="tariff1" type="text" value="${param.get("publisherDate")}" required
+                                               placeholder="<fmt:message key="publisherDate"/>"
                                                name="name">
                                     </label>
                                 </p>
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("description")}" required
-                                               placeholder="2"
+                                               placeholder="<fmt:message key="description"/>"
                                                name="description">
                                     </label>
                                 </p>
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("price")}" required
-                                               placeholder="3"
+                                               placeholder="<fmt:message key="price"/>"
                                                name="price">
                                     </label>
                                 </p>
                                 <input class="submitBtn" type="submit"
-                                       onclick="return confirm('<fmt:message key="updateConfirm"/>')"
+                                       onclick="return confirm('<fmt:message key="editBookConfirm"/>')"
                                        value="<fmt:message key="update"/>">
                             </form>
                         </div>

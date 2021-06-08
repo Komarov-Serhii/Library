@@ -5,11 +5,12 @@ import model.entity.Book;
 import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
+import org.apache.log4j.Logger;
 import service.factory.ServiceFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 
 public class PersonOrderPageCommand implements Command {
@@ -38,7 +39,7 @@ public class PersonOrderPageCommand implements Command {
 
         List<Book> list = bookService.getAllOrderByPersonID(person.getId());
 
-        req.setAttribute("books", list);
+        req.setAttribute("orders", list);
 
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/personOrderPage.jsp");
     }

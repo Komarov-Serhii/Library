@@ -36,8 +36,11 @@ public class ListPersonCommand implements Command {
                 req.setAttribute("win", true);
 
                 List<Book> books = bookService.getAllBooksByPersonIDAndAddDebt(id);
-
-                req.setAttribute("books", books);
+                if (books.size() > 0) {
+                    req.setAttribute("books", books);
+                } else {
+                    req.setAttribute("notBooks", true);
+                }
                 logger.info("Successful open window list books Person");
             }
 
