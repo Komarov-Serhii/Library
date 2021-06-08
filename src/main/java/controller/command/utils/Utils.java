@@ -1,15 +1,12 @@
 package controller.command.utils;
 
 import model.entity.Book;
-import service.BookService;
+import org.apache.log4j.Logger;
 import service.factory.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-
-import org.apache.log4j.Logger;
 
 public final class Utils {
 
@@ -51,7 +48,7 @@ public final class Utils {
         if (Objects.nonNull(text)) {
             List<Book> bookList = bookService.findByAuthorOrName(text);
             if (!bookList.isEmpty()) {
-                req.setAttribute("win", true);
+                req.setAttribute("window", true);
                 req.setAttribute("list", bookList);
                 logger.info("successful search");
             } else {

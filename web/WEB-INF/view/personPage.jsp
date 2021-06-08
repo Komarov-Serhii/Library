@@ -47,7 +47,7 @@
     </form>
 
     <div align="center">
-        <c:if test="${win}">
+        <c:if test="${window}">
         <table>
             <tr>
                 <th><fmt:message key="name"/></th>

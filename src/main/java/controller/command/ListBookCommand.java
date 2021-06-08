@@ -6,13 +6,13 @@ import model.entity.Book;
 import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
+import org.apache.log4j.Logger;
 import service.factory.ServiceFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Objects;
-
-import org.apache.log4j.Logger;
 
 
 public class ListBookCommand implements Command {
@@ -29,6 +29,8 @@ public class ListBookCommand implements Command {
 
         String button = req.getParameter("button");
 
+        Utils.search(req);
+
         if (Objects.nonNull(button)) {
 
             if (button.equals("delete")) {
@@ -39,7 +41,7 @@ public class ListBookCommand implements Command {
             }
 
             if (button.equals("add")) {
-                req.setAttribute("window", true);
+                req.setAttribute("win1", true);
                 logger.info("Successful open window add");
             }
 
