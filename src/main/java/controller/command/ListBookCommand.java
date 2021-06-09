@@ -50,7 +50,7 @@ public class ListBookCommand implements Command {
                         .setName(req.getParameter("name"))
                         .setAuthor(req.getParameter("author"))
                         .setPublisher(req.getParameter("publisher"))
-                        .setPublisherDate(req.getParameter("publisher_date"))
+                        .setPublisherDate(req.getParameter("publisherDate"))
                         .setDescription(req.getParameter("description"))
                         .setPrice(Integer.parseInt(req.getParameter("price")))
                         .setGenre(req.getParameter("genre"))

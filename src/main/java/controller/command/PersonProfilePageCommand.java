@@ -1,13 +1,16 @@
 package controller.command;
 
 import controller.command.utils.CommandUtil;
+import controller.command.utils.ValidationData;
 import model.entity.Person;
 import model.exception.DataBaseException;
 import model.exception.ServiceException;
+import model.exception.WrongDataException;
+import org.apache.log4j.Logger;
 import service.factory.ServiceFactory;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.log4j.Logger;
 
 
 public class PersonProfilePageCommand implements Command {
@@ -34,6 +37,9 @@ public class PersonProfilePageCommand implements Command {
 
         if (button != null && button.equals("update")) {
             try {
+                if (!ValidationData.isEmailValid(email) || !ValidationData.isPasswordValid(password)) {
+                    throw new WrongDataException();
+                }
                 Person person = personService.getEntity(Integer.parseInt(req.getParameter("id")));
                 person.setName(name);
                 person.setEmail(email);
@@ -43,6 +49,10 @@ public class PersonProfilePageCommand implements Command {
                 req.getSession().setAttribute("person", person);
             } catch (DataBaseException|ServiceException e) {
                 logger.error("Bad update person" + e.getMessage());
+                CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
+            }catch (WrongDataException e) {
+                req.setAttribute("wrongData", true);
+                logger.error("Incorrect login or password in myProfile");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
             }
         }

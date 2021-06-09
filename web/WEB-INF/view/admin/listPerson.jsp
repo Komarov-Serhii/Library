@@ -20,20 +20,22 @@
 <div id="home"></div>
 <div class="ournet-inter-area">
     <header id="header" class="header-area">
-
-        <div class="logoBlock">
-            <div style="font-size: 16px; text-align: end;">
-                <a class="loginBtn"
-                   href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a>
-                <a class="loginBtn"
-                   href="${pageContext.request.contextPath}/view/admin/adminPage"><fmt:message key="admin"/></a>
-                <a class="loginBtn"
-                   href="${pageContext.request.contextPath}/view/language/admin/listPerson?language=RU">RU</a>
-                <a class="loginBtn"
-                   href="${pageContext.request.contextPath}/view/language/admin/listPerson?language=EN">EN</a>
-            </div>
-            <p id="pageLogo">ISPAdmin</p>
+    <div class="logoBlock">
+        <div style="font-size: 16px; text-align: end;">
+            <a class="btn" href="${pageContext.request.contextPath}/view/language/admin/listPerson?language=RU">RU</a>
+            <a class="btn" href="${pageContext.request.contextPath}/view/language/admin/listPerson?language=EN">EN</a>
         </div>
+        <p id="pageLogo">ISPAdmin</p>
+        <div class="adminmenu">
+            <ul>
+                <li><a class="scroll-animite btn"
+                       href="${pageContext.request.contextPath}/view/admin/adminPage"><fmt:message key="admin"/></a>
+                </li>
+                <li><a class="scroll-animite logOutBtn"
+                       href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a></li>
+            </ul>
+        </div>
+    </div>
         <div id="time"><span id="datetime"></span></div>
     </header>
     <!-- Slider area Start -->

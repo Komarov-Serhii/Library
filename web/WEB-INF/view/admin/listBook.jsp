@@ -225,41 +225,42 @@
 <div id="home"></div>
 <div class="ournet-inter-area">
     <header id="header" class="header-area">
-
-        <div class="logoBlock">
-            <div style="font-size: 16px; text-align: end;">
-                <a class="loginBtn"
-                   href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a>
-                <a class="loginBtn"
-                   href="${pageContext.request.contextPath}/view/admin/adminPage"><fmt:message key="admin"/></a>
-                <a class="loginBtn"
-                   href="${pageContext.request.contextPath}/view/language/admin/listBook?language=RU">RU</a>
-                <a class="loginBtn"
-                   href="${pageContext.request.contextPath}/view/language/admin/listBook?language=EN">EN</a>
-            </div>
-            <p id="pageLogo">ISPAdmin</p>
-            <div class="searchFormDiv">
-                <form class="searchForm" method="post"
-                      action="${pageContext.request.contextPath}/view/admin/listBook">
-                    <p>
-                        <label>
-                            <input class="searchField" type="search" required
-                                   placeholder="<fmt:message key="searchSite"/>"
-                                   name="search">
-                        </label>
-                    </p>
-                    <div>
-                        <input class=searchBtn" type="submit"
-                               value="<fmt:message key="search"/>" name="sear">
-                    </div>
-                    <c:if test="${requestScope.notFoundSearch}">
-                        <div class="notFoundMessage">
-                            <p><fmt:message key="notFoundSearch"/></p>
-                        </div>
-                    </c:if>
-                </form>
-            </div>
+    <div class="logoBlock">
+        <div style="font-size: 16px; text-align: end;">
+            <a class="btn" href="${pageContext.request.contextPath}/view/language/admin/listBook?language=RU">RU</a>
+            <a class="btn" href="${pageContext.request.contextPath}/view/language/admin/listBook?language=EN">EN</a>
         </div>
+        <p id="pageLogo">ISPAdmin</p>
+        <div class="searchFormDiv">
+            <form class="searchForm" method="post"
+                  action="${pageContext.request.contextPath}/view/admin/listBook">
+                <p>
+                    <label>
+                        <input class="searchField" type="search" required
+                               placeholder="<fmt:message key="searchSite"/>"
+                               name="search">
+                    </label>
+                </p>
+                <div>
+                    <input class=searchBtn" type="submit"
+                           value="<fmt:message key="search"/>" name="sear">
+                </div>
+                <c:if test="${requestScope.notFoundSearch}">
+                    <div class="notFoundMessage">
+                        <p><fmt:message key="notFoundSearch"/></p>
+                    </div>
+                </c:if>
+            </form>
+        </div>
+        <div class="mainmenu">
+            <ul>
+                <li><a class="scroll-animite btn"
+                       href="${pageContext.request.contextPath}/view/admin/adminPage"><fmt:message key="admin"/></a></li>
+                <li><a class="scroll-animite logOutBtn"
+                       href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a></li>
+            </ul>
+        </div>
+    </div>
         <div id="time"><span id="datetime"></span></div>
     </header>
     <!-- Slider area Start -->
@@ -280,7 +281,7 @@
                     <c:if test="${win1}">
                         <div class="newTariff">
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/view/admin/listBook?param=${param.get('param')}&id=${param.get("id")}&command=updateCommand">
+                                  action="${pageContext.request.contextPath}/view/admin/listBook?param=${param.get('param')}&id=${param.get("id")}&button=addSubmit">
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("name")}" required
@@ -292,14 +293,21 @@
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("author")}" required
                                                placeholder="<fmt:message key="author"/>"
-                                               name="name">
+                                               name="author">
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input class="tariff1" type="text" value="${param.get("genre")}" required
+                                               placeholder="<fmt:message key="genre"/>"
+                                               name="genre">
                                     </label>
                                 </p>
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("publisher")}" required
                                                placeholder="<fmt:message key="publisher"/>"
-                                               name="name">
+                                               name="publisher">
                                     </label>
                                 </p>
 
@@ -307,7 +315,7 @@
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("publisherDate")}" required
                                                placeholder="<fmt:message key="publisherDate"/>"
-                                               name="name">
+                                               name="publisherDate">
                                     </label>
                                 </p>
                                 <p>
@@ -363,7 +371,7 @@
                                         </td>
                                         <td>
                                             <a class="updateButton"
-                                               href="${pageContext.request.contextPath}/view/admin/listBook?id=${a.id}&button=set&name=${a.name}&author=${a.author}&genre=${a.genre}&publisher=${a.publisher}&publisherDate=${a.publisherDate}&description=${a.description}&price=${a.price}"><fmt:message
+                                               href="${pageContext.request.contextPath}/view/admin/listBook?id=${a.id}&name=${a.name}&author=${a.author}&genre=${a.genre}&publisher=${a.publisher}&publisherDate=${a.publisherDate}&description=${a.description}&price=${a.price}&button=set"><fmt:message
                                                     key="edit"/></a>
                                         </td>
                                     </tr>
@@ -375,7 +383,7 @@
                     <c:if test="${win}">
                         <div class="newTariff">
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/view/admin/listBook?param=${param.get('param')}&id=${param.get("id")}&command=updateCommand">
+                                  action="${pageContext.request.contextPath}/view/admin/listBook?param=${param.get('param')}&id=${param.get("id")}&button=update">
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("name")}" required
@@ -387,14 +395,21 @@
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("author")}" required
                                                placeholder="<fmt:message key="author"/>"
-                                               name="name">
+                                               name="author">
+                                    </label>
+                                </p>
+                                <p>
+                                    <label>
+                                        <input class="tariff1" type="text" value="${param.get("genre")}" required
+                                               placeholder="<fmt:message key="genre"/>"
+                                               name="genre">
                                     </label>
                                 </p>
                                 <p>
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("publisher")}" required
                                                placeholder="<fmt:message key="publisher"/>"
-                                               name="name">
+                                               name="publisher">
                                     </label>
                                 </p>
 
@@ -402,7 +417,7 @@
                                     <label>
                                         <input class="tariff1" type="text" value="${param.get("publisherDate")}" required
                                                placeholder="<fmt:message key="publisherDate"/>"
-                                               name="name">
+                                               name="publisherDate">
                                     </label>
                                 </p>
                                 <p>

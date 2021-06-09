@@ -16,35 +16,31 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css" media="screen">
 </head>
 
-<body >
+<body>
 <div id="home"></div>
 <div class="ournet-inter-area">
     <header id="header" class="header-area">
-
         <div class="logoBlock">
             <div style="font-size: 16px; text-align: end;">
-                <a class="loginBtn" href="${pageContext.request.contextPath}/view/language/admin/adminPage?language=RU">
-                    RU
-                </a>
-                <a class="loginBtn" href="${pageContext.request.contextPath}/view/language/admin/adminPage?language=EN">
-                    EN
-                </a>
+                <a class="btn" href="${pageContext.request.contextPath}/view/language/admin/adminPage?language=RU">RU</a>
+                <a class="btn" href="${pageContext.request.contextPath}/view/language/admin/adminPage?language=EN">EN</a>
             </div>
             <p id="pageLogo">ISPAdmin</p>
-            <div class="mainmenu">
+            <div class="adminmenu">
                 <ul>
                     <li><a class="scroll-animite btn"
-                           href="${pageContext.request.contextPath}/view/admin/adminPage"><fmt:message key="mainPage"/></a></li>
-                    <li><a class="scroll-animite btn"
-                           href="${pageContext.request.contextPath}/view/admin/listBook"><fmt:message key="books"/></a></li>
+                           href="${pageContext.request.contextPath}/view/admin/listBook"><fmt:message key="books"/></a>
+                    </li>
                     <li><a class="scroll-animite btn"
                            href="${pageContext.request.contextPath}/view/admin/listPerson"><fmt:message key="users"/></a></li>
                     <li><a class="scroll-animite btn"
                            href="${pageContext.request.contextPath}/view/admin/orderPage"><fmt:message key="orders"/></a></li>
-                    <li><a class="scroll-animite logOutBtn" href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a></li>
+                    <li><a class="scroll-animite logOutBtn"
+                           href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a></li>
                 </ul>
             </div>
         </div>
+
         <div id="time"><span id="datetime"></span></div>
         <script src="${pageContext.request.contextPath}/styles/js/time.js"></script>
 
