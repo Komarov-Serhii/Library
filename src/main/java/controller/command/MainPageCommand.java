@@ -26,7 +26,7 @@ public class MainPageCommand implements Command {
         Utils.search(req);
 
         try {
-            List<Book> list = bookService.getAll();
+            List<Book> list = bookService.getAllFree();
 
             Utils.sortBooks(req, list);
 

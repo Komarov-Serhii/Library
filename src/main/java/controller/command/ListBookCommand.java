@@ -90,7 +90,7 @@ public class ListBookCommand implements Command {
         }
 
         try {
-            List<Book> list = bookService.getAll();
+            List<Book> list = bookService.getAllFree();
 
             Utils.sortBooks(req, list);
 

@@ -36,7 +36,7 @@ public class PersonPageCommand implements Command {
 
         }
         try {
-            List<Book> list = bookService.getAll();
+            List<Book> list = bookService.getAllFree();
 
             Utils.sortBooks(req, list);
 

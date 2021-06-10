@@ -68,19 +68,19 @@
                             <tbody>
                             <c:forEach items="${order}" var="a">
                                 <tr class="highlight">
-                                    <td> ${a.key.id} <br></td>
-                                    <td> ${a.key.name} <br></td>
-                                    <td> ${a.key.email} <br></td>
                                     <td> ${a.value.id} <br></td>
                                     <td> ${a.value.name} <br></td>
-                                    <td> ${a.value.author} <br></td>
+                                    <td> ${a.value.email} <br></td>
+                                    <td> ${a.key.id} <br></td>
+                                    <td> ${a.key.name} <br></td>
+                                    <td> ${a.key.author} <br></td>
                                     <td>
-                                        <a href="${pageContext.request.contextPath}/view/admin/orderPage?id=${a.value.id}&button=accept"
+                                        <a href="${pageContext.request.contextPath}/view/admin/orderPage?id=${a.key.id}&button=accept"
                                            onclick="return confirm('<fmt:message key="acceptConfirm"/>')"><fmt:message
                                                 key="accept"/></a>
                                     </td>
                                     <td>
-                                        <a href="${pageContext.request.contextPath}/view/admin/orderPage?id=${a.value.id}&button=reject"
+                                        <a href="${pageContext.request.contextPath}/view/admin/orderPage?id=${a.key.id}&button=reject"
                                            onclick="return confirm('<fmt:message key="rejectConfirm"/>')"><fmt:message
                                                 key="reject"/></a>
                                     </td>

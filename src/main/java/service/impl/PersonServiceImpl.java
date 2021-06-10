@@ -10,6 +10,8 @@ import model.exception.WrongDataException;
 import org.apache.log4j.Logger;
 import service.PersonService;
 
+import javax.naming.NamingException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -53,7 +55,7 @@ public class PersonServiceImpl implements PersonService {
         try {
             personDao.add(entity);
             return true;
-        } catch (DataBaseException e) {
+        } catch (DataBaseException | NamingException | SQLException e) {
             throw new ServiceException(e);
         }
     }
@@ -65,14 +67,25 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public boolean delete(Integer id) {
-        return personDao.deleteEntity(id);
+        boolean flag = false;
+        try {
+            flag =  personDao.deleteEntity(id);
+        } catch (SQLException |NamingException e) {
+            logger.error(e.getMessage());
+        }
+        return flag;
     }
 
     @Override
-    public List<Person> getAll() throws ServiceException {
+    public List<Person> getAllFree() throws ServiceException {
         return personDao.getAll();
     }
 
+    /**
+     * If book name or author contains text
+     * print this book
+     * @return All person which has accessLevel = 2
+     */
     @Override
     public List<Person> getAllPerson() throws ServiceException {
         List<Person> all = personDao.getAll();

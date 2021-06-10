@@ -40,10 +40,11 @@ public class PersonProfilePageCommand implements Command {
                 if (!ValidationData.isEmailValid(email) || !ValidationData.isPasswordValid(password)) {
                     throw new WrongDataException();
                 }
+                var encrypt = CommandUtil.encrypt(password);
                 Person person = personService.getEntity(Integer.parseInt(req.getParameter("id")));
                 person.setName(name);
                 person.setEmail(email);
-                person.setPassword(CommandUtil.encrypt(password));
+                person.setPassword(encrypt.orElseThrow(() -> new Exception()));
                 personService.update(person);
 
                 req.getSession().setAttribute("person", person);
@@ -54,6 +55,8 @@ public class PersonProfilePageCommand implements Command {
                 req.setAttribute("wrongData", true);
                 logger.error("Incorrect login or password in myProfile");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
 

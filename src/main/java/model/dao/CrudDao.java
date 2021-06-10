@@ -1,18 +1,19 @@
 package model.dao;
 
-import model.exception.DataBaseException;
-import model.exception.ServiceException;
 import model.entity.Model;
+import model.exception.DataBaseException;
 
+import javax.naming.NamingException;
+import java.sql.SQLException;
 
 
 public interface CrudDao<K, T extends Model> {
 
-    boolean add(T entity) throws DataBaseException;
+    boolean add(T entity) throws DataBaseException, SQLException, NamingException;
 
     T getById(K id) throws DataBaseException;
 
-    boolean deleteEntity(K id);
+    boolean deleteEntity(K id) throws NamingException, SQLException;
 
     T updateEntity(T entity);
 

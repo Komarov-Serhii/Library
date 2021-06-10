@@ -51,7 +51,8 @@ public class OrderAdminCommand implements Command {
             }
         }
 
-        Map<Person, Book> map = bookService.getAllInfoByOrder();
+        Map<Book, Person> map = bookService.getAllInfoByOrder();
+
 
         req.setAttribute("order", map);
 

@@ -12,7 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.naming.NamingException;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +48,7 @@ class BookServiceImplTest {
     }
 
     @Test
-    void add() throws ServiceException, DataBaseException {
+    void add() throws ServiceException, DataBaseException, SQLException, NamingException {
         when(bookDaoMock.add(any())).thenReturn(true);
         boolean result = testingInstance.add(new Book.BookBuilderImpl().setId(0).setName(null).setAuthor(null)
                 .setPublisher(null).setPublisher(null).setDescription(null).setPrice(0).setGenre(null).setStatus(0)
@@ -66,7 +68,7 @@ class BookServiceImplTest {
     }
 
     @Test
-    void delete() {
+    void delete() throws SQLException, NamingException {
         when(bookDaoMock.deleteEntity(any())).thenReturn(true);
         boolean result = testingInstance.delete(0);
         assertTrue(result);
@@ -74,14 +76,14 @@ class BookServiceImplTest {
 
     @Test
     void getAll() throws ServiceException {
-        when(bookDaoMock.getAll()).thenReturn(Collections.singletonList(new Book()));
-        List<Book> result = testingInstance.getAll();
+        when(bookDaoMock.getAllFree()).thenReturn(Collections.singletonList(new Book()));
+        List<Book> result = testingInstance.getAllFree();
         assertFalse(result.isEmpty());
     }
 
     @Test
     void findByAuthorOrName() {
-        when(bookDaoMock.getAll()).thenReturn(getBooks());
+        when(bookDaoMock.getAllFree()).thenReturn(getBooks());
         List<Book> result = testingInstance.findByAuthorOrName("GHR");
         assertEquals(2, result.size());
     }
@@ -98,7 +100,7 @@ class BookServiceImplTest {
         when(bookDaoMock.getAllOrder()).thenReturn(getBooks());
         when(personDaoMock.getAll()).thenReturn(getPersons());
         //when(personDaoMock.getById(1)).thenReturn(getBook());
-        Map<Person, Book> result = testingInstance.getAllInfoByOrder();
+        Map<Book, Person> result = testingInstance.getAllInfoByOrder();
         assertEquals(1, result.size());
     }
 

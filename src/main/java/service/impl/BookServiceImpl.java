@@ -11,6 +11,8 @@ import model.exception.ServiceException;
 import org.apache.log4j.Logger;
 import service.BookService;
 
+import javax.naming.NamingException;
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -32,11 +34,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean add(Book entity) throws ServiceException {
+        boolean flag = false;
         try {
-            return bookDAO.add(entity);
-        } catch (DataBaseException e) {
-            throw new ServiceException(e);
+            flag = bookDAO.add(entity);
+        } catch (SQLException |NamingException | DataBaseException e) {
+            logger.error(e.getMessage());
         }
+        return flag;
     }
 
     @Override
@@ -46,7 +50,18 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public boolean delete(Integer id) {
-        return bookDAO.deleteEntity(id);
+        boolean flag = false;
+        try {
+            flag = bookDAO.deleteEntity(id);
+        } catch (SQLException | NamingException e) {
+            logger.error(e.getMessage());
+        }
+        return flag;
+    }
+
+    @Override
+    public List<Book> getAllFree() throws ServiceException {
+        return bookDAO.getAllFree();
     }
 
     @Override
@@ -54,10 +69,15 @@ public class BookServiceImpl implements BookService {
         return bookDAO.getAll();
     }
 
-
+    /**
+     * If book name or author contains text
+     * print this book
+     * @param text
+     * @return All book by author or name
+     */
     @Override
     public List<Book> findByAuthorOrName(String text) {
-        return bookDAO.getAll().stream()
+        return bookDAO.getAllFree().stream()
                 .filter(o -> o.getName().toUpperCase().contains(text.toUpperCase())
                         || o.getAuthor().toUpperCase().contains(text.toUpperCase()))
                 .collect(Collectors.toList());
@@ -78,21 +98,30 @@ public class BookServiceImpl implements BookService {
         }
     }
 
-
     @Override
-    public Map<Person, Book> getAllInfoByOrder() {
+    public List<Book> getAllBusyBooks() {
+        return bookDAO.getAllBusyBooks();
+    }
+
+
+    /**
+     * print orders for each person separately
+     * @return All user orders
+     */
+    @Override
+    public Map<Book, Person> getAllInfoByOrder() {
         List<Book> list = bookDAO.getAllOrder();
         Person person;
         Book book;
-        Map<Person, Book> map = new HashMap<>();
+        Map<Book, Person> map = new HashMap<>();
         try {
-            for (int i = 0; i < list.size(); i++) {
-                book = list.get(i);
+            for (Book value : list) {
+                book = value;
                 person = personDao.getById(book.getPerson_id());
-                map.put(person, book);
+                map.put(book, person);
             }
         } catch (DataBaseException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return Collections.emptyMap();
         }
 
@@ -104,6 +133,14 @@ public class BookServiceImpl implements BookService {
         return bookDAO.getAllOrder();
     }
 
+
+    /**
+     * check returnDate and if current date after return date
+     * will be debt to current person
+     *
+     * @param person_id
+     * @return All user`s book
+     */
     @Override
     public List<Book> getAllBooksByPersonIDAndAddDebt(int person_id) {
         List<Book> list = bookDAO.getAllBooksByPersonID(person_id);

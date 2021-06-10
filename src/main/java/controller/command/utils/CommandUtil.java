@@ -1,5 +1,7 @@
 package controller.command.utils;
 
+import org.apache.log4j.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,8 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import org.apache.log4j.Logger;
+import java.util.Optional;
 
 public abstract class CommandUtil {
 
@@ -61,7 +62,7 @@ public abstract class CommandUtil {
         return Date.valueOf(date);
     }
 
-    public static String encrypt(String pass) {
+    public static Optional<String> encrypt(String pass) {
         try {
             var messageDigest = MessageDigest.getInstance("SHA-256");
 
@@ -73,10 +74,10 @@ public abstract class CommandUtil {
             for (byte theByte : digest) {
                 stringBuilder.append(String.format("%02x", theByte & 0xff));
             }
-            return stringBuilder.toString();
+            return Optional.of(stringBuilder.toString());
         } catch (NoSuchAlgorithmException e) {
             logger.info(e.getMessage());
         }
-        return "";
+        return Optional.empty();
     }
 }

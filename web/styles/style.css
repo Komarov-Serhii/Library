@@ -324,7 +324,7 @@ header#header.sticky-header {
 
 .notFoundMessage{
     font-size: 16px;
-    margin: -45px 0 0 185px;
+    margin: -45px 0 0 200px;
 }
 
 .searchForm p {
@@ -366,7 +366,6 @@ header#header.sticky-header {
     text-align: center;
     padding-top: 50px;
 }
-
 
 .shape-2 {
     position: absolute;
@@ -1046,11 +1045,19 @@ input.tariff1 {
 }
 
 .loginBtn.reg:hover{
-    background-color: white;;
+    background-color: white;
+}
+.loginBtn.res:hover{
+    background-color: #1dd1a1;
 }
 
 .reg{
     background-color: #7e91d1 ;
+    transition: 0.5s ease-in-out;
+}
+
+.res{
+    background-color: white ;
     transition: 0.5s ease-in-out;
 }
 

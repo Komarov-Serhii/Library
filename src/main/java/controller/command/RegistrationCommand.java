@@ -46,7 +46,8 @@ public class RegistrationCommand implements Command {
                             .setName(name)
                             .setEmail(email)
                             .build();
-                    person.setPassword(CommandUtil.encrypt(password));
+                    var encrypt = CommandUtil.encrypt(password);
+                    person.setPassword(encrypt.orElseThrow(() -> new Exception()));
                     person.setAccessLevel(2);
                     person.setStatus(1);
                     personService.add(person);
@@ -71,6 +72,8 @@ public class RegistrationCommand implements Command {
                 req.setAttribute("alreadyExist", true);
                 logger.error("person already exist");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");

@@ -12,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import javax.naming.NamingException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -58,7 +60,7 @@ class PersonServiceImplTest {
     }
 
     @Test
-    void add() throws DataBaseException, ServiceException {
+    void add() throws DataBaseException, ServiceException, SQLException, NamingException {
         when(personDaoMock.add(any())).thenReturn(true);
         boolean result = testingInstance.add(new Person.PersonBuilderImpl().setId(0).setName(null).setEmail(null)
                 .setPassword(null).setAccessLevel(0).setStatus(0).build());
@@ -75,7 +77,7 @@ class PersonServiceImplTest {
     }
 
     @Test
-    void delete() {
+    void delete() throws SQLException, NamingException {
         when(personDaoMock.deleteEntity(any())).thenReturn(true);
         boolean result = testingInstance.delete(0);
         assertTrue(result);
@@ -84,7 +86,7 @@ class PersonServiceImplTest {
     @Test
     void getAll() throws ServiceException {
         when(personDaoMock.getAll()).thenReturn(Collections.singletonList(new Person()));
-        List<Person> result = testingInstance.getAll();
+        List<Person> result = testingInstance.getAllFree();
         assertFalse(result.isEmpty());
     }
 

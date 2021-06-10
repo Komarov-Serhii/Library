@@ -59,6 +59,8 @@
                         <h4><fmt:message key="countUser"/>: ${people}</h4>
                         <h4><fmt:message key="countActive"/>: ${active}</h4>
                         <h4><fmt:message key="countBlocked"/> : ${blocked}</h4>
+                        <h4><fmt:message key="countBooks"/> : ${books}</h4>
+                        <h4><fmt:message key="countBooksBusy"/> : ${booksBusy}</h4>
                         <h4><fmt:message key="countOrder"/> : ${order}</h4>
                     </div>
                 </div>

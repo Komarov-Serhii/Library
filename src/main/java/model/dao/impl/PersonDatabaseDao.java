@@ -1,17 +1,19 @@
 package model.dao.impl;
 
 import model.dao.Connection.Connector;
-import model.dao.constant.Constants;
 import model.dao.PersonDao;
-import model.exception.DataBaseException;
+import model.dao.constant.Constants;
 import model.entity.Person;
+import model.exception.DataBaseException;
+import org.apache.log4j.Logger;
 
 import javax.naming.NamingException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.log4j.Logger;
 
 
 public class PersonDatabaseDao implements PersonDao {
@@ -23,9 +25,10 @@ public class PersonDatabaseDao implements PersonDao {
     }
 
     @Override
-    public boolean add(Person person) throws DataBaseException {
-        try (Connection connection = Connector.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(Constants.INSERT_PERSON)) {
+    public boolean add(Person person) throws DataBaseException, SQLException, NamingException {
+        Connection connection = Connector.getInstance().getConnection();
+        connection.setAutoCommit(false);
+        try (PreparedStatement statement = connection.prepareStatement(Constants.INSERT_PERSON)) {
             statement.setString(1, person.getName());
             statement.setString(2, person.getEmail());
             statement.setString(3, person.getPassword());
@@ -33,8 +36,10 @@ public class PersonDatabaseDao implements PersonDao {
             statement.setInt(5, person.getStatus());
             statement.execute();
             logger.info("successful add person");
+            connection.commit();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
+            connection.rollback();
             throw new DataBaseException("Cannot add person", e);
         }
     }
@@ -63,14 +68,17 @@ public class PersonDatabaseDao implements PersonDao {
 
 
     @Override
-    public boolean deleteEntity(Integer id) {
-        try (Connection connection = Connector.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(Constants.DELETE_PERSON)) {
+    public boolean deleteEntity(Integer id) throws NamingException, SQLException {
+        Connection connection = Connector.getInstance().getConnection();
+        connection.setAutoCommit(false);
+        try (PreparedStatement statement = connection.prepareStatement(Constants.DELETE_PERSON)) {
             statement.setInt(1, id);
             statement.executeUpdate();
             logger.info("successful delete person");
+            connection.commit();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
+            connection.rollback();
             throw new RuntimeException("Cannot delete person", e);
         }
     }
@@ -78,7 +86,7 @@ public class PersonDatabaseDao implements PersonDao {
     @Override
     public Person updateEntity(Person person) {
         try (Connection connection = Connector.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(Constants.UPDATE_PERSON)) {
+        PreparedStatement statement = connection.prepareStatement(Constants.UPDATE_PERSON)) {
             statement.setString(1, person.getName());
             statement.setString(2, person.getEmail());
             statement.setString(3, person.getPassword());
@@ -86,7 +94,6 @@ public class PersonDatabaseDao implements PersonDao {
             statement.setInt(5, person.getId());
             statement.executeUpdate();
             logger.info("successful update person");
-
             return person;
         } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot update person", e);

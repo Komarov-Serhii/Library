@@ -1,18 +1,15 @@
 package controller.command;
 
 import controller.command.utils.CommandUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import model.entity.Person;
 import model.exception.NotFoundPersonException;
 import model.exception.WrongDataException;
-import model.entity.Person;
 import org.apache.log4j.Logger;
 import service.PersonService;
 import service.factory.ServiceFactory;
 
-
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 public class LoginCommand implements Command {
@@ -32,8 +29,8 @@ public class LoginCommand implements Command {
             PersonService personService = factory.getPersonService();
 
             try {
-
-                Person person = personService.getByLoginAndPass(login, CommandUtil.encrypt(password));
+                var encrypt = CommandUtil.encrypt(password);
+                Person person = personService.getByLoginAndPass(login, encrypt.orElseThrow(() -> new Exception()));
 
                 if (person.getStatus() == 1) {
                     req.getSession().setAttribute("person", person);
@@ -53,6 +50,8 @@ public class LoginCommand implements Command {
                 req.setAttribute("wrongData", true);
                 logger.error("Incorrect login or password");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/login.jsp");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/login.jsp");

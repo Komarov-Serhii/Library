@@ -15,7 +15,6 @@ public interface ItemService <K, T extends Model> {
 
     boolean delete(K id);
 
-    List<T> getAll() throws ServiceException;
-
+    List<T> getAllFree() throws ServiceException;
 
 }

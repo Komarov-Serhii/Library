@@ -25,9 +25,10 @@ public class BookDatabaseDao implements BookDao {
 
 
     @Override
-    public boolean add(Book book) throws DataBaseException {
-        try (Connection connection = Connector.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(Constants.INSERT_BOOK)) {
+    public boolean add(Book book) throws DataBaseException, NamingException, SQLException {
+        Connection connection = Connector.getInstance().getConnection();
+        connection.setAutoCommit(false);
+        try (PreparedStatement statement = connection.prepareStatement(Constants.INSERT_BOOK)) {
             statement.setString(1, book.getName());
             statement.setString(2, book.getAuthor());
             statement.setString(3, book.getPublisher());
@@ -41,10 +42,11 @@ public class BookDatabaseDao implements BookDao {
             statement.setDate(11, book.getReturnDate());
             statement.setInt(12, book.getDebt());
             statement.execute();
-
             logger.info("successful add book");
+            connection.commit();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
+            connection.rollback();
             throw new DataBaseException("Cannot add book", e);
         }
     }
@@ -79,14 +81,17 @@ public class BookDatabaseDao implements BookDao {
     }
 
     @Override
-    public boolean deleteEntity(Integer id) {
-        try (Connection connection = Connector.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(Constants.DELETE_BOOK)) {
+    public boolean deleteEntity(Integer id) throws NamingException, SQLException {
+        Connection connection = Connector.getInstance().getConnection();
+        connection.setAutoCommit(false);
+        try (PreparedStatement statement = connection.prepareStatement(Constants.DELETE_BOOK)) {
             statement.setInt(1, id);
             statement.executeUpdate();
             logger.info("successful delete book");
+            connection.commit();
             return true;
-        } catch (SQLException | NamingException e) {
+        } catch (SQLException e) {
+            connection.rollback();
             throw new RuntimeException("Cannot delete book", e);
         }
     }
@@ -113,8 +118,23 @@ public class BookDatabaseDao implements BookDao {
             logger.info("successful update book");
             return book;
         } catch (SQLException | NamingException e) {
-            logger.error(e);
+            logger.error(e.getMessage());
             throw new RuntimeException("Cannot update book", e);
+        }
+
+    }
+
+    @Override
+    public List<Book> getAllFree() {
+        List<Book> listBook = new ArrayList<>();
+        try (Connection connection = Connector.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(Constants.ALL_BOOK_FREE)) {
+            ResultSet rs = statement.executeQuery();
+            listBook = initBook(rs);
+            logger.info("successful getAll free book ");
+            return listBook;
+        } catch (SQLException | NamingException e) {
+            throw new RuntimeException("Cannot getAllEntity free book", e);
         }
     }
 
@@ -129,6 +149,20 @@ public class BookDatabaseDao implements BookDao {
             return listBook;
         } catch (SQLException | NamingException e) {
             throw new RuntimeException("Cannot getAllEntity book", e);
+        }
+    }
+
+    @Override
+    public List<Book> getAllBusyBooks() {
+        List<Book> listBook = new ArrayList<>();
+        try (Connection connection = Connector.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(Constants.ALL_BOOK_BUSY)) {
+            ResultSet rs = statement.executeQuery();
+            listBook = initBook(rs);
+            logger.info("successful getAll busy books");
+            return listBook;
+        } catch (SQLException | NamingException e) {
+            throw new RuntimeException("Cannot getAllBusyBooks book", e);
         }
     }
 
