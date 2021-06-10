@@ -51,7 +51,7 @@ public class LoginCommand implements Command {
                 logger.error("Incorrect login or password");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/login.jsp");
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/login.jsp");

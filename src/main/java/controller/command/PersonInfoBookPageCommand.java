@@ -3,13 +3,12 @@ package controller.command;
 import controller.command.utils.CommandUtil;
 import model.entity.Book;
 import model.entity.Person;
+import org.apache.log4j.Logger;
 import service.factory.ServiceFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-
-import org.apache.log4j.Logger;
 
 
 public class PersonInfoBookPageCommand implements Command {
@@ -28,9 +27,7 @@ public class PersonInfoBookPageCommand implements Command {
         List<Book> listOrders = bookService.getAllOrderByPersonID(person.getId());
 
         int count = 0;
-        for (Book book : list) { // do lyamd
-            count += book.getDebt();
-        }
+        count += list.stream().mapToInt(Book::getDebt).sum();
 
 
         req.setAttribute("books", list.size());

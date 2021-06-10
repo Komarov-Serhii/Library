@@ -73,7 +73,7 @@ public class RegistrationCommand implements Command {
                 logger.error("person already exist");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         CommandUtil.goToPage(req, resp, "/WEB-INF/view/registration.jsp");

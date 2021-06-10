@@ -42,29 +42,77 @@ class BookServiceImplTest {
     void getEntity() throws ServiceException, DataBaseException {
         when(bookDaoMock.getById(any())).thenReturn(new Book());
         Book result = testingInstance.getEntity(0);
-        assertEquals(new Book.BookBuilderImpl().setId(0).setName(null).setAuthor(null)
-                .setPublisher(null).setPublisher(null).setDescription(null).setPrice(0).setGenre(null).setStatus(0)
-                .setPersonId(0).setOrderStatus(0).setReturnDate(null).setDebt(0).build(), result);
+        assertEquals(new Book.BookBuilderImpl()
+                .setId(0)
+                .setName(null)
+                .setAuthor(null)
+                .setPublisher(null)
+                .setPublisher(null)
+                .setDescription(null)
+                .setPrice(0)
+                .setGenre(null)
+                .setStatus(0)
+                .setPersonId(0)
+                .setOrderStatus(0)
+                .setReturnDate(null)
+                .setDebt(0)
+                .build(), result);
     }
 
     @Test
     void add() throws ServiceException, DataBaseException, SQLException, NamingException {
         when(bookDaoMock.add(any())).thenReturn(true);
-        boolean result = testingInstance.add(new Book.BookBuilderImpl().setId(0).setName(null).setAuthor(null)
-                .setPublisher(null).setPublisher(null).setDescription(null).setPrice(0).setGenre(null).setStatus(0)
-                .setPersonId(0).setOrderStatus(0).setReturnDate(null).setDebt(0).build());
+        boolean result = testingInstance.add(new Book.BookBuilderImpl()
+                .setId(0)
+                .setName(null)
+                .setAuthor(null)
+                .setPublisher(null)
+                .setPublisher(null)
+                .setDescription(null)
+                .setPrice(0)
+                .setGenre(null)
+                .setStatus(0)
+                .setPersonId(0)
+                .setOrderStatus(0)
+                .setReturnDate(null)
+                .setDebt(0)
+                .build());
         assertTrue(result);
     }
 
     @Test
     void update() {
         when(bookDaoMock.updateEntity(any())).thenReturn(new Book());
-        Book result = testingInstance.update(new Book.BookBuilderImpl().setId(0).setName(null).setAuthor(null)
-                .setPublisher(null).setPublisher(null).setDescription(null).setPrice(0).setGenre(null).setStatus(0)
-                .setPersonId(0).setOrderStatus(0).setReturnDate(null).setDebt(0).build());
-        assertEquals(new Book.BookBuilderImpl().setId(0).setName(null).setAuthor(null)
-                .setPublisher(null).setPublisher(null).setDescription(null).setPrice(0).setGenre(null).setStatus(0)
-                .setPersonId(0).setOrderStatus(0).setReturnDate(null).setDebt(0).build(), result);
+        Book result = testingInstance.update(new Book.BookBuilderImpl()
+                .setId(0)
+                .setName(null)
+                .setAuthor(null)
+                .setPublisher(null)
+                .setPublisher(null)
+                .setDescription(null)
+                .setPrice(0)
+                .setGenre(null)
+                .setStatus(0)
+                .setPersonId(0)
+                .setOrderStatus(0)
+                .setReturnDate(null)
+                .setDebt(0)
+                .build());
+        assertEquals(new Book.BookBuilderImpl()
+                .setId(0)
+                .setName(null)
+                .setAuthor(null)
+                .setPublisher(null)
+                .setPublisher(null)
+                .setDescription(null)
+                .setPrice(0)
+                .setGenre(null)
+                .setStatus(0)
+                .setPersonId(0)
+                .setOrderStatus(0)
+                .setReturnDate(null)
+                .setDebt(0)
+                .build(), result);
     }
 
     @Test
@@ -128,17 +176,52 @@ class BookServiceImplTest {
 
     private List<Book> getBooks() {
         List<Book> list = new ArrayList<>();
-        Book book1 = new Book.BookBuilderImpl().setId(1).setName("GHR").setAuthor("bdfb")
-                .setPublisher(null).setPublisher(null).setDescription(null).setPrice(1000).setGenre(null).setStatus(0)
-                .setPersonId(1).setOrderStatus(0).setReturnDate(Date.valueOf("2021-05-03")).setDebt(0).build();
+        Book book1 = new Book.BookBuilderImpl()
+                .setId(1)
+                .setName("GHR")
+                .setAuthor("bdfb")
+                .setPublisher(null)
+                .setPublisher(null)
+                .setDescription(null)
+                .setPrice(1000)
+                .setGenre(null)
+                .setStatus(0)
+                .setPersonId(1)
+                .setOrderStatus(0)
+                .setReturnDate(Date.valueOf("2021-05-03"))
+                .setDebt(0).build();
 
-        Book book2 = new Book.BookBuilderImpl().setId(2).setName("GHR").setAuthor("bdfb")
-                .setPublisher(null).setPublisher(null).setDescription(null).setPrice(1000).setGenre(null).setStatus(0)
-                .setPersonId(2).setOrderStatus(0).setReturnDate(Date.valueOf("2021-07-03")).setDebt(0).build();
+        Book book2 = new Book.BookBuilderImpl()
+                .setId(2)
+                .setName("GHR")
+                .setAuthor("bdfb")
+                .setPublisher(null)
+                .setPublisher(null)
+                .setDescription(null)
+                .setPrice(1000)
+                .setGenre(null)
+                .setStatus(0)
+                .setPersonId(2)
+                .setOrderStatus(0)
+                .setReturnDate(Date.valueOf("2021-07-03"))
+                .setDebt(0)
+                .build();
 
-        Book book3 = new Book.BookBuilderImpl().setId(3).setName("bdfb").setAuthor("bdfb")
-                .setPublisher(null).setPublisher(null).setDescription(null).setPrice(1000).setGenre(null).setStatus(0)
-                .setPersonId(3).setOrderStatus(0).setReturnDate(Date.valueOf("2021-07-03")).setDebt(0).build();
+        Book book3 = new Book.BookBuilderImpl()
+                .setId(3)
+                .setName("eahr")
+                .setAuthor("earhg")
+                .setPublisher(null)
+                .setPublisher(null)
+                .setDescription(null)
+                .setPrice(1000)
+                .setGenre(null)
+                .setStatus(0)
+                .setPersonId(2)
+                .setOrderStatus(0)
+                .setReturnDate(Date.valueOf("2021-07-03"))
+                .setDebt(0)
+                .build();
         list.add(book1);
         list.add(book2);
         list.add(book3);
@@ -146,9 +229,21 @@ class BookServiceImplTest {
     }
 
     private Book getBook() {
-        Book book1 = new Book.BookBuilderImpl().setId(1).setName("GHR").setAuthor(null)
-                .setPublisher(null).setPublisher(null).setDescription(null).setPrice(1000).setGenre(null).setStatus(0)
-                .setPersonId(1).setOrderStatus(0).setReturnDate(Date.valueOf("2021-05-03")).setDebt(0).build();
+        Book book1 = new Book.BookBuilderImpl()
+                .setId(1)
+                .setName("eg")
+                .setAuthor("arh")
+                .setPublisher(null)
+                .setPublisher(null)
+                .setDescription(null)
+                .setPrice(1000)
+                .setGenre(null)
+                .setStatus(0)
+                .setPersonId(2)
+                .setOrderStatus(0)
+                .setReturnDate(Date.valueOf("2021-05-03"))
+                .setDebt(0)
+                .build();
         return book1;
     }
 

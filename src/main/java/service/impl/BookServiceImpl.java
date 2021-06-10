@@ -10,7 +10,6 @@ import model.exception.DataBaseException;
 import model.exception.ServiceException;
 import org.apache.log4j.Logger;
 import service.BookService;
-
 import javax.naming.NamingException;
 import java.sql.SQLException;
 import java.util.Collections;

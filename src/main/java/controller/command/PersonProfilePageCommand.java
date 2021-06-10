@@ -56,7 +56,7 @@ public class PersonProfilePageCommand implements Command {
                 logger.error("Incorrect login or password in myProfile");
                 CommandUtil.goToPage(req, resp, "/WEB-INF/view/personProfile.jsp");
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
 

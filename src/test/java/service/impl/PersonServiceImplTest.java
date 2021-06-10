@@ -47,33 +47,63 @@ class PersonServiceImplTest {
     void getByLogin() {
         when(personDaoMock.getByLogin(any())).thenReturn(new Person());
         Person result = testingInstance.getByLogin("basket@gmail.com");
-        assertEquals(new Person.PersonBuilderImpl().setId(0).setName(null).setEmail(null)
-                .setPassword(null).setAccessLevel(0).setStatus(0).build(), result);
+        assertEquals(new Person.PersonBuilderImpl()
+                .setId(0)
+                .setName(null)
+                .setEmail(null)
+                .setPassword(null)
+                .setAccessLevel(0)
+                .setStatus(0)
+                .build(), result);
     }
 
     @Test
     void getEntity() throws DataBaseException, ServiceException {
         when(personDaoMock.getById(any())).thenReturn(new Person());
         Person result = testingInstance.getEntity(0);
-        assertEquals(new Person.PersonBuilderImpl().setId(0).setName(null).setEmail(null)
-                .setPassword(null).setAccessLevel(0).setStatus(0).build(), result);
+        assertEquals(new Person.PersonBuilderImpl()
+                .setId(0)
+                .setName(null)
+                .setEmail(null)
+                .setPassword(null)
+                .setAccessLevel(0)
+                .setStatus(0)
+                .build(), result);
     }
 
     @Test
     void add() throws DataBaseException, ServiceException, SQLException, NamingException {
         when(personDaoMock.add(any())).thenReturn(true);
-        boolean result = testingInstance.add(new Person.PersonBuilderImpl().setId(0).setName(null).setEmail(null)
-                .setPassword(null).setAccessLevel(0).setStatus(0).build());
+        boolean result = testingInstance.add(new Person.PersonBuilderImpl()
+                .setId(0)
+                .setName(null)
+                .setEmail(null)
+                .setPassword(null)
+                .setAccessLevel(0)
+                .setStatus(0)
+                .build());
         assertTrue(result);
     }
 
     @Test
     void update() {
         when(personDaoMock.updateEntity(any())).thenReturn(new Person());
-        Person result = testingInstance.update(new Person.PersonBuilderImpl().setId(0).setName(null).setEmail(null)
-                .setPassword(null).setAccessLevel(0).setStatus(0).build());
-        assertEquals(new Person.PersonBuilderImpl().setId(0).setName(null).setEmail(null)
-                .setPassword(null).setAccessLevel(0).setStatus(0).build(), result);
+        Person result = testingInstance.update(new Person.PersonBuilderImpl()
+                .setId(0)
+                .setName(null)
+                .setEmail(null)
+                .setPassword(null)
+                .setAccessLevel(0)
+                .setStatus(0)
+                .build());
+        assertEquals(new Person.PersonBuilderImpl()
+                .setId(0)
+                .setName(null)
+                .setEmail(null)
+                .setPassword(null)
+                .setAccessLevel(0)
+                .setStatus(0)
+                .build(), result);
     }
 
     @Test

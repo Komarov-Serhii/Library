@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class PersonServiceImpl implements PersonService {
 
-     private static Logger logger = Logger.getLogger(PersonServiceImpl.class);
+    private static Logger logger = Logger.getLogger(PersonServiceImpl.class);
 
     private final DaoFactory daoFactory = DaoFactory.getInstance();
     private PersonDao personDao = daoFactory.getPersonDAO();
@@ -45,7 +45,7 @@ public class PersonServiceImpl implements PersonService {
             Person person = personDao.getById(id);
             return person;
         } catch (DataBaseException e) {
-           logger.error(e);
+            logger.error(e);
             throw new ServiceException("Cannot get person in service", e);
         }
     }
@@ -69,8 +69,8 @@ public class PersonServiceImpl implements PersonService {
     public boolean delete(Integer id) {
         boolean flag = false;
         try {
-            flag =  personDao.deleteEntity(id);
-        } catch (SQLException |NamingException e) {
+            flag = personDao.deleteEntity(id);
+        } catch (SQLException | NamingException e) {
             logger.error(e.getMessage());
         }
         return flag;
@@ -84,6 +84,7 @@ public class PersonServiceImpl implements PersonService {
     /**
      * If book name or author contains text
      * print this book
+     *
      * @return All person which has accessLevel = 2
      */
     @Override
