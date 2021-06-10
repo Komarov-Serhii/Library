@@ -20,21 +20,6 @@
 <div id="home"></div>
 <div class="ournet-inter-area">
     <header id="header" class="header-area">
-
-<%--        <div class="logoBlock">--%>
-<%--            <div style="font-size: 16px; text-align: end;">--%>
-<%--                <a class="logOutBtn"--%>
-<%--                   href="${pageContext.request.contextPath}/view/logout"><fmt:message key="logout"/></a>--%>
-<%--                <a class="btn"--%>
-<%--                   href="${pageContext.request.contextPath}/view/personPage"><fmt:message key="personPage"/></a>--%>
-<%--                <a class="btn"--%>
-<%--                   href="${pageContext.request.contextPath}/view/language/personBookPage?language=RU">RU</a>--%>
-<%--                <a class="btn"--%>
-<%--                   href="${pageContext.request.contextPath}/view/language/personBookPage?language=EN">EN</a>--%>
-<%--            </div>--%>
-<%--            <p id="pageLogo"><fmt:message key="myLibrary"/></p>--%>
-<%--        </div>--%>
-
     <div class="logoBlock">
         <div style="font-size: 16px; text-align: end;">
             <a class="btn" href="${pageContext.request.contextPath}/view/language/personBookPage?language=RU">RU</a>
